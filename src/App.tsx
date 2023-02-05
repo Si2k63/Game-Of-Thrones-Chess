@@ -4,7 +4,7 @@ import Board from './components/Board'
 import Piece from './components/Piece/Piece'
 
 const pieces: (ReactElement|null)[][] = [
-  [null, null, null, null, null, null, null, null],
+  [<Piece colour='Black' type="Knight" />, null, null, null, null, null, null, null],
   [null, null, null, null, null, null, null, null],
   [null, null, null, null, null, null, null, null],
   [null, null, null, null, null, null, null, null],
