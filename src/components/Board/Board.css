@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    #board {
+        width: 100vh;
+        height: 100vh;
+        @apply mx-auto border-8 border-stone-400;
+    }
+
+    .row {
+        height: 12.5%;
+    }
+}
