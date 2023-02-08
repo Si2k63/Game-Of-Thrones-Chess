@@ -4,9 +4,12 @@
 
 @layer components {
     #board {
-        width: 100vh;
-        height: 100vh;
-        @apply mx-auto border-8 border-stone-400;
+        width: 90vh;
+        height: 90vh;
+        position: absolute;
+        top: 5vh;
+        left: 25vw;
+        @apply drop-shadow-2xl border-2 border-black;
     }
 
     .row {
