@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @layer components {
     .square {
         width: 12.5%;
@@ -9,26 +5,22 @@
     }
 
     .square img {
-        @apply h-3/4 w-3/4 align-middle;
+        @apply align-middle;
     }
 
     .square.active img {
-        @apply border-8 rounded-full;
+        @apply bg-white rounded-full p-3 bg-opacity-30; 
     }
 
     .square.black {
-        @apply bg-stone-600;
+        @apply bg-stone-700;
     }
 
     .square.white {
         @apply bg-stone-200;
     }
 
-    .square.active {
-        @apply bg-blue-500;
-    }
-
-    .square.available {
-        @apply bg-yellow-400;
+    .square.available .square-child-container {
+        @apply opacity-50 bg-black inline-block rounded-full h-1/4 w-1/4;
     }
 }

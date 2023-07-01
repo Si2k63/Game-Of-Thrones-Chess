@@ -1,0 +1,12 @@
+@import './components/Board/Board.css';
+@import './components/Square/Square.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    body {
+        @apply bg-stone-900;
+    }
+}

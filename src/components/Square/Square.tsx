@@ -1,5 +1,3 @@
-import './Square.css'
-
 interface SquareInterface {
     colour: string,
     active: boolean,
@@ -9,7 +7,22 @@ interface SquareInterface {
 
 const Square: React.FC<SquareInterface> = (props: SquareInterface) => {
     const { colour, children, active, available} = props;
-    return <div className={`square ${colour} ${active && "active"} ${available && "available"}`}>{children}</div>
+
+    const classes = ['square', colour];
+
+    if (active) {
+        classes.push('active');
+    }
+
+    if (available) {
+        classes.push('available');
+    }
+
+    return (
+        <div className={classes.join(" ")}>
+            <span className="square-child-container">{children}</span>
+        </div>
+    );
 }
 
 export default Square;
