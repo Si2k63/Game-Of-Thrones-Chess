@@ -4,7 +4,7 @@
         height: 100vh;
         position: absolute;
         left: 25vw;
-        @apply drop-shadow-2xl;
+        @apply drop-shadow-2xl select-none;
     }
 
     .row {
