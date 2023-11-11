@@ -22,7 +22,7 @@ const Square: React.FC<SquareInterface> = (props: SquareInterface) => {
         classes.push('active');
     }
     
-    if (children) {
+    if (children || available) {
         classes.push('cursor-pointer');
     }
 

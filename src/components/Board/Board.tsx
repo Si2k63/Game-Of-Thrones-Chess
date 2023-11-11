@@ -6,30 +6,35 @@ interface BoardInterface {
     pieces: TBoard
     availableSpaces: Number[][]
     onPieceClick: Function
+    onAvailableClick: Function
 }
 
 const Board: React.FC<BoardInterface> = (props: BoardInterface) => {
-
-    const { pieces, onPieceClick, availableSpaces } = props;
+    const { pieces, onPieceClick, onAvailableClick, availableSpaces } = props;
     const colors: Array<string> = ['white', 'black', 'white'];
- 
     return (
-       <div id="board">
+        <div id="board">
             {pieces.map((row: Array<any>, rowIndex: number) => {
                 return (<div className="row" key={`row_${rowIndex}`}>
                     {row.map((piece: PieceInterface | null, columnIndex: number) => {
-                        
+
                         const available = availableSpaces.map(x => x.toString()).includes([rowIndex, columnIndex].toString())
 
                         return (
-                            <Square onClick={() => onPieceClick([rowIndex, columnIndex])} available={available} active={false} key={`square_${columnIndex}`} colour={colors[rowIndex % 2 + columnIndex % 2]}>
+                            <Square
+                                onClick={() => available ? onAvailableClick([rowIndex, columnIndex]) : onPieceClick([rowIndex, columnIndex])}
+                                available={available}
+                                active={false}
+                                key={`square_${columnIndex}`}
+                                colour={colors[rowIndex % 2 + columnIndex % 2]}
+                            >
                                 {piece ? <Piece {...piece} /> : null}
                             </Square>
                         )
                     })}
                 </div>)
-            })} 
-       </div> 
+            })}
+        </div>
     );
 }
 
