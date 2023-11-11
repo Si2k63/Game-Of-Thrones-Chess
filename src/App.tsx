@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import './App.css';
-import Board from './components/Board';
-import BoardController from './engine/Board';
-import { PieceInterface } from './components/Piece/Piece';
-import { TBoard, TCoordinates } from './engine/Engine.types';
+import Board from '@components/Board';
+import BoardController from '@engine/Board';
+import { TBoard, TCoordinates } from '@engine/Engine.types';
 
 function App() {
 

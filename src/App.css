@@ -1,5 +1,5 @@
-@import './components/Board/Board.css';
-@import './components/Square/Square.css';
+@import '@components/Board/Board.css';
+@import '@components/Square/Square.css';
 
 @tailwind base;
 @tailwind components;
