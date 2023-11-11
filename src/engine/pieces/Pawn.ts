@@ -1,8 +1,8 @@
 import Move from '../Move';
-import IsEnemyRule from '../rules/IsEnemyRule';
-import isNullRule from '../rules/IsNullRule';
-import IsObstructedRule from '../rules/IsObstructedRule';
-import IsOnRowRule from '../rules/IsOnRowRule';
+import IsEnemyRule from '../Rules/IsEnemyRule';
+import isNullRule from '../Rules/IsNullRule';
+import IsObstructedRule from '../Rules/IsObstructedRule';
+import IsOnRowRule from '../Rules/IsOnRowRule';
 import { PieceColour, PieceName } from '../Engine.types';
 import Piece from './AbstractPiece';
 
