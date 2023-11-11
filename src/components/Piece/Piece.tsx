@@ -1,11 +1,13 @@
-interface PieceInterface {
-    type: 'Pawn' | 'Bishop' | 'Knight' | 'Rook' | 'Queen' | 'King',
-    colour: 'Black' | 'White'
+import { PieceColour, PieceName } from "../../engine/Engine.types";
+
+export interface PieceInterface {
+    name: PieceName,
+    colour: PieceColour
 }
 
 const Piece: React.FC<PieceInterface> = (props: PieceInterface) => {
-    const { type, colour } = props;
-    return <img src={`Pieces/${colour}/${type}.png`} alt={`${colour} ${type}`} />
+    const { name, colour } = props;
+    return <img src={`Pieces/${colour}/${name}.png`} alt={`${colour} ${name}`} />
 }
 
 export default Piece;

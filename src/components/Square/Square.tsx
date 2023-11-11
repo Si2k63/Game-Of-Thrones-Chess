@@ -30,6 +30,7 @@ const Square: React.FC<SquareInterface> = (props: SquareInterface) => {
         classes.push('available');
     }
 
+
     return (
         <div className={classes.join(" ")} onClick={onClick}>
             <span className="square-child-container">{children}</span>
