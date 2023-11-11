@@ -1,4 +1,4 @@
-import { defaultBoard } from './helpers/board';
+import { defaultBoard } from './Helpers/board';
 import Move from './Move';
 import { TBoard, TCoordinates } from './Engine.types';
 
@@ -15,19 +15,19 @@ class Board {
   }
   
   move = (from: TCoordinates, to: TCoordinates) => {
-    let fromPiece = this.board[from[0]][from[1]];
-    let toPiece = this.board[to[0]][to[1]];
-    
-    if (fromPiece?.colour !== toPiece?.colour) {
-      toPiece = null;
-    }
-
-    [fromPiece, toPiece] = [ toPiece, fromPiece ]
+    [
+      this.board[from[0]][from[1]],
+      this.board[to[0]][to[1]],
+    ] =
+    [
+      this.board[to[0]][to[1]],
+      this.board[from[0]][from[1]],
+    ]
   }
 
-  getAvailableSpaces(pieceTCoordinates: TCoordinates) {
+  getAvailableSpaces(coords: TCoordinates) {
 
-    const piece = this.board[pieceTCoordinates[0]][pieceTCoordinates[1]];
+    const piece = this.board[coords[0]][coords[1]];
     const available: number[][] = [];
     
     if (!piece) {
@@ -35,9 +35,9 @@ class Board {
     }
 
     piece.getMoves().forEach((move: Move) => {
-      const isValid = move.isValid(this.board, pieceTCoordinates);
+      const isValid = move.isValid(this.board, coords);
         if (isValid) {
-          available.push(move.getTargetTCoordinates(pieceTCoordinates))
+          available.push(move.getTargetTCoordinates(coords))
         }
     })
     
@@ -45,5 +45,4 @@ class Board {
   }
 }
 
-const board = new Board(defaultBoard);
-export default board;
+export default Board;
