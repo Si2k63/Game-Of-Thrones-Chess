@@ -5,11 +5,7 @@
     }
 
     .square img {
-        @apply align-middle;
-    }
-
-    .square.active img {
-        @apply bg-white rounded-full p-3 bg-opacity-30; 
+        @apply align-middle opacity-100;
     }
 
     .square.black {
@@ -21,6 +17,10 @@
     }
 
     .square.available .square-child-container {
-        @apply opacity-50 bg-black inline-block rounded-full h-1/4 w-1/4;
+        @apply bg-opacity-50 bg-black inline-block rounded-full h-1/4 w-1/4;
     }
+
+     .square.available .square-child-container:has(img) {
+        @apply bg-red-400 bg-opacity-60 border-rose-800 border-4 rounded-full h-2/3 w-2/3 flex items-center justify-center;
+    }   
 }

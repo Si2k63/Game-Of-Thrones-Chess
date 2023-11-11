@@ -13,8 +13,12 @@ class Board {
   getBoard() {
     return this.board;
   }
-  
+
   move = (from: TCoordinates, to: TCoordinates) => {
+    if (this.board[from[0]][from[1]]?.colour !== this.board[to[0]][to[1]]?.colour) {
+      this.board[to[0]][to[1]] = null;
+    }
+
     [
       this.board[from[0]][from[1]],
       this.board[to[0]][to[1]],
@@ -26,7 +30,6 @@ class Board {
   }
 
   getAvailableSpaces(coords: TCoordinates) {
-
     const piece = this.board[coords[0]][coords[1]];
     const available: number[][] = [];
     
