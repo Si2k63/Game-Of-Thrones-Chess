@@ -1,5 +1,5 @@
-import Move from "../Move";
-import { PieceColour, PieceName, TPiece } from "../Engine.types";
+import Move from '../Move';
+import { PieceColour, PieceName, TPiece } from '../Engine.types';
 
 abstract class Piece implements TPiece {
     colour: PieceColour = 'White'

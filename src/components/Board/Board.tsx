@@ -1,6 +1,6 @@
-import { TBoard, TSquare } from "@engine/Engine.types";
-import Piece, { PieceInterface } from "../Piece";
-import Square from "../Square";
+import { TBoard, TSquare } from '@engine/Engine.types';
+import Piece, { PieceInterface } from '../Piece';
+import Square from '../Square';
 
 interface BoardInterface {
     pieces: TBoard

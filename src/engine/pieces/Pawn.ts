@@ -1,10 +1,10 @@
-import Move from "../Move";
-import IsEnemyRule from "../rules/IsEnemyRule";
-import isNullRule from "../rules/IsNullRule";
-import IsObstructedRule from "../rules/IsObstructedRule";
-import IsOnRowRule from "../rules/IsOnRowRule";
-import { PieceColour, PieceName } from "../Engine.types";
-import Piece from "./AbstractPiece";
+import Move from '../Move';
+import IsEnemyRule from '../rules/IsEnemyRule';
+import isNullRule from '../rules/IsNullRule';
+import IsObstructedRule from '../rules/IsObstructedRule';
+import IsOnRowRule from '../rules/IsOnRowRule';
+import { PieceColour, PieceName } from '../Engine.types';
+import Piece from './AbstractPiece';
 
 class Pawn extends Piece {
   name: PieceName ='Pawn';

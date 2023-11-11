@@ -1,4 +1,4 @@
-import { TBoard, TMovementRule, TSquare, TCoordinates } from "../Engine.types";
+import { TBoard, TMovementRule, TSquare, TCoordinates } from '../Engine.types';
 
 abstract class AbstractMovementRule implements TMovementRule {
   board: TBoard = [];

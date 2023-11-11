@@ -1,4 +1,4 @@
-import AbstractMovementRule from "./AbstractMovementRule";
+import AbstractMovementRule from './AbstractMovementRule';
 
 class IsValidSpaceRule extends AbstractMovementRule {
     isValid(movement: [number, number]) {

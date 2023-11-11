@@ -1,6 +1,6 @@
-import { defaultBoard } from "./helpers/board";
-import Move from "./Move";
-import { TBoard, TCoordinates } from "./Engine.types";
+import { defaultBoard } from './helpers/board';
+import Move from './Move';
+import { TBoard, TCoordinates } from './Engine.types';
 
 class Board {
 

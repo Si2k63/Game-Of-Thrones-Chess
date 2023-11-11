@@ -1,7 +1,7 @@
-import IsObstructedRule from "./rules/IsObstructedRule";
-import IsNullOrEnemyRule from "./rules/IsNullOrEnemyRule";
-import IsValidSpaceRule from "./rules/IsValidSpaceRule";
-import { TBoard, TMovementRule, TCoordinates } from "./Engine.types";
+import IsObstructedRule from './rules/IsObstructedRule';
+import IsNullOrEnemyRule from './rules/IsNullOrEnemyRule';
+import IsValidSpaceRule from './rules/IsValidSpaceRule';
+import { TBoard, TMovementRule, TCoordinates } from './Engine.types';
 
 interface MoveInterface {
   movement: TCoordinates,

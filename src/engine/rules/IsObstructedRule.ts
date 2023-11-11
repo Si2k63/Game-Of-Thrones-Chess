@@ -1,5 +1,5 @@
-import { TCoordinates } from "../Engine.types";
-import AbstractMovementRule from "./AbstractMovementRule";
+import { TCoordinates } from '../Engine.types';
+import AbstractMovementRule from './AbstractMovementRule';
 
 class IsObstructedRule extends AbstractMovementRule {
 

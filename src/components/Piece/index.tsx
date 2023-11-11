@@ -1,4 +1,4 @@
-import { PieceColour, PieceName } from "@engine/Engine.types";
+import { PieceColour, PieceName } from '@engine/Engine.types';
 
 export interface PieceInterface {
     name: PieceName,

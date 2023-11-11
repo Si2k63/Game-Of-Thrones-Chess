@@ -1,5 +1,5 @@
-import { TMovementRule } from "../Engine.types";
-import AbstractMovementRule from "./AbstractMovementRule";
+import { TMovementRule } from '../Engine.types';
+import AbstractMovementRule from './AbstractMovementRule';
 
 class IsOnRowRule extends AbstractMovementRule {
   

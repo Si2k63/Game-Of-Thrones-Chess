@@ -1,6 +1,6 @@
-import Move from "../Move";
-import { PieceName } from "../Engine.types";
-import Piece from "./AbstractPiece";
+import Move from '../Move';
+import { PieceName } from '../Engine.types';
+import Piece from './AbstractPiece';
 
 class Knight extends Piece {
   name: PieceName ='Knight';
