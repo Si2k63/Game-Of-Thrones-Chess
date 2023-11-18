@@ -17,7 +17,10 @@ class Pawn extends Piece {
       new Move([modifier, 0]).addRule(new isNullRule()),
       new Move([modifier, -1]).addRule(new IsEnemyRule()),
       new Move([modifier, 1]).addRule(new IsEnemyRule()),
-      new Move([modifier * 2, 0]).addRule(new IsOnRowRule().setRow(colour === 'White' ? 6 : 1)).addRule(new IsObstructedRule()),
+      new Move([modifier * 2, 0])
+        .addRule(new IsOnRowRule().setRow(colour === 'White' ? 6 : 1))
+        .addRule(new IsObstructedRule())
+        .addRule(new isNullRule()),
     ]
   }
 }
