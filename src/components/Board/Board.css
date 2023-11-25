@@ -3,8 +3,8 @@
         width: 100vh;
         height: 100vh;
         position: absolute;
-        left: 25vw;
-        @apply drop-shadow-2xl select-none;
+        left: calc(50% - 50vh);
+        @apply select-none;
     }
 
     .row {

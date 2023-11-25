@@ -1,26 +1,51 @@
 @layer components {
     .square {
         width: 12.5%;
-        @apply h-full inline-flex items-center justify-center align-top;
+        @apply h-full inline-flex items-center justify-center align-top p-2;
+        position: relative;
     }
 
     .square img {
         @apply align-middle opacity-100;
     }
-
-    .square.black {
-        @apply bg-stone-700;
+    
+    .square.black::after {
+        content: "";
+        background: url('images/black.jpg');
+        background-position: cover;
+        opacity: 0.55;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        z-index: -1;   
     }
 
-    .square.white {
-        @apply bg-stone-200;
+    .square.white::after {
+        content: "";
+        background: url('images/white.jpg');
+        background-size: 100%;
+        background-position: bottom;
+        opacity: 0.55;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        z-index: -1;   
     }
 
-    .square.available .square-child-container {
+    .square.available.black .square-child-container {
+        @apply bg-opacity-40 bg-white inline-block rounded-full h-1/4 w-1/4;
+    }
+    .square.available.white .square-child-container {
         @apply bg-opacity-50 bg-black inline-block rounded-full h-1/4 w-1/4;
     }
 
      .square.available .square-child-container:has(img) {
-        @apply bg-red-400 bg-opacity-60 border-rose-800 border-4 rounded-full h-2/3 w-2/3 flex items-center justify-center;
+        height: auto !important;
+        background: transparent !important;
+        width: auto !important;
     }   
 }
