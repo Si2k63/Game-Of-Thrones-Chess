@@ -1,4 +1,4 @@
-import { TSquare, TCoordinates } from '../Engine.types';
+import { TCoordinates, TSquare } from '../Engine.types';
 import AbstractMovementRule from './AbstractMovementRule';
 
 class IsEnemyRule extends AbstractMovementRule {

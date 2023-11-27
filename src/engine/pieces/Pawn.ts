@@ -1,9 +1,9 @@
+import { PieceColour, PieceName, TSkin } from '../Engine.types';
 import Move from '../Move';
 import IsEnemyRule from '../Rules/IsEnemyRule';
 import isNullRule from '../Rules/IsNullRule';
 import IsObstructedRule from '../Rules/IsObstructedRule';
 import IsOnRowRule from '../Rules/IsOnRowRule';
-import { PieceColour, PieceName, TSkin } from '../Engine.types';
 import Piece from './AbstractPiece';
 
 class Pawn extends Piece {

@@ -1,5 +1,5 @@
-import Move from '../Move';
 import { PieceName } from '../Engine.types';
+import Move from '../Move';
 import Piece from './AbstractPiece';
 
 class Knight extends Piece {

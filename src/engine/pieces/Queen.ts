@@ -1,5 +1,5 @@
-import Move from '../Move';
 import { PieceColour, PieceName, TSkin } from '../Engine.types';
+import Move from '../Move';
 import Piece from './AbstractPiece';
 
 class Queen extends Piece {

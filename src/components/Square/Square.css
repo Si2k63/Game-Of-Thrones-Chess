@@ -8,7 +8,7 @@
     .square img {
         @apply align-middle opacity-100;
     }
-    
+
     .square.black::after {
         content: "";
         background: url('images/black.jpg');
@@ -19,7 +19,7 @@
         bottom: 0;
         right: 0;
         position: absolute;
-        z-index: -1;   
+        z-index: -1;
     }
 
     .square.white::after {
@@ -33,19 +33,20 @@
         bottom: 0;
         right: 0;
         position: absolute;
-        z-index: -1;   
+        z-index: -1;
     }
 
     .square.available.black .square-child-container {
         @apply bg-opacity-40 bg-white inline-block rounded-full h-1/4 w-1/4;
     }
+
     .square.available.white .square-child-container {
         @apply bg-opacity-50 bg-black inline-block rounded-full h-1/4 w-1/4;
     }
 
-     .square.available .square-child-container:has(img) {
+    .square.available .square-child-container:has(img) {
         height: auto !important;
         background: transparent !important;
         width: auto !important;
-    }   
+    }
 }

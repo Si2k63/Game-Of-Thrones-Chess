@@ -3,13 +3,13 @@ import { MouseEventHandler } from 'react';
 interface SquareInterface {
     colour: string,
     available: boolean,
-    children?: React.ReactNode ,
+    children?: React.ReactNode,
     onClick?: MouseEventHandler<HTMLDivElement>
 }
 
 const Square: React.FC<SquareInterface> = (props: SquareInterface) => {
-    const { colour, children, onClick, active, available} = props;
-    
+    const { colour, children, onClick, available } = props;
+
     /**
      * @todo: Class variance authority package?
      * https://youtube.com/shorts/_eFPsxlFBrY?feature=share

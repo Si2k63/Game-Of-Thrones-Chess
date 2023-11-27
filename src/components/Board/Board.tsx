@@ -1,11 +1,11 @@
-import { TBoard, TCoordinates, TSquare } from '@engine/Engine.types';
-import Piece, { PieceInterface } from '../Piece';
+import { TBoard, TCoordinates } from '@engine/Engine.types';
+import Piece, { PieceInterface } from '../Piece/Piece';
 import Square from '../Square';
 
 interface BoardInterface {
     pieces: TBoard
     availableSpaces: Number[][]
-    activePiece: TCoordinates|null
+    activePiece: TCoordinates | null
     onPieceClick: Function
     onAvailableClick: Function
 }

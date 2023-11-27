@@ -10,7 +10,7 @@ const board = new BoardController(defaultBoard);
 
 interface IApplicationState {
     pieces: TBoard,
-    activePiece: TCoordinates|null,
+    activePiece: TCoordinates | null,
     availableSpaces: TCoordinates[],
     hasBegun: Boolean
 }
@@ -20,7 +20,7 @@ function App() {
         pieces: [...board.getBoard()],
         activePiece: null,
         availableSpaces: [],
-        hasBegun:false
+        hasBegun: false
     });
 
     const { pieces, activePiece, availableSpaces, hasBegun } = state;
@@ -28,33 +28,33 @@ function App() {
 
     const onPieceClick = (activePiece: TCoordinates) => {
         const availableSpaces = board.getAvailableSpaces(activePiece)
-        setState({...state, availableSpaces, activePiece });
+        setState({ ...state, availableSpaces, activePiece });
     }
 
     const onAvailableClick = (coordinates: TCoordinates) => {
         board.move(activePiece as TCoordinates, coordinates);
-        setState({...state, pieces: [...board.getBoard()], availableSpaces: [] });
+        setState({ ...state, pieces: [...board.getBoard()], availableSpaces: [] });
     }
 
     const onBeginClick = () => {
-        setState({...state, hasBegun: true });
+        setState({ ...state, hasBegun: true });
         theme.play();
     }
 
     return (
         <div className="App" id="app">
             {!hasBegun ?
-                    <SplashScreen onBeginClick={onBeginClick} />
+                <SplashScreen onBeginClick={onBeginClick} />
                 :
-                    <>
-                        <Board
-                            activePiece={activePiece}
-                            availableSpaces={availableSpaces}
-                            pieces={pieces}
-                            onPieceClick={onPieceClick}
-                            onAvailableClick={onAvailableClick}
-                        />
-                    </>
+                <>
+                    <Board
+                        activePiece={activePiece}
+                        availableSpaces={availableSpaces}
+                        pieces={pieces}
+                        onPieceClick={onPieceClick}
+                        onAvailableClick={onAvailableClick}
+                    />
+                </>
             }
         </div>
     )

@@ -11,12 +11,12 @@
         background-size: cover;
         background-position: top;
     }
-    
+
     #splash img {
         @apply absolute;
         left: calc(50vw - 400px);
     }
-    
+
     #splash button {
         @apply absolute z-50 font-bold text-black p-4 bottom-0 m-20 bg-teal-500;
         left: calc(50vw - 230px);
