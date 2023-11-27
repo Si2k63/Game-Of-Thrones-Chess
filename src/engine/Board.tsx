@@ -34,7 +34,7 @@ class Board {
 
   getAvailableSpaces(coords: TCoordinates) {
     const piece = this.board[coords[0]][coords[1]];
-    const available: number[][] = [];
+    const available: TCoordinates[] = [];
     
     console.log(piece);
     

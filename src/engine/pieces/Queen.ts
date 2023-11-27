@@ -1,13 +1,13 @@
 import Move from '../Move';
-import { PieceColour, PieceName } from '../Engine.types';
+import { PieceColour, PieceName, TSkin } from '../Engine.types';
 import Piece from './AbstractPiece';
 
 class Queen extends Piece {
   name: PieceName ='Queen';
   movements: Move[] = [];
 
-  constructor(colour: PieceColour) {
-    super(colour);
+  constructor(colour: PieceColour, skin: TSkin = 'Default') {
+    super(colour, skin);
 
     for (let i = 1; i <= 7; i++) {
       this.movements.push(new Move([i * -1, i * -1]))

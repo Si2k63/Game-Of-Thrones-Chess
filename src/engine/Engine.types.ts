@@ -6,12 +6,14 @@ export type PieceColour = 'Black' | 'White';
 export type TCoordinates = [number, number];
 export type TSquare = TPiece|null;
 export type TBoard = TSquare[][]
+export type TSkin = string;
 
 export type TPiece = {
     name: PieceName,
     colour: PieceColour
+    skin?: TSkin
     movements: Move[]
-    getMoves: () => Move[];
+    getMoves: () => Move[]
 }
 
 export type TMovementRule = {

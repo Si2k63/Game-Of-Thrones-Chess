@@ -2,7 +2,6 @@ import { MouseEventHandler } from 'react';
 
 interface SquareInterface {
     colour: string,
-    active: boolean,
     available: boolean,
     children?: React.ReactNode ,
     onClick?: MouseEventHandler<HTMLDivElement>
@@ -18,10 +17,6 @@ const Square: React.FC<SquareInterface> = (props: SquareInterface) => {
 
     const classes = ['square', colour];
 
-    if (active) {
-        classes.push('active');
-    }
-    
     if (children || available) {
         classes.push('cursor-pointer');
     }
