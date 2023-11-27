@@ -5,6 +5,7 @@ import { TBoard, TCoordinates } from './Engine.types';
 class Board {
 
   board: TBoard = []
+  activeColour: string = 'White';
 
   constructor(board: TBoard) {
     this.board = board;
@@ -27,13 +28,17 @@ class Board {
       this.board[to[0]][to[1]],
       this.board[from[0]][from[1]],
     ]
+
+    this.activeColour = this.activeColour == 'White' ? 'Black' : 'White';
   }
 
   getAvailableSpaces(coords: TCoordinates) {
     const piece = this.board[coords[0]][coords[1]];
     const available: number[][] = [];
     
-    if (!piece) {
+    console.log(piece);
+    
+    if (!piece || piece.colour !== this.activeColour) {
       return [];
     }
 
