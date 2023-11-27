@@ -7,23 +7,23 @@ import { PieceColour, PieceName, TSkin } from '../Engine.types';
 import Piece from './AbstractPiece';
 
 class Pawn extends Piece {
-  name: PieceName ='Pawn';
-  movements: Move[] = [];
+    name: PieceName = 'Pawn';
+    movements: Move[] = [];
 
-  constructor(colour: PieceColour, skin: TSkin = 'Default') {
-    super(colour, skin);
-    this.skin = 'Default'
-    const modifier = colour === 'White' ? -1 : 1
-    this.movements = [
-      new Move([modifier, 0]).addRule(new isNullRule()),
-      new Move([modifier, -1]).addRule(new IsEnemyRule()),
-      new Move([modifier, 1]).addRule(new IsEnemyRule()),
-      new Move([modifier * 2, 0])
-        .addRule(new IsOnRowRule().setRow(colour === 'White' ? 6 : 1))
-        .addRule(new IsObstructedRule())
-        .addRule(new isNullRule()),
-    ]
-  }
+    constructor(colour: PieceColour, skin: TSkin = 'Default') {
+        super(colour, skin);
+        this.skin = 'Default'
+        const modifier = colour === 'White' ? -1 : 1
+        this.movements = [
+            new Move([modifier, 0]).addRule(new isNullRule()),
+            new Move([modifier, -1]).addRule(new IsEnemyRule()),
+            new Move([modifier, 1]).addRule(new IsEnemyRule()),
+            new Move([modifier * 2, 0])
+                .addRule(new IsOnRowRule().setRow(colour === 'White' ? 6 : 1))
+                .addRule(new IsObstructedRule())
+                .addRule(new isNullRule()),
+        ]
+    }
 }
 
 export default Pawn;

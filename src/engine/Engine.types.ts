@@ -4,7 +4,7 @@ export type PieceName = 'Pawn' | 'Bishop' | 'Knight' | 'Rook' | 'Queen' | 'King'
 export type PieceColour = 'Black' | 'White';
 
 export type TCoordinates = [number, number];
-export type TSquare = TPiece|null;
+export type TSquare = TPiece | null;
 export type TBoard = TSquare[][]
 export type TSkin = string;
 

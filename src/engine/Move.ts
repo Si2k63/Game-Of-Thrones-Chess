@@ -1,7 +1,7 @@
-import IsObstructedRule from './Rules/IsObstructedRule';
+import { TBoard, TCoordinates, TMovementRule } from './Engine.types';
 import IsNullOrEnemyRule from './Rules/IsNullOrEnemyRule';
+import IsObstructedRule from './Rules/IsObstructedRule';
 import IsValidSpaceRule from './Rules/IsValidSpaceRule';
-import { TBoard, TMovementRule, TCoordinates } from './Engine.types';
 
 interface MoveInterface {
   movement: TCoordinates,
@@ -9,44 +9,44 @@ interface MoveInterface {
 }
 
 class Move implements MoveInterface {
-    movement: TCoordinates = [0, 0];
-    rules: TMovementRule[] = [
-      new IsValidSpaceRule(),
-      new IsNullOrEnemyRule(),
-      new IsObstructedRule()
-    ];
-  
-    /**
-     * @param movement relative TCoordinates to travel to.
-     */
-    constructor(movement: TCoordinates) {
-      this.movement = movement;
-    }
+  movement: TCoordinates = [0, 0];
+  rules: TMovementRule[] = [
+    new IsValidSpaceRule(),
+    new IsNullOrEnemyRule(),
+    new IsObstructedRule()
+  ];
 
-    getTargetTCoordinates(piece: TCoordinates) {
-      return [this.movement[0] + piece[0], this.movement[1] + piece[1]]
-    }
-
-    getMovement() {
-      return this.movement;
-    }
-
-    addRule(rule: TMovementRule): Move {
-      this.rules.push(rule);
-      return this;
-    }
-  
-    isValid(board: TBoard, piece: TCoordinates) {
-      for (const rule of this.rules) {
-        rule.setBoard(board);
-        rule.setPiece(piece);
-        if (!rule.isValid(this.movement)) {
-          return false;
-        }
-      }
-  
-      return true;
-    }
+  /**
+   * @param movement relative TCoordinates to travel to.
+   */
+  constructor(movement: TCoordinates) {
+    this.movement = movement;
   }
-  
-  export default Move;
+
+  getTargetTCoordinates(piece: TCoordinates): TCoordinates {
+    return [this.movement[0] + piece[0], this.movement[1] + piece[1]]
+  }
+
+  getMovement() {
+    return this.movement;
+  }
+
+  addRule(rule: TMovementRule): Move {
+    this.rules.push(rule);
+    return this;
+  }
+
+  isValid(board: TBoard, piece: TCoordinates) {
+    for (const rule of this.rules) {
+      rule.setBoard(board);
+      rule.setPiece(piece);
+      if (!rule.isValid(this.movement)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+}
+
+export default Move;

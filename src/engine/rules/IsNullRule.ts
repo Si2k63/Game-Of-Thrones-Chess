@@ -3,8 +3,8 @@ import AbstractMovementRule from './AbstractMovementRule';
 
 class IsNullRule extends AbstractMovementRule {
     isValid(movement: TCoordinates) {
-      const target = this.getTargetPiece(movement)
-      return target === null
+        const target = this.getTargetPiece(movement)
+        return target === null
     }
 }
 

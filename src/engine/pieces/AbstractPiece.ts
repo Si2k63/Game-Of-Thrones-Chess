@@ -6,15 +6,15 @@ abstract class Piece implements TPiece {
     name: PieceName = 'Pawn'
     skin: TSkin = 'Default';
     movements: Move[] = [];
-    
+
     constructor(colour: PieceColour, skin: TSkin = 'Default') {
-      this.colour = colour;
-      this.skin = skin;
+        this.colour = colour;
+        this.skin = skin;
     }
 
     getMoves() {
         return this.movements;
     }
-  }
-  
+}
+
 export default Piece;
