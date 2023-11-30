@@ -1,20 +1,14 @@
 import { MouseEventHandler } from 'react';
+import { TParentComponent } from '../component.types';
 
-interface SquareInterface {
+type TSquareProps = TParentComponent & {
     colour: string,
     available: boolean,
-    children?: React.ReactNode,
     onClick?: MouseEventHandler<HTMLDivElement>
 }
 
-const Square: React.FC<SquareInterface> = (props: SquareInterface) => {
+const Square: React.FC<TSquareProps> = (props: TSquareProps) => {
     const { colour, children, onClick, available } = props;
-
-    /**
-     * @todo: Class variance authority package?
-     * https://youtube.com/shorts/_eFPsxlFBrY?feature=share
-     */
-
     const classes = ['square', colour];
 
     if (children || available) {

@@ -1,14 +1,6 @@
-import { PieceColour, PieceName, TSkin } from '@engine/Engine.types';
+import { TPieceProps } from "../component.types";
 
-export interface PieceInterface {
-    name: PieceName,
-    colour: PieceColour
-    active: Boolean
-    underAttack: Boolean
-    skin?: TSkin
-}
-
-const Piece: React.FC<PieceInterface> = (props: PieceInterface) => {
+const Piece: React.FC<TPieceProps> = (props: TPieceProps) => {
 
     const { name, colour, active, underAttack } = props;
     const skin = props.skin || 'Default';
