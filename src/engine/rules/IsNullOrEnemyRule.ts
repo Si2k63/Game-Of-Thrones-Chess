@@ -5,7 +5,7 @@ class IsNullOrEnemyRule extends AbstractMovementRule {
     isValid(movement: TCoordinates) {
         const piece = this.getSelectedPiece();
         const target = this.getTargetPiece(movement);
-        return target === null || target?.colour !== piece?.colour;
+        return target === null || (target?.colour !== piece?.colour && target?.name !== "King");
     }
 }
 
