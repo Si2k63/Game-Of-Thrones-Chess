@@ -1,12 +1,12 @@
-import { PieceColour, PieceName, TSkin } from '../Engine.types';
+import { TPieceColour, TPieceName, TSkin } from '../Engine.types';
 import Move from '../Move';
 import Piece from './AbstractPiece';
 
 class Queen extends Piece {
-    name: PieceName = 'Queen';
+    name: TPieceName = 'Queen';
     movements: Move[] = [];
 
-    constructor(colour: PieceColour, skin: TSkin = 'Default') {
+    constructor(colour: TPieceColour, skin: TSkin = 'Default') {
         super(colour, skin);
 
         for (let i = 1; i <= 7; i++) {

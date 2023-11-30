@@ -1,4 +1,4 @@
-import { PieceColour, PieceName, TSkin } from '../Engine.types';
+import { TPieceColour, TPieceName, TSkin } from '../Engine.types';
 import Move from '../Move';
 import IsEnemyRule from '../Rules/IsEnemyRule';
 import isNullRule from '../Rules/IsNullRule';
@@ -7,10 +7,10 @@ import IsOnRowRule from '../Rules/IsOnRowRule';
 import Piece from './AbstractPiece';
 
 class Pawn extends Piece {
-    name: PieceName = 'Pawn';
+    name: TPieceName = 'Pawn';
     movements: Move[] = [];
 
-    constructor(colour: PieceColour, skin: TSkin = 'Default') {
+    constructor(colour: TPieceColour, skin: TSkin = 'Default') {
         super(colour, skin);
         this.skin = 'Default'
         const modifier = colour === 'White' ? -1 : 1

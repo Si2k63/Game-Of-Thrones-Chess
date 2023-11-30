@@ -5,6 +5,7 @@ import IsValidSpaceRule from './Rules/IsValidSpaceRule';
 
 interface MoveInterface {
   movement: TCoordinates,
+  rules: TMovementRule[]
 
 }
 

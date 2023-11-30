@@ -1,7 +1,7 @@
 import Move from './Move';
 
-export type PieceName = 'Pawn' | 'Bishop' | 'Knight' | 'Rook' | 'Queen' | 'King';
-export type PieceColour = 'Black' | 'White';
+export type TPieceName = 'Pawn' | 'Bishop' | 'Knight' | 'Rook' | 'Queen' | 'King';
+export type TPieceColour = 'Black' | 'White';
 
 export type TCoordinates = [number, number];
 export type TSquare = TPiece | null;
@@ -9,8 +9,8 @@ export type TBoard = TSquare[][]
 export type TSkin = string;
 
 export type TPiece = {
-    name: PieceName,
-    colour: PieceColour
+    name: TPieceName,
+    colour: TPieceColour
     skin?: TSkin
     movements: Move[]
     getMoves: () => Move[]

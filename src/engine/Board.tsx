@@ -24,6 +24,10 @@ class Board {
         this.activeColour = this.activeColour == 'White' ? 'Black' : 'White';
     }
 
+    getPiece(coords: TCoordinates) {
+        return this.board[coords[0]][coords[1]];
+    }
+
     getAvailableSpaces(coords: TCoordinates) {
         const piece = this.board[coords[0]][coords[1]];
         const available: TCoordinates[] = [];

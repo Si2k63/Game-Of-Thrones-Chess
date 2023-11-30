@@ -1,9 +1,9 @@
-import { PieceName } from '../Engine.types';
+import { TPieceName } from '../Engine.types';
 import Move from '../Move';
 import Piece from './AbstractPiece';
 
 class Rook extends Piece {
-    name: PieceName = 'Rook';
+    name: TPieceName = 'Rook';
     movements: Move[] = [
         new Move([-1, 0]),
         new Move([-2, 0]),
