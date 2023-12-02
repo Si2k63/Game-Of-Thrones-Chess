@@ -8,7 +8,7 @@ const ApplicationContextProvider: React.FC<TParentComponent> = (props: TParentCo
     const [state, setState] = useState<TApplicationState>(defaultApplicationState);
     return (
         <ApplicationContext.Provider
-            value={[state, (value: React.SetStateAction<TApplicationState>) => setState({ ...state, ...value })]}
+            value={[state, setState]}
         >
             {children}
         </ApplicationContext.Provider>

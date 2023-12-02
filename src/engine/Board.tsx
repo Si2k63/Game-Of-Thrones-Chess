@@ -32,8 +32,6 @@ class Board {
         const piece = this.board[coords[0]][coords[1]];
         const available: TCoordinates[] = [];
 
-        console.log(piece);
-
         if (!piece || piece.colour !== this.activeColour) {
             return [];
         }

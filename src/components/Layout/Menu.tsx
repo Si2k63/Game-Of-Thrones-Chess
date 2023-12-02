@@ -3,11 +3,11 @@ import { faMusic, faVolumeLow } from '@fortawesome/free-solid-svg-icons';
 import useApplicationContext from '@hooks/useApplicationContext';
 
 export const theme = new Audio('/audio/theme.mp3')
-theme.volume = 0.5;
+theme.volume = 0.4;
 
 const Menu: React.FC = () => {
-
-    const [{ playTheme, playSounds }, setState] = useApplicationContext();
+    const [state, setState] = useApplicationContext();
+    const { playTheme, playSounds } = state;
 
     const onMusicClick = () => {
         if (playTheme) {
@@ -16,7 +16,7 @@ const Menu: React.FC = () => {
             theme.play();
         }
 
-        setState({ playTheme: !playTheme })
+        setState({ ...state, playTheme: !playTheme })
     }
 
     return (
@@ -27,7 +27,7 @@ const Menu: React.FC = () => {
                 active={playTheme}
             />
             <Button
-                onClick={() => setState({ playSounds: !playSounds })}
+                onClick={() => setState({ ...state, playSounds: !playSounds })}
                 active={playSounds}
                 icon={faVolumeLow}
             />

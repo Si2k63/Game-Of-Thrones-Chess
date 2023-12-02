@@ -6,7 +6,7 @@ const SplashScreen: React.FC = () => {
     const [state, setState] = useApplicationContext();
 
     const onBeginClick = () => {
-        setState({ hasBegun: true });
+        setState({ ...state, hasBegun: true });
         theme.play();
     }
 
