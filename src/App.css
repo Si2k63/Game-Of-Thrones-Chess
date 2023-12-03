@@ -1,4 +1,3 @@
-@import '@components/Board/Board.css';
 @import '@components/Square/Square.css';
 
 @tailwind base;
@@ -21,7 +20,6 @@
         @apply absolute z-50 bottom-0 m-20;
         left: calc(50vw - 230px);
         width: 300px;
-        @apply bg-teal-500 border-2 rounded-sm border-teal-500 px-4 py-2 font-medium text-white mr-1
     }
 
     #menu {

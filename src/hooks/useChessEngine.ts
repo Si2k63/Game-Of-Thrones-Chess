@@ -8,7 +8,7 @@ const board = new BoardController(defaultBoard);
 
 export function useChessEngine() {
     const [state, setState] = useApplicationContext();
-    const { pieces, activePiece, availableSpaces, playSounds } = state;
+    const { pieces, activePiece, availableSquares, playSounds } = state;
 
     useEffect(
         () => setState({ ...state, pieces: board.getBoard() }),
@@ -16,17 +16,26 @@ export function useChessEngine() {
     );
 
     const onPieceClick = (activePiece: TCoordinates) => {
-        const availableSpaces = board.getAvailableSpaces(activePiece)
-        setState({ ...state, availableSpaces, activePiece });
+        const availableSquares = board.getAvailableSquares(activePiece)
+        setState({ ...state, availableSquares, activePiece });
     }
 
     const onPieceMove = (coordinates: TCoordinates) => {
         board.move(activePiece as TCoordinates, coordinates);
-        setState({ ...state, pieces: [...board.getBoard()], availableSpaces: [] });
+        setState({ ...state, pieces: [...board.getBoard()], availableSquares: [] });
         playSound(coordinates, playSounds);
     }
 
-    return { pieces, activePiece, availableSpaces, onPieceClick, onPieceMove };
+    const isAvailableSquare = (coordinates: TCoordinates): boolean => {
+        const match = availableSquares.filter(space => space[0] === coordinates[0] && space[1] === coordinates[1]);
+        return match.length > 0;
+    }
+
+    const isActivePiece = (coordinates: TCoordinates): boolean => {
+        return activePiece !== null && activePiece[0] === coordinates[0] && activePiece[1] === coordinates[1];
+    }
+
+    return { pieces, isActivePiece, isAvailableSquare, onPieceClick, onPieceMove };
 }
 
 function playSound(activePiece: TCoordinates, playSounds: boolean): void {

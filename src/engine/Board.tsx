@@ -28,7 +28,7 @@ class Board {
         return this.board[coords[0]][coords[1]];
     }
 
-    getAvailableSpaces(coords: TCoordinates) {
+    getAvailableSquares(coords: TCoordinates) {
         const piece = this.board[coords[0]][coords[1]];
         const available: TCoordinates[] = [];
 

@@ -4,7 +4,7 @@ import { createContext, useContext } from "react";
 export const defaultApplicationState: TApplicationState = {
     pieces: [],
     activePiece: null,
-    availableSpaces: [],
+    availableSquares: [],
     hasBegun: false,
     playTheme: true,
     playSounds: true

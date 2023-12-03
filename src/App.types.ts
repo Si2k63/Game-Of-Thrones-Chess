@@ -3,7 +3,7 @@ import { TBoard, TCoordinates } from "@engine/Engine.types"
 export type TApplicationState = {
     pieces: TBoard,
     activePiece: TCoordinates | null,
-    availableSpaces: TCoordinates[],
+    availableSquares: TCoordinates[],
     hasBegun: boolean
     playTheme: boolean
     playSounds: boolean

@@ -1,6 +1,6 @@
 import { TPieceColour, TPieceName, TSkin } from "@/engine/Engine.types";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import { ReactNode } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 
 export type TParentComponent = {
     children?: React.ReactNode
@@ -19,4 +19,14 @@ export type TPieceProps = {
     active: Boolean
     underAttack: Boolean
     skin?: TSkin
+}
+
+export type TAvailableSquareMarkerProps = {
+    colour: TPieceColour
+}
+
+export type TSquareProps = TParentComponent & {
+    colour: TPieceColour,
+    available: boolean,
+    onClick?: MouseEventHandler<HTMLDivElement>
 }
