@@ -1,10 +1,12 @@
-import { TBoard, TCoordinates } from './Engine.types';
+import { TBoard, TCoordinates, TPiece } from './Engine.types';
 import Move from './Move';
 
 class Board {
 
     board: TBoard = []
     activeColour: string = 'White';
+    taken: TPiece[] = [
+    ];
 
     constructor(board: TBoard) {
         this.board = board;
@@ -15,7 +17,8 @@ class Board {
     }
 
     move = (from: TCoordinates, to: TCoordinates) => {
-        if (this.board[from[0]][from[1]]?.colour !== this.board[to[0]][to[1]]?.colour) {
+        if (this.board[to[0]][to[1]] !== null && this.board[from[0]][from[1]]?.colour !== this.board[to[0]][to[1]]?.colour) {
+            this.taken.push(this.board[to[0]][to[1]] as TPiece);
             this.board[to[0]][to[1]] = null;
         }
 
@@ -26,6 +29,10 @@ class Board {
 
     getPiece(coords: TCoordinates) {
         return this.board[coords[0]][coords[1]];
+    }
+
+    getTaken() {
+        return this.taken;
     }
 
     getAvailableSquares(coords: TCoordinates) {

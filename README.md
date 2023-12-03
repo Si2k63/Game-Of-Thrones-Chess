@@ -11,7 +11,7 @@ Built using Typescript, React, Tailwind and Vite.
 
 ## Future Plans
 
-- Add checkmate detection
-- Add en passant rule
-- Add list of captured pieces
-- Separate engine into npm package
+[ ] Add check/checkmate detection
+[ ] Add en passant rule
+[x] Add list of captured pieces
+[ ] Separate engine into npm package

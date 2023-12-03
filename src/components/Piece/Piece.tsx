@@ -25,6 +25,7 @@ const Piece: React.FC<TPieceProps> = (props: TPieceProps) => {
     return <img
         src={src}
         alt={`${colour} ${name}`}
+        className="inline-block"
     />
 }
 

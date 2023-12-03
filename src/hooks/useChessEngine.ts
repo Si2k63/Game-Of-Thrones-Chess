@@ -22,7 +22,7 @@ export function useChessEngine() {
 
     const onPieceMove = (coordinates: TCoordinates) => {
         board.move(activePiece as TCoordinates, coordinates);
-        setState({ ...state, pieces: [...board.getBoard()], availableSquares: [] });
+        setState({ ...state, pieces: [...board.getBoard()], availableSquares: [], taken: [...board.getTaken()] });
         playSound(coordinates, playSounds);
     }
 

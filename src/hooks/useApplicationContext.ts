@@ -7,7 +7,8 @@ export const defaultApplicationState: TApplicationState = {
     availableSquares: [],
     hasBegun: false,
     playTheme: true,
-    playSounds: true
+    playSounds: true,
+    taken: []
 }
 
 export const ApplicationContext = createContext<TApplicationContext | null>(null);

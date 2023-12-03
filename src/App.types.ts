@@ -1,4 +1,4 @@
-import { TBoard, TCoordinates } from "@engine/Engine.types"
+import { TBoard, TCoordinates, TPiece } from "@engine/Engine.types"
 
 export type TApplicationState = {
     pieces: TBoard,
@@ -7,6 +7,7 @@ export type TApplicationState = {
     hasBegun: boolean
     playTheme: boolean
     playSounds: boolean
+    taken: TPiece[]
 }
 
 export type TApplicationContext = [TApplicationState, React.Dispatch<React.SetStateAction<TApplicationState>>];
