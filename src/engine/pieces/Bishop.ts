@@ -1,3 +1,4 @@
+import { TPieceName } from '@engine/Engine.types';
 import Move from '../Move';
 import Piece from './AbstractPiece';
 
