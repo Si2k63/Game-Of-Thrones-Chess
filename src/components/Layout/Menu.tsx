@@ -3,7 +3,7 @@ import { faMusic, faVolumeLow } from '@fortawesome/free-solid-svg-icons';
 import useApplicationContext from '@hooks/useApplicationContext';
 
 export const theme = new Audio('/audio/theme.mp3')
-theme.volume = 0.4;
+theme.volume = 0.2;
 
 const Menu: React.FC = () => {
     const [state, setState] = useApplicationContext();
