@@ -5,7 +5,7 @@ import useApplicationContext from '@hooks/useApplicationContext';
 import { useEffect } from 'react';
 
 const board = new BoardController(defaultBoard);
-let sound: HTMLAudioElement = new Audio('/audio/Black.Pawn.Default.mp3');
+let sound: HTMLAudioElement = new Audio('audio/Black.Pawn.Default.mp3');
 
 export function useChessEngine() {
     const [state, setState] = useApplicationContext();
