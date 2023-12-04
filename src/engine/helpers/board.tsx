@@ -1,9 +1,9 @@
-import Bishop from '../Pieces/Bishop';
-import King from '../Pieces/King';
-import Knight from '../Pieces/Knight';
-import Pawn from '../Pieces/Pawn';
-import Queen from '../Pieces/Queen';
-import Rook from '../Pieces/Rook';
+import Bishop from '../pieces/Bishop';
+import King from '../pieces/King';
+import Knight from '../pieces/Knight';
+import Pawn from '../pieces/Pawn';
+import Queen from '../pieces/Queen';
+import Rook from '../pieces/Rook';
 
 export const defaultBoard = [
     [new Rook('Black', 'Left'), new Knight('Black', 'Left'), new Bishop('Black', 'Left'), new Queen('Black'), new King('Black'), new Bishop('Black', 'Right'), new Knight('Black', 'Right'), new Rook('Black', 'Right')],

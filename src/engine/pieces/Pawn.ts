@@ -1,9 +1,9 @@
 import { TPieceColour, TPieceName, TSkin } from '../Engine.types';
 import Move from '../Move';
-import IsEnemyRule from '../Rules/IsEnemyRule';
-import isNullRule from '../Rules/IsNullRule';
-import IsObstructedRule from '../Rules/IsObstructedRule';
-import IsOnRowRule from '../Rules/IsOnRowRule';
+import IsEnemyRule from '../rules/IsEnemyRule';
+import isNullRule from '../rules/IsNullRule';
+import IsObstructedRule from '../rules/IsObstructedRule';
+import IsOnRowRule from '../rules/IsOnRowRule';
 import Piece from './AbstractPiece';
 
 class Pawn extends Piece {

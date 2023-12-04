@@ -5,11 +5,11 @@
     }
 
     .square.Black::after {
-        background: url('images/black.jpg');
+        background: url('../images/black.jpg');
 
     }
 
     .square.White::after {
-        background: url('images/white.jpg');
+        background: url('../images/white.jpg');
     }
 }

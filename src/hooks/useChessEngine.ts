@@ -1,7 +1,7 @@
-import { defaultBoard } from '@/engine/Helpers/board';
-import useApplicationContext from '@/hooks/useApplicationContext';
 import BoardController from '@engine/Board';
 import { TCoordinates } from '@engine/Engine.types';
+import { defaultBoard } from '@engine/helpers/board';
+import useApplicationContext from '@hooks/useApplicationContext';
 import { useEffect } from 'react';
 
 const board = new BoardController(defaultBoard);
