@@ -17,13 +17,13 @@ export function useChessEngine() {
 
     const onPieceClick = (activePiece: TCoordinates) => {
         const availableSquares = board.getAvailableSquares(activePiece)
+        playSound(activePiece, playSounds);
         setState({ ...state, availableSquares, activePiece });
     }
 
     const onPieceMove = (coordinates: TCoordinates) => {
         board.move(activePiece as TCoordinates, coordinates);
         setState({ ...state, pieces: [...board.getBoard()], availableSquares: [], taken: [...board.getTaken()] });
-        playSound(coordinates, playSounds);
     }
 
     const isAvailableSquare = (coordinates: TCoordinates): boolean => {
