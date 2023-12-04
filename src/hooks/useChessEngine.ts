@@ -5,6 +5,7 @@ import { TCoordinates } from '@engine/Engine.types';
 import { useEffect } from 'react';
 
 const board = new BoardController(defaultBoard);
+let sound: HTMLAudioElement = new Audio('/audio/Black.Pawn.Default.mp3');
 
 export function useChessEngine() {
     const [state, setState] = useApplicationContext();
@@ -45,7 +46,8 @@ function playSound(activePiece: TCoordinates, playSounds: boolean): void {
         return
     }
 
-    const sound = new Audio(`/audio/${piece.colour}.${piece.name}.${piece.skin}.mp3`);
+    sound.pause()
+    sound = new Audio(`/audio/${piece.colour}.${piece.name}.${piece.skin}.mp3`);
     sound.volume = 0.3;
     sound.play();
 }
