@@ -1,7 +1,7 @@
 @layer components {
     .square::after {
         content: "";
-        @apply opacity-50 top-0 left-0 right-0 bottom-0 absolute -z-10 bg-cover;
+        @apply opacity-60 top-0 left-0 right-0 bottom-0 absolute -z-10 bg-cover;
     }
 
     .square.Black::after {

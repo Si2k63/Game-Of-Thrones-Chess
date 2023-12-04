@@ -11,9 +11,12 @@
         background-position: top;
     }
 
+    #splash {
+        @apply flex justify-center;
+    }
+
     #splash img {
-        @apply absolute;
-        left: calc(50vw - 400px);
+        max-width: 90%;
     }
 
     #splash button {

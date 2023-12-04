@@ -11,9 +11,9 @@ const Board: React.FC = () => {
     const colours: TPieceColour[] = ['White', 'Black', 'White'];
 
     return (
-        <div id="board" className="absolute h-screen select-none shadow-2xl aspect-square left-1/2 transform -translate-x-1/2">
+        <div id="board" className="absolute h-fit w-fit select-none shadow-2xl aspect-square m-auto landscape:left-0 landscape:right-0 top-0 bottom-0">
             {pieces && pieces.map((row: Array<any>, rowIndex: number) => {
-                return (<div className="h-1/8" key={`row_${rowIndex}`}>
+                return (<div className="landscape:h-1/8vh portrait:h-1/8vw" key={`row_${rowIndex}`}>
                     {row.map((piece: TPieceProps | null, columnIndex: number) => {
                         const coordinates: TCoordinates = [rowIndex, columnIndex];
                         const available: boolean = isAvailableSquare(coordinates);
