@@ -47,7 +47,7 @@ function playSound(activePiece: TCoordinates, playSounds: boolean): void {
     }
 
     sound.pause()
-    sound = new Audio(`/audio/${piece.colour}.${piece.name}.${piece.skin}.mp3`);
+    sound = new Audio(`audio/${piece.colour}.${piece.name}.${piece.skin}.mp3`);
     sound.volume = 0.3;
     sound.play();
 }

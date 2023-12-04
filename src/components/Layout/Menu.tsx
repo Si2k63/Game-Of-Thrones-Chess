@@ -2,7 +2,7 @@ import Button from '@/components/Layout/Button';
 import { faMusic, faVolumeLow } from '@fortawesome/free-solid-svg-icons';
 import useApplicationContext from '@hooks/useApplicationContext';
 
-export const theme = new Audio('/audio/theme.mp3')
+export const theme = new Audio('audio/theme.mp3')
 theme.volume = 0.2;
 
 const Menu: React.FC = () => {
