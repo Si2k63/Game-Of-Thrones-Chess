@@ -2,23 +2,28 @@ import BoardController from '@engine/Board';
 import { TCoordinates } from '@engine/Engine.types';
 import { defaultBoard } from '@engine/helpers/board';
 import useApplicationContext from '@hooks/useApplicationContext';
-import { useEffect } from 'react';
+import useSound from '@hooks/useSound';
+import { useEffect, useState } from 'react';
 
 const board = new BoardController(defaultBoard);
-let sound: HTMLAudioElement = new Audio('audio/Black.Pawn.Default.mp3');
 
 export function useChessEngine() {
-    const [state, setState] = useApplicationContext();
-    const { pieces, activePiece, availableSquares, playSounds } = state;
 
-    useEffect(
-        () => setState({ ...state, pieces: board.getBoard() }),
-        []
-    );
+    const { playActivationSound } = useSound();
+
+    const defaultState = {
+        pieces: [],
+        activePiece: null,
+        availableSquares: [],
+        taken: [],
+        pieces: board.getBoard()
+    }
+    const [state, setState] = useState<TBoardState>(defaultState);
+    const { pieces, activePiece, availableSquares, playSounds } = state;
 
     const onPieceClick = (activePiece: TCoordinates) => {
         const availableSquares = board.getAvailableSquares(activePiece)
-        playSound(activePiece, playSounds);
+        playActivationSound(board.getPiece(activePiece));
         setState({ ...state, availableSquares, activePiece });
     }
 
@@ -36,18 +41,5 @@ export function useChessEngine() {
         return activePiece !== null && activePiece[0] === coordinates[0] && activePiece[1] === coordinates[1];
     }
 
-    return { pieces, isActivePiece, isAvailableSquare, onPieceClick, onPieceMove };
-}
-
-function playSound(activePiece: TCoordinates, playSounds: boolean): void {
-    const piece = board.getPiece(activePiece);
-
-    if (!piece || !playSounds) {
-        return
-    }
-
-    sound.pause()
-    sound = new Audio(`audio/${piece.colour}.${piece.name}.${piece.skin}.mp3`);
-    sound.volume = 0.3;
-    sound.play();
+    return { ...state, isActivePiece, isAvailableSquare, onPieceClick, onPieceMove };
 }

@@ -21,3 +21,10 @@ export type TMovementRule = {
     setPiece: (piece: TCoordinates) => void
     isValid: (movement: TCoordinates) => boolean
 }
+
+export type TBoardState = {
+    pieces: TBoard,
+    activePiece: TCoordinates | null,
+    availableSquares: TCoordinates[],
+    taken: TPiece[]
+}

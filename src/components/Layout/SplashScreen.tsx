@@ -1,14 +1,11 @@
-import { theme } from "@/components/Layout/Menu";
 import useApplicationContext from "@/hooks/useApplicationContext";
+import useSound from "@/hooks/useSound";
 import Button from "./Button";
 
 const SplashScreen: React.FC = () => {
-    const [state, setState] = useApplicationContext();
+    const [applicationState, setApplicationState] = useApplicationContext();
 
-    const onBeginClick = () => {
-        setState({ ...state, hasBegun: true });
-        theme.play();
-    }
+    const onBeginClick = () => setApplicationState({ ...applicationState, hasBegun: true });
 
     return (
         <div id='splash'>

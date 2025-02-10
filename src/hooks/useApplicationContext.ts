@@ -2,13 +2,9 @@ import { TApplicationContext, TApplicationState } from "@/App.types";
 import { createContext, useContext } from "react";
 
 export const defaultApplicationState: TApplicationState = {
-    pieces: [],
-    activePiece: null,
-    availableSquares: [],
     hasBegun: false,
     playTheme: true,
     playSounds: true,
-    taken: []
 }
 
 export const ApplicationContext = createContext<TApplicationContext | null>(null);
