@@ -1,4 +1,4 @@
-import { TPiece, TPieceColour, TPieceName, TSkin } from '../Engine.types';
+import { TCoordinates, TPiece, TBoard, TPieceColour, TPieceName, TSkin } from '../Engine.types';
 import Move from '../Move';
 
 abstract class Piece implements TPiece {
@@ -12,8 +12,16 @@ abstract class Piece implements TPiece {
         this.skin = skin;
     }
 
-    getMoves() {
-        return this.movements;
+    getMoves(board: TBoard, coords: TCoordinates) {
+        const available: TCoordinates[] = [];
+
+        this.movements.forEach((move: Move) => {
+            if (move.isValid(board, coords)) {
+                available.push(move.getTargetTCoordinates(coords))
+            }
+        })
+
+        return available;
     }
 }
 

@@ -1,14 +1,14 @@
-import { TCoordinates } from '../Engine.types';
-import AbstractMovementRule from './AbstractMovementRule';
+import { TCoordinates } from "../Engine.types";
+import AbstractMovementRule from "./AbstractMovementRule";
 
 class IsObstructedRule extends AbstractMovementRule {
-
     checkForObstructions(movement: TCoordinates): boolean {
         const targetRow = this.piece[0] + movement[0];
         const targetCol = this.piece[1] + movement[1];
 
         let curRow = this.piece[0];
         let curCol = this.piece[1];
+        let kingIntersects = false;
 
         while (curRow != targetRow || curCol != targetCol) {
             const netRow = targetRow - curRow;
@@ -23,15 +23,27 @@ class IsObstructedRule extends AbstractMovementRule {
                 break;
             }
 
-            if (this.board[curRow][curCol] !== null) {
-                return false;
+
+            if (this.board[curRow][curCol] !== null && this.board[curRow][curCol]?.colour !== this.getSelectedPiece()?.colour) {
+                if (this.board[curRow][curCol]?.name == 'King') {
+                    console.log(`kingIntersects @ ${curRow},${curCol}`);
+                   kingIntersects = true; 
+                } else {
+                    return false;
+                }
+                
             }
+
+        }
+        console.log(this.board[curRow][curCol])
+        if (kingIntersects && this.board[curRow][curCol] !== null) {
+            return false;
         }
         return true;
     }
 
     isValid(movement: TCoordinates): boolean {
-        if (this.getSelectedPiece()?.name === 'Knight') {
+        if (this.getSelectedPiece()?.name === "Knight") { // instanceof
             return true;
         }
 

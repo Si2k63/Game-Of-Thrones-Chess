@@ -1,12 +1,11 @@
-import { TBoard, TCoordinates, TMovementRule } from './Engine.types';
-import IsNullOrEnemyRule from './rules/IsNullOrEnemyRule';
-import IsObstructedRule from './rules/IsObstructedRule';
-import IsValidSpaceRule from './rules/IsValidSpaceRule';
+import { TBoard, TCoordinates, TMovementRule } from "./Engine.types";
+import IsNullOrEnemyRule from "./rules/IsNullOrEnemyRule";
+import IsObstructedRule from "./rules/IsObstructedRule";
+import IsValidSpaceRule from "./rules/IsValidSpaceRule";
 
 interface MoveInterface {
-  movement: TCoordinates,
-  rules: TMovementRule[]
-
+  movement: TCoordinates;
+  rules: TMovementRule[];
 }
 
 class Move implements MoveInterface {
@@ -14,7 +13,7 @@ class Move implements MoveInterface {
   rules: TMovementRule[] = [
     new IsValidSpaceRule(),
     new IsNullOrEnemyRule(),
-    new IsObstructedRule()
+    new IsObstructedRule(),
   ];
 
   /**
@@ -25,7 +24,7 @@ class Move implements MoveInterface {
   }
 
   getTargetTCoordinates(piece: TCoordinates): TCoordinates {
-    return [this.movement[0] + piece[0], this.movement[1] + piece[1]]
+    return [this.movement[0] + piece[0], this.movement[1] + piece[1]];
   }
 
   getMovement() {
@@ -51,3 +50,4 @@ class Move implements MoveInterface {
 }
 
 export default Move;
+

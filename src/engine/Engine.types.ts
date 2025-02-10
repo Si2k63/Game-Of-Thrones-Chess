@@ -13,7 +13,7 @@ export type TPiece = {
     colour: TPieceColour
     skin?: TSkin
     movements: Move[]
-    getMoves: () => Move[]
+    getMoves: (board: TBoard, coords: TCoordinates) => TCoordinates[]
 }
 
 export type TMovementRule = {
