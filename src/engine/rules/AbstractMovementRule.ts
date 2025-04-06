@@ -3,6 +3,7 @@ import { TBoard, TCoordinates, TMovementRule, TSquare } from '../Engine.types';
 abstract class AbstractMovementRule implements TMovementRule {
     board: TBoard = [];
     piece: TCoordinates = [0, 0];
+    path: TCoordinates[] = [];
 
     setBoard(board: TBoard) {
         this.board = board;
@@ -10,6 +11,10 @@ abstract class AbstractMovementRule implements TMovementRule {
 
     setPiece(piece: TCoordinates) {
         this.piece = piece;
+    }
+
+    setVectorPath(path: TCoordinates[]) {
+        this.path = path;
     }
 
     getSelectedPiece(): TSquare {

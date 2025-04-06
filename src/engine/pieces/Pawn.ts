@@ -2,7 +2,6 @@ import { TPieceColour, TPieceName, TSkin } from '../Engine.types';
 import Move from '../Move';
 import IsEnemyRule from '../rules/IsEnemyRule';
 import isNullRule from '../rules/IsNullRule';
-import IsObstructedRule from '../rules/IsObstructedRule';
 import IsOnRowRule from '../rules/IsOnRowRule';
 import Piece from './AbstractPiece';
 
@@ -18,9 +17,8 @@ class Pawn extends Piece {
             new Move([modifier, 0]).addRule(new isNullRule()),
             new Move([modifier, -1]).addRule(new IsEnemyRule()),
             new Move([modifier, 1]).addRule(new IsEnemyRule()),
-            new Move([modifier * 2, 0])
+            new Move([modifier, 0], 2)
                 .addRule(new IsOnRowRule().setRow(colour === 'White' ? 6 : 1))
-                .addRule(new IsObstructedRule())
                 .addRule(new isNullRule()),
         ]
     }

@@ -7,7 +7,7 @@ import Rook from "../pieces/Rook";
 
 /*
  * @TODO: check pinned pieces.
- *
+ */
 export const defaultBoard = [
     [
         new Rook("Black", "Left"),
@@ -55,12 +55,12 @@ export const defaultBoard = [
     ],
 ];
 
-*/
-
+/*
 export const defaultBoard = [
-    [null, null, null, null, new Bishop("Black", "Left")],
-    [null, null, null, new Queen("Black"), null],
-    [null, null, new Rook("White", "Left"), null, null],
     [null, null, null, null, null],
-    [new King("White"), null, null, null, null],
+    [null, null, null, null, null],
+    [null, null, null, null, null],
+    [null, null, null, new Queen("White"), null],
+    [null, null, null, null, null],
 ];
+*/

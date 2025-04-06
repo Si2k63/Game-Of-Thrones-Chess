@@ -6,8 +6,7 @@ class IsNullOrEnemyRule extends AbstractMovementRule {
         const piece = this.getSelectedPiece();
         const target = this.getTargetPiece(movement);
         return target === null ||
-            (target?.colour !== piece?.colour && target?.name !== "King" &&
-                piece?.name !== "King");
+            (target?.colour !== piece?.colour && target?.name !== "King");
     }
 }
 

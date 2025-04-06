@@ -16,9 +16,9 @@ abstract class Piece implements TPiece {
         const available: TCoordinates[] = [];
 
         this.movements.forEach((move: Move) => {
-            if (move.isValid(board, coords)) {
-                available.push(move.getTargetTCoordinates(coords))
-            }
+            move.getValidMoves(board, coords).forEach((valid: TCoordinates) => {
+                available.push(valid)
+            });
         })
 
         return available;
