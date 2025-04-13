@@ -1,5 +1,7 @@
 import { TBoard, TCoordinates, TMovementRule } from "./Engine.types";
 import IsNullOrEnemyRule from "./rules/IsNullOrEnemyRule";
+import IsObstructed from "./rules/IsObstructed";
+import IsPinned from "./rules/IsPinned";
 import IsValidSpaceRule from "./rules/IsValidSpaceRule";
 
 interface MoveInterface {
@@ -16,6 +18,7 @@ class Move implements MoveInterface {
   rules: TMovementRule[] = [
     new IsValidSpaceRule(),
     new IsNullOrEnemyRule(),
+    new IsPinned(),
   ];
 
   /**
@@ -40,7 +43,6 @@ class Move implements MoveInterface {
   * Calculates all possible movements for the current movement vector relative to the current square.
   */
   getPossibleMoves() {
-    console.log(this.maximumRecurrences)
     if (this.maximumRecurrences == 1) {
       return [this.movement]
     }

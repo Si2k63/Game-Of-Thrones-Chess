@@ -17,7 +17,7 @@ class Board {
         if (
             this.board[to[0]][to[1]] !== null &&
             this.board[from[0]][from[1]]?.colour !==
-                this.board[to[0]][to[1]]?.colour
+            this.board[to[0]][to[1]]?.colour
         ) {
             this.taken.push(this.board[to[0]][to[1]] as TPiece);
             this.board[to[0]][to[1]] = null;
@@ -46,8 +46,7 @@ class Board {
             return [];
         }
 
-        const moves = piece.getMoves(this.board, coords);
-        console.log(moves);
+        const moves = piece.getMoves(this.board, coords, true);
         return moves;
     }
 }

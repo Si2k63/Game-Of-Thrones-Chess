@@ -21,6 +21,10 @@ abstract class AbstractMovementRule implements TMovementRule {
         return this.board[this.piece[0]][this.piece[1]];
     }
 
+    getTargetCoordinates = (movement: TCoordinates): TCoordinates => this.getAbsoluteCoordinates(movement, this.piece);
+
+    getAbsoluteCoordinates = (position: TCoordinates, movement: TCoordinates): TCoordinates => [position[0] + movement[0], position[1] + movement[1]];
+
     getTargetPiece(movement: TCoordinates): TSquare {
         return this.board[movement[0] + this.piece[0]][movement[1] + this.piece[1]];
     }

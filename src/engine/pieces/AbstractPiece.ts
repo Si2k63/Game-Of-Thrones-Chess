@@ -12,6 +12,21 @@ abstract class Piece implements TPiece {
         this.skin = skin;
     }
 
+    getVectors() {
+        const vectors: TCoordinates[][] = [];
+
+        this.movements.forEach((move: Move) => {
+            const possibleMoves = move.getPossibleMoves();
+            const currentVector: TCoordinates[] = [];
+            possibleMoves.forEach(mv => {
+                currentVector.push(mv)
+            })
+            vectors.push(currentVector);
+        })
+
+        return vectors;
+    }
+
     getMoves(board: TBoard, coords: TCoordinates) {
         const available: TCoordinates[] = [];
 

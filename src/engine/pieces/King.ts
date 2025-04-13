@@ -1,6 +1,7 @@
-import { TPieceName } from '@engine/Engine.types';
+import { TPieceColour, TPieceName, TSkin } from '@engine/Engine.types';
 import Move from '../Move';
 import Piece from './AbstractPiece';
+import IsNotMovingIntoCheck from '../rules/IsNotMovingIntoCheck';
 
 class King extends Piece {
     name: TPieceName = 'King';
@@ -17,7 +18,7 @@ class King extends Piece {
 
     constructor(colour: TPieceColour, skin: TSkin = 'Default') {
         super(colour, skin);
-        //this.movements.forEach(move => move.addRule(new IsNotMovingIntoCheck()));
+        this.movements.forEach(move => move.addRule(new IsNotMovingIntoCheck()));
     }
 }
 
