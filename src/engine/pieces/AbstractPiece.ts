@@ -27,6 +27,7 @@ abstract class Piece implements TPiece {
         return vectors;
     }
 
+
     getMoves(board: TBoard, coords: TCoordinates) {
         const available: TCoordinates[] = [];
 

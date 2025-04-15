@@ -14,7 +14,7 @@ export type TPiece = {
     skin?: TSkin
     movements: Move[]
     getMoves: (board: TBoard, coords: TCoordinates) => TCoordinates[]
-    getVectors: (board: TBoard, coords: TCoordinates) => TCoordinates[][]
+    getVectors: () => TCoordinates[][]
 }
 
 export type TMovementRule = {

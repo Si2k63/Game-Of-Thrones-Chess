@@ -19,6 +19,7 @@ class Move implements MoveInterface {
     new IsValidSpaceRule(),
     new IsNullOrEnemyRule(),
     new IsPinned(),
+    new IsObstructed(),
   ];
 
   /**
