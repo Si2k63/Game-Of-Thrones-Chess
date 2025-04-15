@@ -1,3 +1,4 @@
+import { TPiece } from '@/engine/Engine.types';
 import useApplicationContext from '@hooks/useApplicationContext';
 import { useEffect } from 'react';
 
@@ -7,14 +8,12 @@ theme.volume = 0.2;
 
 export default function useSound() {
 
-  const [ applicationState, setApplicationState] = useApplicationContext();
+  const [applicationState, setApplicationState] = useApplicationContext();
   const { playSounds, playTheme } = applicationState;
-
-  console.log('hi')
 
   function playActivationSound(piece: TPiece): void {
     if (!piece || !playSounds) {
-        return
+      return
     }
 
     sound.pause()
@@ -27,14 +26,12 @@ export default function useSound() {
     setApplicationState({ ...applicationState, playSounds: !playSounds })
   }
 
-  function toggleMusic () {
+  function toggleMusic() {
     if (playTheme) {
-        theme.pause();
+      theme.pause();
     } else {
-        theme.play();
+      theme.play();
     }
-
-    console.log('hello')
 
     setApplicationState({ ...applicationState, playTheme: !playTheme })
   }
