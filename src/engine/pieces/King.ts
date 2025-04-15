@@ -15,11 +15,6 @@ class King extends Piece {
         new Move([1, 0]),
         new Move([1, 1]),
     ];
-
-    constructor(colour: TPieceColour, skin: TSkin = 'Default') {
-        super(colour, skin);
-        this.movements.forEach(move => move.addRule(new IsNotMovingIntoCheck()));
-    }
 }
 
 export default King;

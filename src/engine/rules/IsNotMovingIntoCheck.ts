@@ -5,37 +5,36 @@ class IsNotMovingIntoCheck extends AbstractMovementRule {
 
     isValid(movement: TCoordinates) {
         const piece: TSquare = this.getSelectedPiece();
-        const target: TCoordinates = [this.piece[0] + movement[0], this.piece[1] + movement[1]];
-        let valid = true;
 
-        this.board.forEach((row: TSquare[], rowIndex: number) => {
-            row.forEach((enemy: TSquare, columnIndex: number) => {
+        if (piece?.name !== 'King') {
+            return true;
+        }
+
+        const target: TCoordinates = this.getAbsoluteCoordinates(this.piece, movement)
+
+        for (const [rowIndex, row] of this.board.entries()) {
+            for (const [columnIndex, enemy] of row.entries()) {
                 if (!enemy || piece?.colour === enemy.colour) {
-                    return;
+                    continue;
                 }
 
-                const moves = enemy
-                    .getMoves(this.board, [rowIndex, columnIndex])
-                    .map(move => {
-                        return move;
-                    })
+                const vectors = this.translateVectors([rowIndex, columnIndex], enemy.getVectors())
+                const intersectingVector = this.getIntersectingVectors(vectors, target).pop();
 
-                const result = moves.find(move => {
-                    return move[0] == target[0] && move[1] == target[1]
-                }) ?? [];
-
-                console.log(enemy?.name, result, target, result.length)
-
-                if (result.length > 0) {
-                    valid = false;
+                if (!intersectingVector) {
+                    continue;
                 }
 
-            })
-        })
+                const squaresBefore = this.getSquaresBefore(intersectingVector, target);
+                const blockingPiece = squaresBefore.find(square => square !== null);
 
+                if (!blockingPiece || blockingPiece == piece) {
+                    return false;
+                }
+            }
+        }
 
-
-        return valid;
+        return true;
     }
 }
 
