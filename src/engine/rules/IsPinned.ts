@@ -5,8 +5,13 @@ class IsPinned extends AbstractMovementRule {
     isValid(movement: TCoordinates) {
         const piece: TSquare = this.getSelectedPiece();
 
+        if (piece?.name == 'King') {
+            return true;
+        }
+
         for (const [rowIndex, row] of this.board.entries()) {
             for (const [columnIndex, enemy] of row.entries()) {
+
                 if (!enemy || piece?.colour === enemy.colour) {
                     continue;
                 }
