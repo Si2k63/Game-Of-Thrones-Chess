@@ -1,3 +1,4 @@
+import Vector from './helpers/Vector';
 import Move from './Move';
 
 export type TPieceName = 'Pawn' | 'Bishop' | 'Knight' | 'Rook' | 'Queen' | 'King';
@@ -15,6 +16,7 @@ export type TPiece = {
     movements: Move[]
     getMoves: (board: TBoard, coords: TCoordinates) => TCoordinates[]
     getVectors: () => TCoordinates[][]
+    getRealVectors: () => Vector[]
 }
 
 export type TMovementRule = {

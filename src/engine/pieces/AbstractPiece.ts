@@ -1,4 +1,5 @@
 import { TCoordinates, TPiece, TBoard, TPieceColour, TPieceName, TSkin } from '../Engine.types';
+import Vector from '../helpers/Vector';
 import Move from '../Move';
 
 abstract class Piece implements TPiece {
@@ -10,6 +11,11 @@ abstract class Piece implements TPiece {
     constructor(colour: TPieceColour, skin: TSkin = 'Default') {
         this.colour = colour;
         this.skin = skin;
+    }
+
+    getRealVectors(): Vector[] {
+        const vectors = this.getVectors();
+        return vectors.map(vector => new Vector(vector))
     }
 
     getVectors() {

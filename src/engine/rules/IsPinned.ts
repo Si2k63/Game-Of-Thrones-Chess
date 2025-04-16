@@ -5,46 +5,55 @@ class IsPinned extends AbstractMovementRule {
     isValid(movement: TCoordinates) {
         const piece: TSquare = this.getSelectedPiece();
 
+        if (!piece) {
+            return false;
+        }
+
+        const targetCoordinates = this.getAbsoluteCoordinates(this.piece, movement);
+
         if (piece?.name == 'King') {
             return true;
         }
 
         for (const [rowIndex, row] of this.board.entries()) {
             for (const [columnIndex, enemy] of row.entries()) {
-
                 if (!enemy || piece?.colour === enemy.colour) {
                     continue;
                 }
 
-                const vectors = this.translateVectors([rowIndex, columnIndex], enemy.getVectors())
-                const intersectingVector = this.getIntersectingVectors(vectors, this.piece).pop();
+                const vectors = enemy.getRealVectors();
+                const intersectingVector = vectors.map(vector => {
+                    return vector
+                        .setOrigin([rowIndex, columnIndex])
+                        .setBoard(this.board)
+                        .absolute()
+                        .insideBoard();
+                }).filter(vector => vector.contains(this.piece)).pop();
 
                 if (!intersectingVector) {
                     continue;
                 }
 
-                const squaresBefore = this.getSquaresBefore(intersectingVector, this.piece);
+                const squaresBefore = intersectingVector.before(this.piece);
 
-                if (squaresBefore.find(square => square !== null)) { // Something's in the way, yeah!
+                console.log(squaresBefore)
+
+                if (!squaresBefore.isEmpty()) { // Something's in the way, yeah!
                     continue;
                 }
 
-                if (squaresBefore.length == intersectingVector.length - 1) { // we're the last piece in the vector.
+                if (squaresBefore.endsWith(targetCoordinates)) { // we're the last piece in the vector.
                     continue;
                 }
 
-                const piecesAfter = this.getSquaresAfter(intersectingVector, this.piece);
+                const piecesAfter = intersectingVector.after(this.piece)
+                const containsKing = piecesAfter.containsPiece('King', piece?.colour);
 
-                const kingIndex = piecesAfter.findIndex(square => {
-                    return square?.name == 'King' && square?.colour == piece?.colour
-                })
+                intersectingVector.push([rowIndex, columnIndex]) // add enemy position to determine if we can take it.
 
-                intersectingVector.push([rowIndex, columnIndex]) // add enemy position
+                const containsTarget = intersectingVector.contains(targetCoordinates);
 
-                const targetIndex = intersectingVector
-                    .findIndex(square => square[0] == this.piece[0] + movement[0] && square[1] == this.piece[1] + movement[1]);
-
-                if (kingIndex >= 0 && targetIndex < 0) { // We're pinned!
+                if (containsKing && !containsTarget) { // We're pinned!
                     return false;
                 }
             }

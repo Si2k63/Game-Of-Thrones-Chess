@@ -1,29 +1,41 @@
-import { TBoard, TCoordinates, TSquare } from "../Engine.types";
+import { TBoard, TCoordinates, TPieceColour, TPieceName, TSquare } from "../Engine.types";
 
 class Vector {
 
   vector: TCoordinates[] = [];
   origin: TCoordinates = [0, 0];
+  board: TBoard = [];
 
-  constructor(origin: TCoordinates, vector: TCoordinates[]) {
-    this.origin = origin;
+  constructor(vector: TCoordinates[]) {
     this.vector = vector;
+  }
+
+  setOrigin(origin: TCoordinates) {
+    this.origin = origin;
+    return this;
+  }
+
+  setBoard(board: TBoard) {
+    this.board = board;
+    return this;
   }
 
   /**
   * Converts the vector to its absolute coordinates.
   */
-  absolute() {
+  absolute(): Vector {
     // @TODO: sum coordinates together performed in several places - refactor.
     this.vector = this.vector.map(coordinate => [coordinate[0] + this.origin[0], coordinate[1] + this.origin[1]]);
+    return this;
   }
 
   /**
   * Converts the vector to its relative coordinates.
   */
-  relative() {
+  relative(): Vector {
     // @TODO: duplication of toAbsolute - refactor.
     this.vector = this.vector.map(coordinate => [coordinate[0] - this.origin[0], coordinate[1] - this.origin[1]]);
+    return this;
   }
 
   /**
@@ -45,12 +57,13 @@ class Vector {
   }
 
   /**
-  * Convert the vector to its board squares.
+  * Converts an absolute vector to its board squares.
   *
   * @param board - the current board
   */
-  pieces(board: TBoard): TSquare[] {
-    return this.vector.map(coordinate => board[coordinate[0]][coordinate[1]])
+  pieces(): TSquare[] {
+    this.pieceChecks('pieces');
+    return this.vector.map(coordinate => this.board[coordinate[0]][coordinate[1]])
   }
 
   /**
@@ -60,7 +73,10 @@ class Vector {
   * @param end - the index to stop the slice at
   */
   slice(start: number, end?: number): Vector {
-    return new Vector(this.origin, this.vector.slice(start, end))
+    const vector = new Vector(this.vector.slice(start, end))
+    vector.setBoard(this.board)
+    vector.setOrigin(this.origin);
+    return vector;
   }
 
   /**
@@ -73,6 +89,12 @@ class Vector {
     return this.slice(0, index);
   }
 
+  private pieceChecks(name: string) {
+    if (this.board.length < 1) {
+      throw new Error(`Cannot call method ${name}() without calling setBoard() first.`)
+    }
+  }
+
   /**
   * Slice the vector and return a new instance containing all coordinates after the specified coordinates.
   *
@@ -81,6 +103,40 @@ class Vector {
   after(coordinates: TCoordinates): Vector {
     const index = this.findIndex(coordinates);
     return this.slice(index);
+  }
+
+  isEmpty(): boolean {
+    this.pieceChecks('isEmpty');
+    return this.pieces().filter(x => x !== null).length == 0
+  }
+
+  containsPiece(name: TPieceName, colour: TPieceColour): boolean {
+    this.pieceChecks('containsPiece');
+
+    return this.pieces()
+      .findIndex(square => square?.name == name && square?.colour == colour) >= 0
+  }
+
+  endsWith(coordinates: TCoordinates): boolean {
+    if (this.vector.length == 0) {
+      return false;
+    }
+    return this.findIndex(coordinates) == this.vector.length - 1;
+  }
+
+  push(coordinates: TCoordinates) {
+    this.vector.push(coordinates);
+  }
+
+  insideBoard() {
+    this.pieceChecks('insideBoard');
+    this.vector = this.vector.filter(target => target[0] >= 0 && target[1] >= 0 && target[0] < this.board.length && target[1] < this.board[0].length)
+    console.log(this.vector)
+    return this;
+  }
+
+  length() {
+    return this.vector.length;
   }
 }
 
