@@ -13,11 +13,6 @@ abstract class Piece implements TPiece {
         this.skin = skin;
     }
 
-    getRealVectors(): Vector[] {
-        const vectors = this.getVectors();
-        return vectors.map(vector => new Vector(vector))
-    }
-
     getVectors() {
         const vectors: TCoordinates[][] = [];
 
@@ -30,9 +25,18 @@ abstract class Piece implements TPiece {
             vectors.push(currentVector);
         })
 
-        return vectors;
+        return vectors.map(vector => new Vector(vector));
     }
 
+    getIntersectingVector(target: TCoordinates, origin: TCoordinates, board: TBoard) {
+        return this.getVectors().map(vector => {
+            return vector
+                .setOrigin(origin)
+                .setBoard(board)
+                .absolute()
+                .insideBoard();
+        }).filter(vector => vector.contains(target)).pop();
+    }
 
     getMoves(board: TBoard, coords: TCoordinates) {
         const available: TCoordinates[] = [];

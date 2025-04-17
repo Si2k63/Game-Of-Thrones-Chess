@@ -15,8 +15,8 @@ export type TPiece = {
     skin?: TSkin
     movements: Move[]
     getMoves: (board: TBoard, coords: TCoordinates) => TCoordinates[]
-    getVectors: () => TCoordinates[][]
-    getRealVectors: () => Vector[]
+    getVectors: () => Vector[]
+    getIntersectingVector(target: TCoordinates, origin: TCoordinates, board: TBoard): Vector
 }
 
 export type TMovementRule = {

@@ -138,6 +138,10 @@ class Vector {
   length() {
     return this.vector.length;
   }
+
+  firstPiece() {
+    return this.pieces().find(x => x !== null)
+  }
 }
 
 export default Vector;

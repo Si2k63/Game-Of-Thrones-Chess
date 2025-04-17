@@ -10,7 +10,7 @@ class IsNotMovingIntoCheck extends AbstractMovementRule {
             return true;
         }
 
-        const target: TCoordinates = this.getAbsoluteCoordinates(this.piece, movement)
+        const targetCoordinates: TCoordinates = this.getAbsoluteCoordinates(this.piece, movement)
 
         for (const [rowIndex, row] of this.board.entries()) {
             for (const [columnIndex, enemy] of row.entries()) {
@@ -18,15 +18,15 @@ class IsNotMovingIntoCheck extends AbstractMovementRule {
                     continue;
                 }
 
-                const vectors = this.translateVectors([rowIndex, columnIndex], enemy.getVectors())
-                const intersectingVector = this.getIntersectingVectors(vectors, target).pop();
+                const intersectingVector = enemy.getIntersectingVector(targetCoordinates, [rowIndex, columnIndex], this.board)
 
                 if (!intersectingVector) {
                     continue;
                 }
 
-                const squaresBefore = this.getSquaresBefore(intersectingVector, target);
-                const blockingPiece = squaresBefore.find(square => square !== null);
+                const blockingPiece = intersectingVector
+                    .before(targetCoordinates)
+                    .firstPiece()
 
                 if (!blockingPiece || blockingPiece == piece) {
                     return false;

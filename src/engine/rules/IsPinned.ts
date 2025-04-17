@@ -21,22 +21,13 @@ class IsPinned extends AbstractMovementRule {
                     continue;
                 }
 
-                const vectors = enemy.getRealVectors();
-                const intersectingVector = vectors.map(vector => {
-                    return vector
-                        .setOrigin([rowIndex, columnIndex])
-                        .setBoard(this.board)
-                        .absolute()
-                        .insideBoard();
-                }).filter(vector => vector.contains(this.piece)).pop();
+                const intersectingVector = enemy.getIntersectingVector(this.piece, [rowIndex, columnIndex], this.board);
 
                 if (!intersectingVector) {
                     continue;
                 }
 
                 const squaresBefore = intersectingVector.before(this.piece);
-
-                console.log(squaresBefore)
 
                 if (!squaresBefore.isEmpty()) { // Something's in the way, yeah!
                     continue;

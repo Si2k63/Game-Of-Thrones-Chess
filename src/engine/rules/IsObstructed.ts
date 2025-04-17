@@ -9,7 +9,7 @@ class IsObstructed extends AbstractMovementRule {
             return false;
         }
 
-        const vectors = piece.getRealVectors();
+        const vectors = piece.getVectors();
         const intersectingVector = vectors.filter(vector => vector.contains(movement)).pop();
 
         if (!intersectingVector) {
