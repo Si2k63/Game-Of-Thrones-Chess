@@ -126,12 +126,12 @@ class Vector {
 
   push(coordinates: TCoordinates) {
     this.vector.push(coordinates);
+    return this;
   }
 
   insideBoard() {
     this.pieceChecks('insideBoard');
     this.vector = this.vector.filter(target => target[0] >= 0 && target[1] >= 0 && target[0] < this.board.length && target[1] < this.board[0].length)
-    console.log(this.vector)
     return this;
   }
 

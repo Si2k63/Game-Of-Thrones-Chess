@@ -1,4 +1,5 @@
 import { TBoard, TCoordinates, TMovementRule } from "./Engine.types";
+import IsKingChecked from "./rules/IsKingChecked";
 import IsNotMovingIntoCheck from "./rules/IsNotMovingIntoCheck";
 import IsNullOrEnemyRule from "./rules/IsNullOrEnemyRule";
 import IsObstructed from "./rules/IsObstructed";
@@ -21,7 +22,8 @@ class Move implements MoveInterface {
     new IsNullOrEnemyRule(),
     new IsPinned(),
     new IsObstructed(),
-    new IsNotMovingIntoCheck()
+    new IsNotMovingIntoCheck(),
+    new IsKingChecked()
   ];
 
   /**
