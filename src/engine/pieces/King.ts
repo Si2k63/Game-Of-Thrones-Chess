@@ -1,7 +1,7 @@
-import { TPieceColour, TPieceName, TSkin } from '@engine/Engine.types';
+import { TPieceName } from '@engine/Engine.types';
 import Move from '../Move';
 import Piece from './AbstractPiece';
-import IsNotMovingIntoCheck from '../rules/IsNotMovingIntoCheck';
+import IsAbleToCastle from '../rules/IsAbleToCastle';
 
 class King extends Piece {
     name: TPieceName = 'King';
@@ -14,6 +14,8 @@ class King extends Piece {
         new Move([1, -1]),
         new Move([1, 0]),
         new Move([1, 1]),
+        new Move([0, 2]).addRule(new IsAbleToCastle()),
+        new Move([0, -2]).addRule(new IsAbleToCastle()),
     ];
 }
 

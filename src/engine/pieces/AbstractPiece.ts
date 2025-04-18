@@ -7,6 +7,7 @@ abstract class Piece implements TPiece {
     name: TPieceName = 'Pawn'
     skin: TSkin = 'Default';
     movements: Move[] = [];
+    hasMoved: boolean = false;
 
     constructor(colour: TPieceColour, skin: TSkin = 'Default') {
         this.colour = colour;
@@ -27,6 +28,11 @@ abstract class Piece implements TPiece {
 
         return vectors;
     }
+
+    setHasMoved() {
+        this.hasMoved = true;
+    }
+
 
     getIntersectingVector(target: TCoordinates, origin: TCoordinates, board: TBoard): Vector | undefined {
         return this.getVectors().map((vector: Vector) => {

@@ -17,6 +17,7 @@ export type TPiece = {
     getMoves: (board: TBoard, coords: TCoordinates) => TCoordinates[]
     getVectors: () => Vector[]
     getIntersectingVector(target: TCoordinates, origin: TCoordinates, board: TBoard): Vector | undefined
+    setHasMoved: () => void
 }
 
 export type TMovementRule = {
