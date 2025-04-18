@@ -13,8 +13,8 @@ abstract class Piece implements TPiece {
         this.skin = skin;
     }
 
-    getVectors() {
-        const vectors: TCoordinates[][] = [];
+    getVectors(): Vector[] {
+        const vectors: Vector[] = []
 
         this.movements.forEach((move: Move) => {
             const possibleMoves = move.getPossibleMoves();
@@ -22,14 +22,14 @@ abstract class Piece implements TPiece {
             possibleMoves.forEach(mv => {
                 currentVector.push(mv)
             })
-            vectors.push(currentVector);
+            vectors.push(new Vector(currentVector));
         })
 
-        return vectors.map(vector => new Vector(vector));
+        return vectors;
     }
 
-    getIntersectingVector(target: TCoordinates, origin: TCoordinates, board: TBoard) {
-        return this.getVectors().map(vector => {
+    getIntersectingVector(target: TCoordinates, origin: TCoordinates, board: TBoard): Vector | undefined {
+        return this.getVectors().map((vector: Vector) => {
             return vector
                 .setOrigin(origin)
                 .setBoard(board)

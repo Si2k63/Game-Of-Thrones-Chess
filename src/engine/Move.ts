@@ -64,23 +64,28 @@ class Move implements MoveInterface {
   }
 
   getValidMoves(board: TBoard, currentLocation: TCoordinates) {
-
     const moves: TCoordinates[] = [];
-    let isValid = true;
 
     for (const move of this.getPossibleMoves()) {
+      let isValid = true;
+      const targetCoordinates: TCoordinates = this.getVectorTarget(currentLocation, move)
+
       for (const rule of this.rules) {
+        if (targetCoordinates[0] < 0 || targetCoordinates[0] >= board.length || targetCoordinates[1] < 0 || targetCoordinates[1] >= board[0].length) {
+          continue;
+        }
         rule.setBoard(board);
         rule.setPiece(currentLocation);
+
         if (!rule.isValid(move)) {
-          isValid = false
+          isValid = false;
           break;
         }
       }
-      if (!isValid) {
-        break;
+
+      if (isValid) {
+        moves.push(targetCoordinates)
       }
-      moves.push(this.getVectorTarget(currentLocation, move))
     }
 
     return moves;

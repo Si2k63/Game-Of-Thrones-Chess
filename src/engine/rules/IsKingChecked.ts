@@ -14,7 +14,7 @@ class IsKingChecked extends AbstractMovementRule {
             return true;
         }
 
-        const targetCoordinates = this.getAbsoluteCoordinates(this.piece, movement)
+        const targetCoordinates: TCoordinates = this.getAbsoluteCoordinates(this.piece, movement)
         const kingCoordinates = this.getKingCoordinates(piece.colour);
 
         if (!kingCoordinates) {
@@ -40,9 +40,14 @@ class IsKingChecked extends AbstractMovementRule {
                     continue;
                 }
 
-                between.push([rowIndex, columnIndex])
+                const counterAttackVector = piece
+                    .getIntersectingVector([rowIndex, columnIndex], this.piece, this.board);
 
-                if (!between.contains(targetCoordinates)) {
+                if (counterAttackVector && counterAttackVector.before([rowIndex, columnIndex]).isEmpty()) {
+                    continue;
+                }
+
+                if (!between.push([rowIndex, columnIndex]).contains(targetCoordinates)) {
                     return false;
                 }
             }
