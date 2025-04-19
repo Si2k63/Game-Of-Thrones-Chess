@@ -4,11 +4,22 @@ import AvailableSquareMarker from '../AvailableSquareMarker';
 import Piece from '../Piece/Piece';
 import Square from '../Square';
 import { TPieceProps } from '../component.types';
+import useApplicationContext from '@/hooks/useApplicationContext';
 
 const Board: React.FC = () => {
 
     const { pieces, isActivePiece, isAvailableSquare, onPieceClick, onPieceMove } = useChessEngine();
+    const [state, setState] = useApplicationContext();
     const colours: TPieceColour[] = ['White', 'Black', 'White'];
+
+    const onClick = (coordinates: TCoordinates, available: boolean) => {
+        if (available) {
+            const result = onPieceMove(coordinates)
+            setState({ ...state, result })
+        } else {
+            onPieceClick(coordinates)
+        }
+    }
 
     return (
         <div id="board" className="absolute h-fit w-fit select-none shadow-2xl aspect-square m-auto landscape:left-0 landscape:right-0 top-0 bottom-0">
@@ -21,7 +32,7 @@ const Board: React.FC = () => {
                         const colour: TPieceColour = colours[rowIndex % 2 + columnIndex % 2];
                         return (
                             <Square
-                                onClick={() => available ? onPieceMove(coordinates) : onPieceClick(coordinates)}
+                                onClick={() => onClick(coordinates, available)}
                                 available={available}
                                 key={`square_${columnIndex}`}
                                 colour={colour}

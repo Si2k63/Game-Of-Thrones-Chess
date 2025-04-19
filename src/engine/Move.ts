@@ -73,7 +73,7 @@ class Move implements MoveInterface {
 
       for (const rule of this.rules) {
         if (targetCoordinates[0] < 0 || targetCoordinates[0] >= board.length || targetCoordinates[1] < 0 || targetCoordinates[1] >= board[0].length) {
-          continue;
+          isValid = false;
         }
         rule.setBoard(board);
         rule.setPiece(currentLocation);

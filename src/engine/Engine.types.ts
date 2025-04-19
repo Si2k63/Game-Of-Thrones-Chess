@@ -32,3 +32,9 @@ export type TBoardState = {
     availableSquares: TCoordinates[],
     taken: TPiece[]
 }
+
+export type MoveResult = {
+    checkmate: boolean
+    stalemate: boolean
+    winner: string | null
+}

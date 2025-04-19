@@ -52,7 +52,6 @@ abstract class Piece implements TPiece {
                 available.push(valid)
             });
         })
-
         return available;
     }
 }

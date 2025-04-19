@@ -4,6 +4,7 @@ import Menu from './components/Layout/Menu';
 import SplashScreen from './components/Layout/SplashScreen';
 import TakenPieces from './components/TakenPieces';
 import useApplicationContext from './hooks/useApplicationContext';
+import ResultModal from './components/ResultModal';
 
 function App() {
     const [{ hasBegun }] = useApplicationContext();
@@ -11,6 +12,7 @@ function App() {
         <div id="app">
             {hasBegun ?
                 <>
+                    <ResultModal />
                     <TakenPieces />
                     <Menu />
                     <Board />

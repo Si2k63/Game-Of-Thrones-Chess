@@ -5,6 +5,11 @@ export const defaultApplicationState: TApplicationState = {
     hasBegun: false,
     playTheme: true,
     playSounds: true,
+    result: {
+        checkmate: false,
+        stalemate: false,
+        winner: null
+    }
 }
 
 export const ApplicationContext = createContext<TApplicationContext | null>(null);
