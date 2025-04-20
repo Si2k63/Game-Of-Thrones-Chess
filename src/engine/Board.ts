@@ -14,20 +14,22 @@ class Board {
         return this.board;
     }
 
-    move = (from: TCoordinates, to: TCoordinates): MoveResult => {
-        if (
-            this.board[to[0]][to[1]] !== null &&
-            this.board[from[0]][from[1]]?.colour !==
-            this.board[to[0]][to[1]]?.colour
-        ) {
-            this.taken.push(this.board[to[0]][to[1]] as TPiece);
-            this.board[to[0]][to[1]] = null;
-        }
+    reset(board: TBoard) {
+        this.activeColour = "White";
+        this.board = board;
+        this.taken = [];
+    }
 
-        [this.board[from[0]][from[1]], this.board[to[0]][to[1]]] = [
-            this.board[to[0]][to[1]],
-            this.board[from[0]][from[1]],
-        ];
+    move = (from: TCoordinates, to: TCoordinates): MoveResult => {
+        this.board = this.board.map((row, rowIndex) =>
+            rowIndex === from[0] || rowIndex === to[0]
+                ? row.map((cell, colIndex) => {
+                    if (rowIndex === from[0] && colIndex === from[1]) return null;
+                    if (rowIndex === to[0] && colIndex === to[1]) return this.board[from[0]][from[1]];
+                    return cell;
+                })
+                : row
+        )
 
         const movedPiece = this.board[to[0]][to[1]]
         movedPiece?.setHasMoved();
@@ -109,8 +111,8 @@ class Board {
 
     hasMoves(): boolean {
         for (const [rowIndex, row] of this.board.entries()) {
-            for (const [columnIndex, enemy] of row.entries()) {
-                const piece = this.board[rowIndex][columnIndex]
+            for (const [columnIndex, piece] of row.entries()) {
+
                 if (!piece) {
                     continue;
                 }

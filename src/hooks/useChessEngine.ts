@@ -1,10 +1,11 @@
-import BoardController from '@engine/Board';
+import Board from '@engine/Board';
 import { TBoardState, TCoordinates } from '@engine/Engine.types';
 import { defaultBoard } from '@engine/helpers/board';
 import useSound from '@hooks/useSound';
 import { useState } from 'react';
 
-const board = new BoardController(defaultBoard);
+
+const board = new Board(defaultBoard);
 
 export function useChessEngine() {
 
@@ -21,8 +22,20 @@ export function useChessEngine() {
 
     const onPieceClick = (activePiece: TCoordinates) => {
         const availableSquares = board.getAvailableSquares(activePiece)
+
         playActivationSound(board.getPiece(activePiece));
         setState({ ...state, availableSquares, activePiece });
+    }
+
+    const onReset = () => {
+        board.reset(defaultBoard);
+
+        setState({
+            ...state,
+            pieces: [...board.getBoard()],
+            availableSquares: [],
+            taken: []
+        });
     }
 
     const onPieceMove = (coordinates: TCoordinates) => {
@@ -47,5 +60,5 @@ export function useChessEngine() {
         return activePiece !== null && activePiece[0] === coordinates[0] && activePiece[1] === coordinates[1];
     }
 
-    return { ...state, isActivePiece, isAvailableSquare, onPieceClick, onPieceMove };
+    return { ...state, onReset, isActivePiece, isAvailableSquare, onPieceClick, onPieceMove };
 }

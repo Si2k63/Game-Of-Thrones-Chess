@@ -1,4 +1,4 @@
-import { TPiece } from '@/engine/Engine.types';
+import { TPiece, TSquare } from '@/engine/Engine.types';
 import useApplicationContext from '@hooks/useApplicationContext';
 import { useEffect } from 'react';
 
@@ -11,7 +11,7 @@ export default function useSound() {
   const [applicationState, setApplicationState] = useApplicationContext();
   const { playSounds, playTheme } = applicationState;
 
-  function playActivationSound(piece: TPiece): void {
+  function playActivationSound(piece: TSquare): void {
     if (!piece || !playSounds) {
       return
     }
