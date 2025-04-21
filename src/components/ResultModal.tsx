@@ -2,7 +2,7 @@ import useApplicationContext, { defaultApplicationState } from "@/hooks/useAppli
 import { useChessEngine } from "@/hooks/useChessEngine";
 
 const ResultModal = () => {
-  const [{ result: { checkmate, stalemate, winner } }, setState] = useApplicationContext();
+  const [{ result: { checkmate, stalemate, current } }, setState] = useApplicationContext();
 
   const { onReset } = useChessEngine();
 
@@ -21,7 +21,7 @@ const ResultModal = () => {
   return (
     <div className={classes.join(" ")}>
       <div className="bg-gray-900 rounded-sm max-w-md w-full p-6 space-y-4 absolute transform translate-x-[-50%] translate-y-[-50%] top-1/2 left-1/2">
-        <h3 className="text-xl text-white font-semibold">{checkmate ? `${winner} Wins - Checkmate!` : `Stalemate!`}</h3>
+        <h3 className="text-xl text-white font-semibold">{checkmate ? `${current} Wins - Checkmate!` : `Stalemate!`}</h3>
         <div className="space-y-4">
           <p className="font-bold text-slate-400">Thanks for playing!</p>
         </div>

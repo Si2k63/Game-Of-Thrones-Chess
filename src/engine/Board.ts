@@ -1,4 +1,4 @@
-import { MoveResult, TBoard, TCoordinates, TPiece, TPieceColour, TPieceName } from "./Engine.types";
+import { MoveResult, TBoard, TCoordinates, TPiece, TPieceColour, TPieceName, TSquare } from "./Engine.types";
 import King from "./pieces/King";
 
 class Board {
@@ -35,21 +35,71 @@ class Board {
         movedPiece?.setHasMoved();
 
         if (this.castleKing(from, to)) {
+            this.changeActiveColour();
             return this.checkResult();
         }
 
-        this.activeColour = this.activeColour == "White" ? "Black" : "White";
 
         return this.checkResult();
 
     };
 
+    changeActiveColour() {
+        this.activeColour = this.activeColour == "White" ? "Black" : "White";
+    }
+
+    /*
+    * @TODO: There's too much repetition in this class - needs refactoring - board iterator?
+    */
+    promote(replacement: TSquare) {
+
+        const indexes = [0, this.board.length - 1];
+        for (const index of indexes) {
+            for (const [columnIndex, piece] of this.board[index].entries()) {
+
+                if (!piece) {
+                    continue;
+                }
+
+                console.log(piece)
+
+                if (piece.colour !== this.activeColour && piece.name === 'Pawn') { // already switched after completion of move.
+                    console.log('test')
+                    this.board[index][columnIndex] = replacement;
+                }
+            }
+        }
+    }
+
+    canPromote(): boolean {
+        const indexes = [0, this.board.length - 1];
+
+        for (const index of indexes) {
+            for (const piece of this.board[index]) {
+
+                if (!piece) {
+                    continue;
+                }
+
+                if (piece.colour === this.activeColour && piece.name === 'Pawn') {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     checkResult(): MoveResult {
         const result = {
             checkmate: this.isCheck() && !this.hasMoves(),
             stalemate: !this.isCheck() && !this.hasMoves(),
-            winner: this.activeColour == "White" ? "Black" : "White"
+            canPromote: this.canPromote(),
+            previous: (this.activeColour == "White" ? "Black" : "White" as TPieceColour),
+            current: this.activeColour
         }
+
+        this.changeActiveColour();
 
         return result;
     }
@@ -121,7 +171,7 @@ class Board {
                     continue;
                 }
 
-                if (piece.colour !== this.activeColour) {
+                if (piece.colour === this.activeColour) {
                     continue;
                 }
 

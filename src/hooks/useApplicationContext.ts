@@ -8,7 +8,9 @@ export const defaultApplicationState: TApplicationState = {
     result: {
         checkmate: false,
         stalemate: false,
-        winner: null
+        canPromote: false,
+        previous: "White",
+        current: "Black"
     }
 }
 

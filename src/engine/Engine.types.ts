@@ -36,5 +36,7 @@ export type TBoardState = {
 export type MoveResult = {
     checkmate: boolean
     stalemate: boolean
-    winner: string | null
+    canPromote: boolean
+    previous: TPieceColour
+    current: TPieceColour
 }

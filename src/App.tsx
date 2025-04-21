@@ -5,6 +5,7 @@ import SplashScreen from './components/Layout/SplashScreen';
 import TakenPieces from './components/TakenPieces';
 import useApplicationContext from './hooks/useApplicationContext';
 import ResultModal from './components/ResultModal';
+import PromotionModal from './components/PromotionModal';
 
 function App() {
     const [{ hasBegun }] = useApplicationContext();
@@ -13,6 +14,7 @@ function App() {
             {hasBegun ?
                 <>
                     <ResultModal />
+                    <PromotionModal />
                     <TakenPieces />
                     <Menu />
                     <Board />

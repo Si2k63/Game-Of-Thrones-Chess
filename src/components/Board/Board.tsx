@@ -7,7 +7,6 @@ import { TPieceProps } from '../component.types';
 import useApplicationContext from '@/hooks/useApplicationContext';
 
 const Board: React.FC = () => {
-
     const { pieces, isActivePiece, isAvailableSquare, onPieceClick, onPieceMove } = useChessEngine();
     const [state, setState] = useApplicationContext();
     const colours: TPieceColour[] = ['White', 'Black', 'White'];

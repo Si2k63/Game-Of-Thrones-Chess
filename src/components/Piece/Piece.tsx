@@ -2,7 +2,7 @@ import { TPieceProps } from "../component.types";
 
 const Piece: React.FC<TPieceProps> = (props: TPieceProps) => {
 
-    const { name, colour, active, underAttack } = props;
+    const { name, colour, active, underAttack, onClick } = props;
     const skin = props.skin || 'Default';
     const segments = [`Pieces/${colour}/${name}.${skin}`];
 
@@ -23,9 +23,10 @@ const Piece: React.FC<TPieceProps> = (props: TPieceProps) => {
     const src: string = segments.join('.');
 
     return <img
+        onClick={onClick}
         src={src}
         alt={`${colour} ${name}`}
-        className="inline-block"
+        className="inline-block cursor-pointer"
     />
 }
 
