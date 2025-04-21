@@ -1,9 +1,9 @@
-import { MoveResult, TBoard, TCoordinates, TPiece } from "./Engine.types";
+import { MoveResult, TBoard, TCoordinates, TPiece, TPieceColour, TPieceName } from "./Engine.types";
 import King from "./pieces/King";
 
 class Board {
     board: TBoard = [];
-    activeColour: string = "White";
+    activeColour: TPieceColour = "White";
     taken: TPiece[] = [];
 
     constructor(board: TBoard) {
@@ -20,7 +20,7 @@ class Board {
         this.taken = [];
     }
 
-    move = (from: TCoordinates, to: TCoordinates): MoveResult => {
+    move(from: TCoordinates, to: TCoordinates): MoveResult {
         this.board = this.board.map((row, rowIndex) =>
             rowIndex === from[0] || rowIndex === to[0]
                 ? row.map((cell, colIndex) => {
@@ -54,10 +54,7 @@ class Board {
         return result;
     }
 
-    isCheck(): boolean {
-
-        let kingCoordinates: TCoordinates = [0, 0];
-
+    findPiece(name: TPieceName, colour: TPieceColour): TCoordinates | undefined {
         for (const [rowIndex, row] of this.board.entries()) {
             for (const [columnIndex, _] of row.entries()) {
 
@@ -67,16 +64,24 @@ class Board {
                     continue;
                 }
 
-                if (piece.colour !== this.activeColour) {
+                if (piece.colour !== colour) {
                     continue;
                 }
 
-                if (piece instanceof King === false) {
+                if (piece.name === name) {
                     continue;
                 }
 
-                kingCoordinates = [rowIndex, columnIndex];
+                return [rowIndex, columnIndex];
             }
+        }
+    }
+
+    isCheck(): boolean {
+        const kingCoordinates = this.findPiece("King", this.activeColour);
+
+        if (!kingCoordinates) {
+            return false;
         }
 
         for (const [rowIndex, row] of this.board.entries()) {
@@ -106,7 +111,6 @@ class Board {
         }
 
         return false;
-
     }
 
     hasMoves(): boolean {
@@ -131,11 +135,9 @@ class Board {
         }
 
         return false;
-
     }
 
     castleKing(from: TCoordinates, to: TCoordinates) {
-
         const movedPiece = this.board[to[0]][to[1]]
 
         if (movedPiece instanceof King === false) {

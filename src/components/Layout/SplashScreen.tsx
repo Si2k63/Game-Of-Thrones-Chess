@@ -1,5 +1,4 @@
 import useApplicationContext from "@/hooks/useApplicationContext";
-import useSound from "@/hooks/useSound";
 import Button from "./Button";
 
 const SplashScreen: React.FC = () => {

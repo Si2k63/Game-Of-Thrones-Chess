@@ -2,7 +2,6 @@ import Button from '@/components/Layout/Button';
 import { faMusic, faVolumeLow } from '@fortawesome/free-solid-svg-icons';
 import useApplicationContext from '@hooks/useApplicationContext';
 import useSound from '@hooks/useSound';
-import { useEffect } from 'react';
 
 const Menu: React.FC = () => {
 

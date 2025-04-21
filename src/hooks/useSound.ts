@@ -1,4 +1,4 @@
-import { TPiece, TSquare } from '@/engine/Engine.types';
+import { TSquare } from '@/engine/Engine.types';
 import useApplicationContext from '@hooks/useApplicationContext';
 import { useEffect } from 'react';
 

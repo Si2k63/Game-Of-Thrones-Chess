@@ -1,9 +1,9 @@
-import { TCoordinates, TPieceColour, TSquare } from '../Engine.types';
+import { TCoordinates, TSquare } from '../Engine.types';
 import King from '../pieces/King';
 import AbstractMovementRule from './AbstractMovementRule';
 
 class IsAbleToCastle extends AbstractMovementRule {
-    isValid(movement: TCoordinates) {
+    isValid(_: TCoordinates) {
         const piece: TSquare = this.getSelectedPiece();
 
         if (!piece) {
@@ -17,8 +17,6 @@ class IsAbleToCastle extends AbstractMovementRule {
         if (piece.hasMoved) {
             return false;
         }
-
-        //        const targetCoordinates: TCoordinates = this.getAbsoluteCoordinates(this.piece, movement)
 
         return true;
     }
