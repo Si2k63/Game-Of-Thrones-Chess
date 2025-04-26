@@ -33,7 +33,7 @@
       "@engine/*": [
         "src/engine/*"
       ]
-    },
+    }
   },
   "include": [
     "src"

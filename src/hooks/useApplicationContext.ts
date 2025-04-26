@@ -2,26 +2,30 @@ import { TApplicationContext, TApplicationState } from "@/App.types";
 import { createContext, useContext } from "react";
 
 export const defaultApplicationState: TApplicationState = {
-    hasBegun: false,
-    playTheme: true,
-    playSounds: true,
-    result: {
-        checkmate: false,
-        stalemate: false,
-        canPromote: false,
-        previous: "White",
-        current: "Black"
-    }
-}
+  hasBegun: false,
+  playTheme: true,
+  playSounds: true,
+  result: {
+    checkmate: false,
+    stalemate: false,
+    canPromote: false,
+    previous: "White",
+    current: "Black",
+  },
+};
 
-export const ApplicationContext = createContext<TApplicationContext | null>(null);
+export const ApplicationContext = createContext<TApplicationContext | null>(
+  null,
+);
 
 export default function useApplicationContext() {
-    const context = useContext(ApplicationContext);
+  const context = useContext(ApplicationContext);
 
-    if (!context) {
-        throw new Error('useApplicationContext must be called within a child of ApplicationContextProvider');
-    }
+  if (!context) {
+    throw new Error(
+      "useApplicationContext must be called within a child of ApplicationContextProvider",
+    );
+  }
 
-    return context;
+  return context;
 }

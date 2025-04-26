@@ -8,11 +8,12 @@ Live Demo: https://si2k63.github.io/Game-Of-Thrones-Chess/
 
 ![image info](./screenshot.png)
 
-All images and audio clips used in this project are for research/educational purposes only and this is not a commercial project.
+All images and audio clips used in this project are for research/educational
+purposes only and this is not a commercial project.
 
 ## Instructions
 
 1. Clone the repository
-2. run ``npm i``
-3. run ``npm run dev``
+2. run `npm i`
+3. run `npm run dev`
 4. Enjoy

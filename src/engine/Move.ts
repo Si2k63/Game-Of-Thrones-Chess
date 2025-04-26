@@ -29,7 +29,6 @@ class Move implements MoveInterface {
 
   /**
    * @param movement relative TCoordinates to travel to.
-   * 
    */
   constructor(movement: TCoordinates, maximumRecurrences: number = 1) {
     this.movement = movement;
@@ -46,19 +45,19 @@ class Move implements MoveInterface {
   }
 
   /**
-  * Calculates all possible movements for the current movement vector relative to the current square.
-  */
+   * Calculates all possible movements for the current movement vector relative to the current square.
+   */
   getPossibleMoves() {
     if (this.maximumRecurrences == 1) {
-      return [this.movement]
+      return [this.movement];
     }
     const moves: TCoordinates[] = [];
 
-    let start: TCoordinates = [0, 0]
+    let start: TCoordinates = [0, 0];
 
     for (let i = 0; i < this.maximumRecurrences; i++) {
-      start = this.getVectorTarget(start, this.movement)
-      moves.push(start)
+      start = this.getVectorTarget(start, this.movement);
+      moves.push(start);
     }
 
     return moves;
@@ -69,10 +68,16 @@ class Move implements MoveInterface {
 
     for (const move of this.getPossibleMoves()) {
       let isValid = true;
-      const targetCoordinates: TCoordinates = this.getVectorTarget(currentLocation, move)
+      const targetCoordinates: TCoordinates = this.getVectorTarget(
+        currentLocation,
+        move,
+      );
 
       for (const rule of this.rules) {
-        if (targetCoordinates[0] < 0 || targetCoordinates[0] >= board.length || targetCoordinates[1] < 0 || targetCoordinates[1] >= board[0].length) {
+        if (
+          targetCoordinates[0] < 0 || targetCoordinates[0] >= board.length ||
+          targetCoordinates[1] < 0 || targetCoordinates[1] >= board[0].length
+        ) {
           isValid = false;
         }
         rule.setBoard(board);
@@ -85,7 +90,7 @@ class Move implements MoveInterface {
       }
 
       if (isValid) {
-        moves.push(targetCoordinates)
+        moves.push(targetCoordinates);
       }
     }
 

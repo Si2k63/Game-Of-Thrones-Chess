@@ -1,29 +1,28 @@
-import { TSquare } from '@/engine/Engine.types';
-import useApplicationContext from '@hooks/useApplicationContext';
-import { useEffect } from 'react';
+import { TSquare } from "@/engine/Engine.types";
+import useApplicationContext from "@hooks/useApplicationContext";
+import { useEffect } from "react";
 
-let sound: HTMLAudioElement = new Audio('audio/Black.Pawn.Default.mp3');
-const theme = new Audio('audio/theme.mp3')
+let sound: HTMLAudioElement = new Audio("audio/Black.Pawn.Default.mp3");
+const theme = new Audio("audio/theme.mp3");
 theme.volume = 0.2;
 
 export default function useSound() {
-
   const [applicationState, setApplicationState] = useApplicationContext();
   const { playSounds, playTheme } = applicationState;
 
   function playActivationSound(piece: TSquare): void {
     if (!piece || !playSounds) {
-      return
+      return;
     }
 
-    sound.pause()
+    sound.pause();
     sound = new Audio(`audio/${piece.colour}.${piece.name}.${piece.skin}.mp3`);
     sound.volume = 0.3;
     sound.play();
   }
 
   function toggleSounds() {
-    setApplicationState({ ...applicationState, playSounds: !playSounds })
+    setApplicationState({ ...applicationState, playSounds: !playSounds });
   }
 
   function toggleMusic() {
@@ -33,12 +32,12 @@ export default function useSound() {
       theme.play();
     }
 
-    setApplicationState({ ...applicationState, playTheme: !playTheme })
+    setApplicationState({ ...applicationState, playTheme: !playTheme });
   }
 
   useEffect(() => {
-    theme.play()
-  }, [])
+    theme.play();
+  }, []);
 
-  return { toggleSounds, toggleMusic, playActivationSound }
+  return { toggleSounds, toggleMusic, playActivationSound };
 }

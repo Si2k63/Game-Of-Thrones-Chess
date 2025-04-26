@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  mode: 'jit',
+  mode: "jit",
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -8,10 +8,10 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
-        '1/8vw': '12.5vw',
-        '1/8vh': '12.5vh'
-      }
+        "1/8vw": "12.5vw",
+        "1/8vh": "12.5vh",
+      },
     },
   },
   plugins: [],
-}
+};
