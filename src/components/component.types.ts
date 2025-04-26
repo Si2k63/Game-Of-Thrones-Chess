@@ -19,7 +19,7 @@ export type TPieceProps = {
     active: Boolean
     underAttack: Boolean
     skin?: TSkin
-    onClick: MouseEventHandler
+    onClick?: MouseEventHandler
 }
 
 export type TAvailableSquareMarkerProps = {

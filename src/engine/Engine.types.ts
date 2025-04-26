@@ -14,6 +14,7 @@ export type TPiece = {
     colour: TPieceColour
     skin?: TSkin
     movements: Move[]
+    hasMoved: boolean
     getMoves: (board: TBoard, coords: TCoordinates) => TCoordinates[]
     getVectors: () => Vector[]
     getIntersectingVector(target: TCoordinates, origin: TCoordinates, board: TBoard): Vector | undefined
