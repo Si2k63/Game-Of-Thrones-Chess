@@ -118,7 +118,7 @@ class Board {
                     continue;
                 }
 
-                if (piece.name === name) {
+                if (piece.name !== name) {
                     continue;
                 }
 
@@ -128,7 +128,9 @@ class Board {
     }
 
     isCheck(): boolean {
-        const kingCoordinates = this.findPiece("King", this.activeColour);
+        const kingCoordinates = this.findPiece("King", this.activeColour == "White" ? "Black" : "White");
+
+        console.log("King", kingCoordinates)
 
         if (!kingCoordinates) {
             return false;
@@ -141,7 +143,7 @@ class Board {
                     continue;
                 }
 
-                if (enemy.colour == this.activeColour) {
+                if (enemy.colour !== this.activeColour) {
                     continue;
                 }
 
@@ -151,8 +153,11 @@ class Board {
                     continue;
                 }
 
+
                 const between = intersectingVector
                     .before(kingCoordinates)
+
+                console.log(enemy.colour, enemy.name, between.pieces())
 
                 if (between.isEmpty()) {
                     return true;
