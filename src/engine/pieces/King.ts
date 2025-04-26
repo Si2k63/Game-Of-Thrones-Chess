@@ -14,8 +14,8 @@ class King extends Piece {
         new Move([1, -1]),
         new Move([1, 0]),
         new Move([1, 1]),
-        new Move([0, 2]).addRule(new IsAbleToCastle()),
-        new Move([0, -2]).addRule(new IsAbleToCastle()),
+        new Move([0, 1], 2).addRule(new IsAbleToCastle()),
+        new Move([0, -1], 2).addRule(new IsAbleToCastle()),
     ];
 }
 

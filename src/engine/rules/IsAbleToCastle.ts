@@ -3,9 +3,9 @@ import King from '../pieces/King';
 import AbstractMovementRule from './AbstractMovementRule';
 
 class IsAbleToCastle extends AbstractMovementRule {
-    isValid(_: TCoordinates) {
+    isValid(coordinates: TCoordinates) {
         const piece: TSquare = this.getSelectedPiece();
-
+        const targetCoordinates: TCoordinates = this.getAbsoluteCoordinates(this.piece, coordinates);
         if (!piece) {
             return false;
         }
@@ -18,7 +18,13 @@ class IsAbleToCastle extends AbstractMovementRule {
             return false;
         }
 
-        return true;
+        const vector = piece.getIntersectingVector(targetCoordinates, this.piece, this.board)
+
+        if (!vector) {
+            return false;
+        }
+
+        return vector.isEmpty();
     }
 }
 

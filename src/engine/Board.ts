@@ -52,7 +52,6 @@ class Board {
     * @TODO: There's too much repetition in this class - needs refactoring - board iterator?
     */
     promote(replacement: TSquare) {
-
         const indexes = [0, this.board.length - 1];
         for (const index of indexes) {
             for (const [columnIndex, piece] of this.board[index].entries()) {
@@ -61,10 +60,7 @@ class Board {
                     continue;
                 }
 
-                console.log(piece)
-
                 if (piece.colour !== this.activeColour && piece.name === 'Pawn') { // already switched after completion of move.
-                    console.log('test')
                     this.board[index][columnIndex] = replacement;
                 }
             }
@@ -130,8 +126,6 @@ class Board {
     isCheck(): boolean {
         const kingCoordinates = this.findPiece("King", this.activeColour == "White" ? "Black" : "White");
 
-        console.log("King", kingCoordinates)
-
         if (!kingCoordinates) {
             return false;
         }
@@ -156,8 +150,6 @@ class Board {
 
                 const between = intersectingVector
                     .before(kingCoordinates)
-
-                console.log(enemy.colour, enemy.name, between.pieces())
 
                 if (between.isEmpty()) {
                     return true;

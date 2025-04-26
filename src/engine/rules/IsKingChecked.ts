@@ -36,8 +36,6 @@ class IsKingChecked extends AbstractMovementRule {
                 const between = intersectingVector
                     .before(kingCoordinates)
 
-                console.log(between)
-
                 if (!between.isEmpty()) {
                     continue;
                 }
