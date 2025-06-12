@@ -21,7 +21,7 @@ abstract class Piece implements TPiece {
     this.skin = skin;
   }
 
-  getVectors(): Vector[] {
+  getVectors(origin: TCoordinates, board: TBoard): Vector[] {
     const vectors: Vector[] = [];
 
     this.movements.forEach((move: Move) => {
@@ -30,7 +30,7 @@ abstract class Piece implements TPiece {
       possibleMoves.forEach((mv) => {
         currentVector.push(mv);
       });
-      vectors.push(new Vector(currentVector));
+      vectors.push(new Vector(currentVector, origin, board));
     });
 
     return vectors;
@@ -45,10 +45,8 @@ abstract class Piece implements TPiece {
     origin: TCoordinates,
     board: TBoard,
   ): Vector | undefined {
-    return this.getVectors().map((vector: Vector) => {
+    return this.getVectors(origin, board).map((vector: Vector) => {
       return vector
-        .setOrigin(origin)
-        .setBoard(board)
         .absolute()
         .insideBoard();
     }).filter((vector) => vector.contains(target)).pop();

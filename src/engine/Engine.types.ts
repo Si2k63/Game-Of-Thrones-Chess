@@ -22,7 +22,7 @@ export type TPiece = {
   movements: Move[];
   hasMoved: boolean;
   getMoves: (board: TBoard, coords: TCoordinates) => TCoordinates[];
-  getVectors: () => Vector[];
+  getVectors: (origin: TCoordinates, board: TBoard) => Vector[];
   getIntersectingVector(
     target: TCoordinates,
     origin: TCoordinates,

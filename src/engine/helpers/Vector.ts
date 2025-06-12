@@ -11,18 +11,10 @@ class Vector {
   origin: TCoordinates = [0, 0];
   board: TBoard = [];
 
-  constructor(vector: TCoordinates[]) {
+  constructor(vector: TCoordinates[], origin: TCoordinates, board: TBoard) {
     this.vector = vector;
-  }
-
-  setOrigin(origin: TCoordinates) {
-    this.origin = origin;
-    return this;
-  }
-
-  setBoard(board: TBoard) {
     this.board = board;
-    return this;
+    this.origin = origin;
   }
 
   /**
@@ -79,7 +71,6 @@ class Vector {
    * @param board - the current board
    */
   pieces(): TSquare[] {
-    this.pieceChecks("pieces");
     return this.vector.map((coordinate) =>
       this.board[coordinate[0]][coordinate[1]]
     );
@@ -92,9 +83,7 @@ class Vector {
    * @param end - the index to stop the slice at
    */
   slice(start: number, end?: number): Vector {
-    const vector = new Vector(this.vector.slice(start, end));
-    vector.setBoard(this.board);
-    vector.setOrigin(this.origin);
+    const vector = new Vector(this.vector.slice(start, end), this.origin, this.board);
     return vector;
   }
 
@@ -108,14 +97,6 @@ class Vector {
     return this.slice(0, index);
   }
 
-  private pieceChecks(name: string) {
-    if (this.board.length < 1) {
-      throw new Error(
-        `Cannot call method ${name}() without calling setBoard() first.`,
-      );
-    }
-  }
-
   /**
    * Slice the vector and return a new instance containing all coordinates after the specified coordinates.
    *
@@ -127,13 +108,10 @@ class Vector {
   }
 
   isEmpty(): boolean {
-    this.pieceChecks("isEmpty");
     return this.pieces().filter((x) => x !== null).length == 0;
   }
 
   containsPiece(name: TPieceName, colour: TPieceColour): boolean {
-    this.pieceChecks("containsPiece");
-
     return this.pieces()
       .findIndex((square) =>
         square?.name == name && square?.colour == colour
@@ -153,7 +131,6 @@ class Vector {
   }
 
   insideBoard() {
-    this.pieceChecks("insideBoard");
     this.vector = this.vector.filter((target) =>
       target[0] >= 0 && target[1] >= 0 && target[0] < this.board.length &&
       target[1] < this.board[0].length
