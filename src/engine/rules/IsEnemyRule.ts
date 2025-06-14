@@ -1,12 +1,21 @@
 import { TCoordinates, TSquare } from "../Engine.types";
+import Pawn from "../pieces/Pawn";
 import AbstractMovementRule from "./AbstractMovementRule";
 
 class IsEnemyRule extends AbstractMovementRule {
   isValid(movement: TCoordinates) {
-    const piece: TSquare = this.getSelectedPiece();
+    const selectedPiece: TSquare = this.getSelectedPiece();
     const target: TSquare = this.getTargetPiece(movement);
 
-    return target?.colour !== piece?.colour && target !== null;
+    if (selectedPiece instanceof Pawn !== true) {
+      return true;
+    } 
+
+    if (![-1, 1].includes(movement[1])) {
+      return true
+    }
+
+    return target?.colour !== selectedPiece?.colour && target !== null;
   }
 }
 

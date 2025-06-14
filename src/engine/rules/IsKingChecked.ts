@@ -37,7 +37,6 @@ class IsKingChecked extends AbstractMovementRule {
           this.board,
         );
 
-
         if (!intersectingVector) {
           continue;
         }

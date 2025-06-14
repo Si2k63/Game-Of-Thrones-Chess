@@ -6,13 +6,37 @@ import {
   TPieceColour,
   TPieceName,
   TSquare,
+  TMovementRule
 } from "./Engine.types";
+
 import King from "./pieces/King";
+import IsEnemyRule from "./rules/IsEnemyRule";
+import IsKingChecked from "./rules/IsKingChecked";
+import IsNotMovingIntoCheck from "./rules/IsNotMovingIntoCheck";
+import IsNullOrEnemyRule from "./rules/IsNullOrEnemyRule";
+import IsNullRule from "./rules/IsNullRule";
+import IsObstructed from "./rules/IsObstructed";
+import IsPawnAbleToDash from "./rules/IsPawnAbleToDash";
+import IsPinned from "./rules/IsPinned";
+
+import IsValidSpaceRule from "./rules/IsValidSpaceRule";
 
 class Board {
   board: TBoard = [];
   activeColour: TPieceColour = "White";
   taken: TPiece[] = [];
+
+  rules: TMovementRule[] = [
+    new IsValidSpaceRule(),
+    new IsNullOrEnemyRule(),
+    new IsPinned(),
+    new IsObstructed(),
+    new IsNotMovingIntoCheck(),
+    new IsKingChecked(),
+    new IsPawnAbleToDash(),
+    new IsNullRule(),
+    new IsEnemyRule()
+  ];
 
   constructor(board: TBoard) {
     this.board = board;
@@ -26,6 +50,11 @@ class Board {
     this.activeColour = "White";
     this.board = board;
     this.taken = [];
+  }
+
+  addRule(rule: TMovementRule): Board {
+    this.rules.push(rule);
+    return this;
   }
 
   move(from: TCoordinates, to: TCoordinates): MoveResult {
@@ -93,6 +122,11 @@ class Board {
   }
 
   checkResult(): MoveResult {
+
+
+    this.changeActiveColour();
+    console.log("isCheck", this.isCheck());
+    console.log("hasMoves", this.hasMoves());
     const result = {
       checkmate: this.isCheck() && !this.hasMoves(),
       stalemate: !this.isCheck() && !this.hasMoves(),
@@ -102,7 +136,6 @@ class Board {
       current: this.activeColour,
     };
 
-    this.changeActiveColour();
 
     return result;
   }
@@ -132,8 +165,10 @@ class Board {
   isCheck(): boolean {
     const kingCoordinates = this.findPiece(
       "King",
-      this.activeColour == "White" ? "Black" : "White",
+      this.activeColour
     );
+
+    console.log(this.activeColour);
 
     if (!kingCoordinates) {
       return false;
@@ -156,9 +191,11 @@ class Board {
           this.board,
         );
 
-        if (!intersectingVector) {
+        if (typeof intersectingVector === "undefined") {
           continue;
         }
+
+        console.log(enemy)
 
         const between = intersectingVector
           .before(kingCoordinates);
@@ -179,11 +216,11 @@ class Board {
           continue;
         }
 
-        if (piece.colour === this.activeColour) {
+        if (piece.colour !== this.activeColour) {
           continue;
         }
 
-        const moves = piece.getMoves(this.board, [rowIndex, columnIndex]);
+        const moves = this.getAvailableSquares([rowIndex, columnIndex]);
 
         if (moves.length > 0) {
           return true;
@@ -225,14 +262,57 @@ class Board {
     return this.taken;
   }
 
-  getAvailableSquares(coords: TCoordinates) {
-    const piece = this.board[coords[0]][coords[1]];
+  static getVectorTarget(current: TCoordinates, vector: TCoordinates): TCoordinates {
+    return [current[0] + vector[0], current[1] + vector[1]];
+  }
+
+
+  // getValidMoves
+  getAvailableSquares(currentLocation: TCoordinates) {
+    const board: TBoard = this.board;
+    const moves: TCoordinates[] = [];
+    const piece = this.getPiece(currentLocation);
 
     if (!piece || piece.colour !== this.activeColour) {
       return [];
     }
 
-    const moves = piece.getMoves(this.board, coords);
+    for (const move of piece.getMoves()) {
+      let isValid = true;
+
+      for(const target of move.getPossibleMoves()) {
+
+        const targetCoordinates: TCoordinates = Board.getVectorTarget(
+          currentLocation,
+          target,
+        );
+
+        for (const rule of this.rules) {
+
+          if (
+            targetCoordinates[0] < 0 || targetCoordinates[0] >= board.length ||
+              targetCoordinates[1] < 0 || targetCoordinates[1] >= board[0].length
+          ) {
+            isValid = false;
+          }
+          rule.setBoard(board);
+          rule.setPiece(currentLocation);
+
+          if (!rule.isValid(target)) {
+            isValid = false;
+            break;
+          }
+        }
+
+        if (isValid) {
+          moves.push(targetCoordinates);
+        }
+      }
+
+
+    }
+
+
     return moves;
   }
 }

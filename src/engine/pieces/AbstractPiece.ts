@@ -40,6 +40,7 @@ abstract class Piece implements TPiece {
     this.hasMoved = true;
   }
 
+
   getIntersectingVector(
     target: TCoordinates,
     origin: TCoordinates,
@@ -52,15 +53,8 @@ abstract class Piece implements TPiece {
     }).filter((vector) => vector.contains(target)).pop();
   }
 
-  getMoves(board: TBoard, coords: TCoordinates) {
-    const available: TCoordinates[] = [];
-
-    this.movements.forEach((move: Move) => {
-      move.getValidMoves(board, coords).forEach((valid: TCoordinates) => {
-        available.push(valid);
-      });
-    });
-    return available;
+  getMoves(): Move[] {
+    return this.movements;
   }
 }
 

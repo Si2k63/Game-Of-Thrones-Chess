@@ -78,9 +78,9 @@ export const _defaultBoard = [
     new Pawn("Black"),
   ],
   [null, null, new Knight("Black", "Left"), new Pawn("Black"), null, null, null, null],
-  [null, null, null, new Knight("White", "Left"), new Knight("White", "Right"), null, null, null],
+  [null, null, null, null, new Knight("White", "Right"), null, null, null],
   [null, null, null, null, new Pawn("White"), null, null, null],
-  [null, null, null, null, null, null, null, new Pawn("White")],
+  [null, null, new Knight("White", "Left"), null, null, null, null, new Pawn("White")],
   [
     new Pawn("White"),
     new Pawn("White"),
