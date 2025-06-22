@@ -4,8 +4,12 @@ import useApplicationContext, {
 import { useChessEngine } from "@/hooks/useChessEngine";
 
 const ResultModal = () => {
-  const [{ result: { checkmate, stalemate, previous } }, setState] =
-    useApplicationContext();
+  const [
+    {
+      result: { checkmate, stalemate, previous },
+    },
+    setState,
+  ] = useApplicationContext();
 
   const { onReset } = useChessEngine();
 

@@ -1,4 +1,4 @@
-import { TPieceColour, TPieceName, TSkin } from "../Engine.types";
+import { TPieceName } from "../Engine.types";
 import Move from "../Move";
 import Piece from "./AbstractPiece";
 

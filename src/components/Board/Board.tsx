@@ -31,42 +31,41 @@ const Board: React.FC = () => {
       id="board"
       className="absolute h-fit w-fit select-none shadow-2xl aspect-square m-auto landscape:left-0 landscape:right-0 top-0 bottom-0"
     >
-      {pieces && pieces.map((row: Array<any>, rowIndex: number) => {
-        return (
-          <div
-            className="landscape:h-1/8vh portrait:h-1/8vw"
-            key={`row_${rowIndex}`}
-          >
-            {row.map((piece: TPieceProps | null, columnIndex: number) => {
-              const coordinates: TCoordinates = [rowIndex, columnIndex];
-              const available: boolean = isAvailableSquare(coordinates);
-              const active: boolean = isActivePiece(coordinates);
-              const colour: TPieceColour =
-                colours[rowIndex % 2 + columnIndex % 2];
-              return (
-                <Square
-                  onClick={() => onClick(coordinates, available)}
-                  available={available}
-                  key={`square_${columnIndex}`}
-                  colour={colour}
-                >
-                  {piece
-                    ? (
+      {pieces &&
+        pieces.map((row: Array<any>, rowIndex: number) => {
+          return (
+            <div
+              className="landscape:h-1/8vh portrait:h-1/8vw"
+              key={`row_${rowIndex}`}
+            >
+              {row.map((piece: TPieceProps | null, columnIndex: number) => {
+                const coordinates: TCoordinates = [rowIndex, columnIndex];
+                const available: boolean = isAvailableSquare(coordinates);
+                const active: boolean = isActivePiece(coordinates);
+                const colour: TPieceColour =
+                  colours[(rowIndex % 2) + (columnIndex % 2)];
+                return (
+                  <Square
+                    onClick={() => onClick(coordinates, available)}
+                    available={available}
+                    key={`square_${columnIndex}`}
+                    colour={colour}
+                  >
+                    {piece ? (
                       <Piece
                         {...piece}
                         underAttack={available}
                         active={active}
                       />
-                    )
-                    : available
-                    ? <AvailableSquareMarker colour={colour} />
-                    : null}
-                </Square>
-              );
-            })}
-          </div>
-        );
-      })}
+                    ) : available ? (
+                      <AvailableSquareMarker colour={colour} />
+                    ) : null}
+                  </Square>
+                );
+              })}
+            </div>
+          );
+        })}
     </div>
   );
 };

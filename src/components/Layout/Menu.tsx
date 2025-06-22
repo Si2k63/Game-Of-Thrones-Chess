@@ -9,16 +9,8 @@ const Menu: React.FC = () => {
 
   return (
     <div id="menu">
-      <Button
-        onClick={toggleMusic}
-        icon={faMusic}
-        active={playTheme}
-      />
-      <Button
-        onClick={toggleSounds}
-        active={playSounds}
-        icon={faVolumeLow}
-      />
+      <Button onClick={toggleMusic} icon={faMusic} active={playTheme} />
+      <Button onClick={toggleSounds} active={playSounds} icon={faVolumeLow} />
     </div>
   );
 };

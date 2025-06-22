@@ -21,10 +21,11 @@ class IsPinned extends AbstractMovementRule {
           continue;
         }
 
-        const intersectingVector = enemy.getIntersectingVector(this.piece, [
-          rowIndex,
-          columnIndex,
-        ], this.board);
+        const intersectingVector = enemy.getIntersectingVector(
+          this.piece,
+          [rowIndex, columnIndex],
+          this.board,
+        );
 
         if (!intersectingVector) {
           continue;
@@ -32,11 +33,13 @@ class IsPinned extends AbstractMovementRule {
 
         const squaresBefore = intersectingVector.before(this.piece);
 
-        if (!squaresBefore.isEmpty()) { // Something's in the way, yeah!
+        if (!squaresBefore.isEmpty()) {
+          // Something's in the way, yeah!
           continue;
         }
 
-        if (squaresBefore.endsWith(targetCoordinates)) { // we're the last piece in the vector.
+        if (squaresBefore.endsWith(targetCoordinates)) {
+          // we're the last piece in the vector.
           continue;
         }
 
@@ -47,7 +50,8 @@ class IsPinned extends AbstractMovementRule {
 
         const containsTarget = intersectingVector.contains(targetCoordinates);
 
-        if (containsKing && !containsTarget) { // We're pinned!
+        if (containsKing && !containsTarget) {
+          // We're pinned!
           return false;
         }
       }

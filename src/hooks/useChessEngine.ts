@@ -53,15 +53,18 @@ export function useChessEngine() {
   };
 
   const isAvailableSquare = (coordinates: TCoordinates): boolean => {
-    const match = availableSquares.filter((space) =>
-      space[0] === coordinates[0] && space[1] === coordinates[1]
+    const match = availableSquares.filter(
+      (space) => space[0] === coordinates[0] && space[1] === coordinates[1],
     );
     return match.length > 0;
   };
 
   const isActivePiece = (coordinates: TCoordinates): boolean => {
-    return activePiece !== null && activePiece[0] === coordinates[0] &&
-      activePiece[1] === coordinates[1];
+    return (
+      activePiece !== null &&
+      activePiece[0] === coordinates[0] &&
+      activePiece[1] === coordinates[1]
+    );
   };
 
   return {

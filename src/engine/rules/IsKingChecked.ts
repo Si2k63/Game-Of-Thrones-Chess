@@ -1,6 +1,5 @@
 import { TCoordinates, TPieceColour, TSquare } from "../Engine.types";
 import King from "../pieces/King";
-import Knight from "../pieces/Knight";
 import AbstractMovementRule from "./AbstractMovementRule";
 
 class IsKingChecked extends AbstractMovementRule {
@@ -25,6 +24,8 @@ class IsKingChecked extends AbstractMovementRule {
       return true;
     }
 
+    let intersectingVectorFound = false;
+
     for (const [rowIndex, row] of this.board.entries()) {
       for (const [columnIndex, enemy] of row.entries()) {
         if (!enemy || enemy?.colour == piece.colour) {
@@ -41,39 +42,23 @@ class IsKingChecked extends AbstractMovementRule {
           continue;
         }
 
+        intersectingVectorFound = true;
 
-        const between = intersectingVector
-          .before(kingCoordinates);
-
+        const between = intersectingVector.before(kingCoordinates);
 
         if (!between.isEmpty()) {
           continue;
         }
 
+        intersectingVector.push([rowIndex, columnIndex]);
 
-        const counterAttackVector = piece
-          .getIntersectingVector(
-            [rowIndex, columnIndex],
-            this.piece,
-            this.board,
-          );
-
-        if (
-          counterAttackVector &&
-          counterAttackVector.before([rowIndex, columnIndex]).isEmpty()
-          && enemy instanceof Knight == false
-        ) {
-          continue;
-        }
-
-        if (
-          rowIndex !== targetCoordinates[0] || columnIndex !== targetCoordinates[1]
-        ) {
-          return false;
+        if (intersectingVector.contains(targetCoordinates)) {
+          return true;
         }
       }
     }
-    return true;
+
+    return !intersectingVectorFound;
   }
 
   getKingCoordinates(colour: TPieceColour): TCoordinates | undefined {

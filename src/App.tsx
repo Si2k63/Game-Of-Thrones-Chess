@@ -11,17 +11,17 @@ function App() {
   const [{ hasBegun }] = useApplicationContext();
   return (
     <div id="app">
-      {hasBegun
-        ? (
-          <>
-            <ResultModal />
-            <PromotionModal />
-            <TakenPieces />
-            <Menu />
-            <Board />
-          </>
-        )
-        : <SplashScreen />}
+      {hasBegun ? (
+        <>
+          <ResultModal />
+          <PromotionModal />
+          <TakenPieces />
+          <Menu />
+          <Board />
+        </>
+      ) : (
+        <SplashScreen />
+      )}
     </div>
   );
 }

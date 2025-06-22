@@ -14,7 +14,7 @@ class Pawn extends Piece {
       new Move([modifier, 0]),
       new Move([modifier, -1]),
       new Move([modifier, 1]),
-      new Move([modifier, 0], 2)
+      new Move([modifier, 0], 2),
     ];
   }
 }

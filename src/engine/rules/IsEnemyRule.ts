@@ -9,10 +9,10 @@ class IsEnemyRule extends AbstractMovementRule {
 
     if (selectedPiece instanceof Pawn !== true) {
       return true;
-    } 
+    }
 
     if (![-1, 1].includes(movement[1])) {
-      return true
+      return true;
     }
 
     return target?.colour !== selectedPiece?.colour && target !== null;

@@ -15,7 +15,11 @@ const Square: React.FC<TSquareProps> = (props: TSquareProps) => {
     classes.push("available");
   }
 
-  return <div className={classes.join(" ")} onClick={onClick}>{children}</div>;
+  return (
+    <div className={classes.join(" ")} onClick={onClick}>
+      {children}
+    </div>
+  );
 };
 
 export default Square;

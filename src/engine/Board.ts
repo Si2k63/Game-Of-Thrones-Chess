@@ -6,7 +6,7 @@ import {
   TPieceColour,
   TPieceName,
   TSquare,
-  TMovementRule
+  TMovementRule,
 } from "./Engine.types";
 
 import King from "./pieces/King";
@@ -18,7 +18,6 @@ import IsNullRule from "./rules/IsNullRule";
 import IsObstructed from "./rules/IsObstructed";
 import IsPawnAbleToDash from "./rules/IsPawnAbleToDash";
 import IsPinned from "./rules/IsPinned";
-
 import IsValidSpaceRule from "./rules/IsValidSpaceRule";
 
 class Board {
@@ -35,7 +34,7 @@ class Board {
     new IsKingChecked(),
     new IsPawnAbleToDash(),
     new IsNullRule(),
-    new IsEnemyRule()
+    new IsEnemyRule(),
   ];
 
   constructor(board: TBoard) {
@@ -61,13 +60,13 @@ class Board {
     this.board = this.board.map((row, rowIndex) =>
       rowIndex === from[0] || rowIndex === to[0]
         ? row.map((cell, colIndex) => {
-          if (rowIndex === from[0] && colIndex === from[1]) return null;
-          if (rowIndex === to[0] && colIndex === to[1]) {
-            return this.board[from[0]][from[1]];
-          }
-          return cell;
-        })
-        : row
+            if (rowIndex === from[0] && colIndex === from[1]) return null;
+            if (rowIndex === to[0] && colIndex === to[1]) {
+              return this.board[from[0]][from[1]];
+            }
+            return cell;
+          })
+        : row,
     );
 
     const movedPiece = this.board[to[0]][to[1]];
@@ -96,7 +95,8 @@ class Board {
           continue;
         }
 
-        if (piece.colour !== this.activeColour && piece.name === "Pawn") { // already switched after completion of move.
+        if (piece.colour !== this.activeColour && piece.name === "Pawn") {
+          // already switched after completion of move.
           this.board[index][columnIndex] = replacement;
         }
       }
@@ -122,8 +122,6 @@ class Board {
   }
 
   checkResult(): MoveResult {
-
-
     this.changeActiveColour();
     console.log("isCheck", this.isCheck());
     console.log("hasMoves", this.hasMoves());
@@ -132,10 +130,9 @@ class Board {
       stalemate: !this.isCheck() && !this.hasMoves(),
       canPromote: this.canPromote(),
       previous:
-        (this.activeColour == "White" ? "Black" : "White" as TPieceColour),
+        this.activeColour == "White" ? "Black" : ("White" as TPieceColour),
       current: this.activeColour,
     };
-
 
     return result;
   }
@@ -163,10 +160,7 @@ class Board {
   }
 
   isCheck(): boolean {
-    const kingCoordinates = this.findPiece(
-      "King",
-      this.activeColour
-    );
+    const kingCoordinates = this.findPiece("King", this.activeColour);
 
     console.log(this.activeColour);
 
@@ -195,10 +189,7 @@ class Board {
           continue;
         }
 
-        console.log(enemy)
-
-        const between = intersectingVector
-          .before(kingCoordinates);
+        const between = intersectingVector.before(kingCoordinates);
 
         if (between.isEmpty()) {
           return true;
@@ -210,6 +201,7 @@ class Board {
   }
 
   hasMoves(): boolean {
+    console.log(this.activeColour);
     for (const [rowIndex, row] of this.board.entries()) {
       for (const [columnIndex, piece] of row.entries()) {
         if (!piece) {
@@ -223,6 +215,7 @@ class Board {
         const moves = this.getAvailableSquares([rowIndex, columnIndex]);
 
         if (moves.length > 0) {
+          console.log(piece, moves);
           return true;
         }
       }
@@ -248,10 +241,10 @@ class Board {
       return false;
     }
 
-    return this.move([from[0], netHorizontal > 0 ? 7 : 0], [
-      from[0],
-      netHorizontal > 0 ? 5 : 3,
-    ]);
+    return this.move(
+      [from[0], netHorizontal > 0 ? 7 : 0],
+      [from[0], netHorizontal > 0 ? 5 : 3],
+    );
   }
 
   getPiece(coords: TCoordinates) {
@@ -262,10 +255,12 @@ class Board {
     return this.taken;
   }
 
-  static getVectorTarget(current: TCoordinates, vector: TCoordinates): TCoordinates {
+  static getVectorTarget(
+    current: TCoordinates,
+    vector: TCoordinates,
+  ): TCoordinates {
     return [current[0] + vector[0], current[1] + vector[1]];
   }
-
 
   // getValidMoves
   getAvailableSquares(currentLocation: TCoordinates) {
@@ -273,47 +268,51 @@ class Board {
     const moves: TCoordinates[] = [];
     const piece = this.getPiece(currentLocation);
 
+    console.log(this.activeColour);
+
     if (!piece || piece.colour !== this.activeColour) {
       return [];
     }
 
     for (const move of piece.getMoves()) {
-      let isValid = true;
-
-      for(const target of move.getPossibleMoves()) {
+      for (const target of move.getPossibleMoves()) {
+        let isValid = true;
 
         const targetCoordinates: TCoordinates = Board.getVectorTarget(
           currentLocation,
           target,
         );
 
-        for (const rule of this.rules) {
+        if (!this.contains(targetCoordinates)) {
+          continue;
+        }
 
-          if (
-            targetCoordinates[0] < 0 || targetCoordinates[0] >= board.length ||
-              targetCoordinates[1] < 0 || targetCoordinates[1] >= board[0].length
-          ) {
-            isValid = false;
-          }
+        for (const rule of this.rules) {
           rule.setBoard(board);
           rule.setPiece(currentLocation);
 
           if (!rule.isValid(target)) {
             isValid = false;
-            break;
           }
         }
 
         if (isValid) {
+          console.log(piece);
           moves.push(targetCoordinates);
         }
       }
-
-
     }
 
-
     return moves;
+  }
+
+  contains(targetCoordinates: TCoordinates) {
+    return (
+      targetCoordinates[0] >= 0 &&
+      targetCoordinates[0] < this.board.length &&
+      targetCoordinates[1] >= 0 &&
+      targetCoordinates[1] < this.board[0].length
+    );
   }
 }
 

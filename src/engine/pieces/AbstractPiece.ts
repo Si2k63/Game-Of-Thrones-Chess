@@ -40,17 +40,17 @@ abstract class Piece implements TPiece {
     this.hasMoved = true;
   }
 
-
   getIntersectingVector(
     target: TCoordinates,
     origin: TCoordinates,
     board: TBoard,
   ): Vector | undefined {
-    return this.getVectors(origin, board).map((vector: Vector) => {
-      return vector
-        .absolute()
-        .insideBoard();
-    }).filter((vector) => vector.contains(target)).pop();
+    return this.getVectors(origin, board)
+      .map((vector: Vector) => {
+        return vector.absolute().insideBoard();
+      })
+      .filter((vector) => vector.contains(target))
+      .pop();
   }
 
   getMoves(): Move[] {

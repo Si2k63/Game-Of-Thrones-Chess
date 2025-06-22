@@ -9,7 +9,10 @@ import { TPiece } from "@/engine/Engine.types";
 
 const PromotionModal = () => {
   const [state, setState] = useApplicationContext();
-  const { result, result: { canPromote, current } } = state;
+  const {
+    result,
+    result: { canPromote, current },
+  } = state;
 
   const { onPromote } = useChessEngine();
 

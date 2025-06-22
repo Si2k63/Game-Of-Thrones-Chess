@@ -14,9 +14,7 @@ const ApplicationContextProvider: React.FC<TParentComponent> = (
     defaultApplicationState,
   );
   return (
-    <ApplicationContext.Provider
-      value={[state, setState]}
-    >
+    <ApplicationContext.Provider value={[state, setState]}>
       {children}
     </ApplicationContext.Provider>
   );

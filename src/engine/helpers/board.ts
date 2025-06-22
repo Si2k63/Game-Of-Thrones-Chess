@@ -5,9 +5,6 @@ import Pawn from "../pieces/Pawn";
 import Queen from "../pieces/Queen";
 import Rook from "../pieces/Rook";
 
-/*
- * @TODO: check pinned pieces.
- */
 export const defaultBoard = [
   [
     new Rook("Black", "Left"),
@@ -55,6 +52,52 @@ export const defaultBoard = [
   ],
 ];
 
+export const __defaultBoard = [
+  [
+    null,
+    null,
+    new Bishop("Black", "Left"),
+    new Queen("Black"),
+    null,
+    new Bishop("Black", "Right"),
+    new King("Black"),
+    new Rook("Black", "Right"),
+  ],
+  [null, null, null, null, null, null, new Pawn("Black"), new Pawn("Black")],
+  [null, null, new Knight("Black", "Left"), null, null, null, null, null],
+  [
+    null,
+    null,
+    null,
+    new Bishop("White", "Right"),
+    new Pawn("Black"),
+    null,
+    null,
+    null,
+  ],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, new Queen("White"), null, null],
+  [
+    new Pawn("White"),
+    new Pawn("White"),
+    new Pawn("White"),
+    new Pawn("White"),
+    null,
+    new Pawn("White"),
+    new Pawn("White"),
+    new Pawn("White"),
+  ],
+  [
+    new Rook("White", "Left"),
+    new Knight("White", "Left"),
+    new Bishop("White", "Left"),
+    null,
+    new King("White"),
+    null,
+    null,
+    new Rook("White", "Right"),
+  ],
+];
 
 export const _defaultBoard = [
   [
@@ -77,10 +120,28 @@ export const _defaultBoard = [
     new Pawn("Black"),
     new Pawn("Black"),
   ],
-  [null, null, new Knight("Black", "Left"), new Pawn("Black"), null, null, null, null],
+  [
+    null,
+    null,
+    new Knight("Black", "Left"),
+    new Pawn("Black"),
+    null,
+    null,
+    null,
+    null,
+  ],
   [null, null, null, null, new Knight("White", "Right"), null, null, null],
   [null, null, null, null, new Pawn("White"), null, null, null],
-  [null, null, new Knight("White", "Left"), null, null, null, null, new Pawn("White")],
+  [
+    null,
+    null,
+    new Knight("White", "Left"),
+    null,
+    null,
+    null,
+    null,
+    new Pawn("White"),
+  ],
   [
     new Pawn("White"),
     new Pawn("White"),

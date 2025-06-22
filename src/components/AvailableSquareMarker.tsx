@@ -5,9 +5,7 @@ const AvailableSquareMarker: React.FC<TAvailableSquareMarkerProps> = (
 ) => {
   const { colour } = props;
 
-  const classes = [
-    "inline-block rounded-full h-1/4 w-1/4",
-  ];
+  const classes = ["inline-block rounded-full h-1/4 w-1/4"];
 
   classes.push(
     colour == "White" ? "bg-black opacity-50" : "bg-white opacity-40",

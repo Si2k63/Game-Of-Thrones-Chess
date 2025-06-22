@@ -6,15 +6,14 @@ class IsPawnAbleToDash extends AbstractMovementRule {
   row: number | null = null;
 
   isValid(movement: TCoordinates) {
-
     const selectedPiece = this.getSelectedPiece();
 
     if (selectedPiece instanceof Pawn !== true) {
       return true;
-    } 
+    }
 
     if (![2, -2].includes(movement[0])) {
-      return true; 
+      return true;
     }
 
     const target = this.getTargetPiece(movement);
@@ -23,7 +22,7 @@ class IsPawnAbleToDash extends AbstractMovementRule {
       return false;
     }
 
-    const row = selectedPiece.colour == "White" ? 6: 1;
+    const row = selectedPiece.colour == "White" ? 6 : 1;
 
     return this.piece[0] === row;
   }

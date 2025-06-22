@@ -22,12 +22,10 @@ class Vector {
    */
   absolute(): Vector {
     // @TODO: sum coordinates together performed in several places - refactor.
-    this.vector = this.vector.map(
-      (coordinate) => [
-        coordinate[0] + this.origin[0],
-        coordinate[1] + this.origin[1],
-      ],
-    );
+    this.vector = this.vector.map((coordinate) => [
+      coordinate[0] + this.origin[0],
+      coordinate[1] + this.origin[1],
+    ]);
     return this;
   }
 
@@ -36,12 +34,10 @@ class Vector {
    */
   relative(): Vector {
     // @TODO: duplication of toAbsolute - refactor.
-    this.vector = this.vector.map(
-      (coordinate) => [
-        coordinate[0] - this.origin[0],
-        coordinate[1] - this.origin[1],
-      ],
-    );
+    this.vector = this.vector.map((coordinate) => [
+      coordinate[0] - this.origin[0],
+      coordinate[1] - this.origin[1],
+    ]);
     return this;
   }
 
@@ -60,8 +56,8 @@ class Vector {
    * @param coordinates - the coordinates to check
    */
   findIndex(coordinates: TCoordinates): number {
-    return this.vector.findIndex((square) =>
-      square[0] == coordinates[0] && square[1] == coordinates[1]
+    return this.vector.findIndex(
+      (square) => square[0] == coordinates[0] && square[1] == coordinates[1],
     );
   }
 
@@ -71,8 +67,8 @@ class Vector {
    * @param board - the current board
    */
   pieces(): TSquare[] {
-    return this.vector.map((coordinate) =>
-      this.board[coordinate[0]][coordinate[1]]
+    return this.vector.map(
+      (coordinate) => this.board[coordinate[0]][coordinate[1]],
     );
   }
 
@@ -83,7 +79,11 @@ class Vector {
    * @param end - the index to stop the slice at
    */
   slice(start: number, end?: number): Vector {
-    const vector = new Vector(this.vector.slice(start, end), this.origin, this.board);
+    const vector = new Vector(
+      this.vector.slice(start, end),
+      this.origin,
+      this.board,
+    );
     return vector;
   }
 
@@ -112,10 +112,11 @@ class Vector {
   }
 
   containsPiece(name: TPieceName, colour: TPieceColour): boolean {
-    return this.pieces()
-      .findIndex((square) =>
-        square?.name == name && square?.colour == colour
-      ) >= 0;
+    return (
+      this.pieces().findIndex(
+        (square) => square?.name == name && square?.colour == colour,
+      ) >= 0
+    );
   }
 
   endsWith(coordinates: TCoordinates): boolean {
@@ -131,9 +132,12 @@ class Vector {
   }
 
   insideBoard() {
-    this.vector = this.vector.filter((target) =>
-      target[0] >= 0 && target[1] >= 0 && target[0] < this.board.length &&
-      target[1] < this.board[0].length
+    this.vector = this.vector.filter(
+      (target) =>
+        target[0] >= 0 &&
+        target[1] >= 0 &&
+        target[0] < this.board.length &&
+        target[1] < this.board[0].length,
     );
     return this;
   }

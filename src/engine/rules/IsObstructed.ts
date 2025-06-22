@@ -10,18 +10,15 @@ class IsObstructed extends AbstractMovementRule {
     }
 
     const vectors = piece.getVectors(this.piece, this.board);
-    const intersectingVector = vectors.filter((vector) =>
-      vector.contains(movement)
-    ).pop();
+    const intersectingVector = vectors
+      .filter((vector) => vector.contains(movement))
+      .pop();
 
     if (!intersectingVector) {
       return false;
     }
 
-    return intersectingVector
-      .before(movement)
-      .absolute()
-      .isEmpty();
+    return intersectingVector.before(movement).absolute().isEmpty();
   }
 }
 

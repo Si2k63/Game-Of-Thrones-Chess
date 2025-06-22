@@ -19,8 +19,6 @@ class Move implements MoveInterface {
     this.maximumRecurrences = maximumRecurrences;
   }
 
-
-
   /**
    * Calculates all possible movements for the current movement vector relative to the current square.
    */
@@ -39,7 +37,6 @@ class Move implements MoveInterface {
 
     return moves;
   }
-
 }
 
 export default Move;
