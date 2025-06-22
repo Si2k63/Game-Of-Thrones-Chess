@@ -14,7 +14,9 @@ class IsAbleToCastle extends AbstractMovementRule {
       return true;
     }
 
-    const isAttemptingToCastle = ["[0,2]","[0,-2]"].includes(JSON.stringify(movement))
+    const isAttemptingToCastle = ["[0,2]", "[0,-2]"].includes(
+      JSON.stringify(movement),
+    );
 
     if (piece.hasMoved && isAttemptingToCastle) {
       return false;

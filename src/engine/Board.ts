@@ -23,7 +23,6 @@ import IsPinned from "./rules/IsPinned";
 import IsValidSpaceRule from "./rules/IsValidSpaceRule";
 
 class Board extends AbstractBoard {
-
   activeColour: TPieceColour = "White";
 
   taken: TPiece[] = [];
@@ -37,7 +36,7 @@ class Board extends AbstractBoard {
     new IsPawnAbleToDash(),
     new IsNullRule(),
     new IsEnemyRule(),
-    new IsAbleToCastle()
+    new IsAbleToCastle(),
   ];
 
   reset(board: TBoard) {
@@ -252,7 +251,7 @@ class Board extends AbstractBoard {
           currentLocation,
           target,
         );
-        
+
         if (!this.contains(targetCoordinates)) {
           continue;
         }

@@ -1,12 +1,6 @@
-
-import {
-  TBoard,
-  TCoordinates,
-  TMovementRule,
-} from "./Engine.types";
+import { TBoard, TCoordinates, TMovementRule } from "./Engine.types";
 
 abstract class AbstractBoard {
-
   board: TBoard = [];
   rules: TMovementRule[] = [];
 

@@ -10,7 +10,10 @@ class IsPinned extends AbstractMovementRule {
       return false;
     }
 
-    const targetCoordinates = Board.getAbsoluteCoordinates(this.piece, movement);
+    const targetCoordinates = Board.getAbsoluteCoordinates(
+      this.piece,
+      movement,
+    );
 
     if (piece?.name == "King") {
       return true;

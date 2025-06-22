@@ -37,7 +37,15 @@ class IsNotMovingIntoCheck extends AbstractMovementRule {
           .firstPiece();
 
         // Pawns are awkward and have non-attacking moves.
-        if (enemy instanceof Pawn === true && intersectingVector.relative().containsAny([[-1, 0], [-2, 0], [1, 0], [2, 0]])) {
+        if (
+          enemy instanceof Pawn === true &&
+          intersectingVector.relative().containsAny([
+            [-1, 0],
+            [-2, 0],
+            [1, 0],
+            [2, 0],
+          ])
+        ) {
           continue;
         }
 
