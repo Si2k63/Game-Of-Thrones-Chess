@@ -1,3 +1,4 @@
+import AbstractBoard from "./AbstractBoard";
 import {
   MoveResult,
   TBoard,
@@ -21,11 +22,11 @@ import IsPawnAbleToDash from "./rules/IsPawnAbleToDash";
 import IsPinned from "./rules/IsPinned";
 import IsValidSpaceRule from "./rules/IsValidSpaceRule";
 
-class Board {
-  board: TBoard = [];
-  activeColour: TPieceColour = "White";
-  taken: TPiece[] = [];
+class Board extends AbstractBoard {
 
+  activeColour: TPieceColour = "White";
+
+  taken: TPiece[] = [];
   rules: TMovementRule[] = [
     new IsValidSpaceRule(),
     new IsNullOrEnemyRule(),
@@ -39,23 +40,10 @@ class Board {
     new IsAbleToCastle()
   ];
 
-  constructor(board: TBoard) {
-    this.board = board;
-  }
-
-  getBoard() {
-    return this.board;
-  }
-
   reset(board: TBoard) {
     this.activeColour = "White";
     this.board = board;
     this.taken = [];
-  }
-
-  addRule(rule: TMovementRule): Board {
-    this.rules.push(rule);
-    return this;
   }
 
   move(from: TCoordinates, to: TCoordinates): MoveResult {
@@ -243,22 +231,10 @@ class Board {
     );
   }
 
-  getPiece(coords: TCoordinates) {
-    return this.board[coords[0]][coords[1]];
-  }
-
   getTaken() {
     return this.taken;
   }
 
-  static getVectorTarget(
-    current: TCoordinates,
-    vector: TCoordinates,
-  ): TCoordinates {
-    return [current[0] + vector[0], current[1] + vector[1]];
-  }
-
-  // getValidMoves
   getAvailableSquares(currentLocation: TCoordinates) {
     const board: TBoard = this.board;
     const moves: TCoordinates[] = [];
@@ -297,15 +273,6 @@ class Board {
     }
 
     return moves;
-  }
-
-  contains(targetCoordinates: TCoordinates) {
-    return (
-      targetCoordinates[0] >= 0 &&
-      targetCoordinates[0] < this.board.length &&
-      targetCoordinates[1] >= 0 &&
-      targetCoordinates[1] < this.board[0].length
-    );
   }
 }
 
