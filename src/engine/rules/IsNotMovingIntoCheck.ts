@@ -1,4 +1,5 @@
-import { TCoordinates, TPiece, TSquare } from "../Engine.types";
+import { TCoordinates, TSquare } from "../Engine.types";
+import Pawn from "../pieces/Pawn";
 import AbstractMovementRule from "./AbstractMovementRule";
 
 class IsNotMovingIntoCheck extends AbstractMovementRule {
@@ -33,6 +34,11 @@ class IsNotMovingIntoCheck extends AbstractMovementRule {
         const blockingPiece = intersectingVector
           .before(targetCoordinates)
           .firstPiece();
+
+        // Pawns are awkward and have non-attacking moves.
+        if (enemy instanceof Pawn === true && intersectingVector.relative().containsAny([[-1, 0], [-2, 0], [1, 0], [2, 0]])) {
+          continue;
+        }
 
         if (!blockingPiece || blockingPiece == piece) {
           return false;

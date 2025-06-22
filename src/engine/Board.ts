@@ -123,8 +123,6 @@ class Board {
 
   checkResult(): MoveResult {
     this.changeActiveColour();
-    console.log("isCheck", this.isCheck());
-    console.log("hasMoves", this.hasMoves());
     const result = {
       checkmate: this.isCheck() && !this.hasMoves(),
       stalemate: !this.isCheck() && !this.hasMoves(),
@@ -161,8 +159,6 @@ class Board {
 
   isCheck(): boolean {
     const kingCoordinates = this.findPiece("King", this.activeColour);
-
-    console.log(this.activeColour);
 
     if (!kingCoordinates) {
       return false;
@@ -201,7 +197,6 @@ class Board {
   }
 
   hasMoves(): boolean {
-    console.log(this.activeColour);
     for (const [rowIndex, row] of this.board.entries()) {
       for (const [columnIndex, piece] of row.entries()) {
         if (!piece) {
@@ -215,7 +210,6 @@ class Board {
         const moves = this.getAvailableSquares([rowIndex, columnIndex]);
 
         if (moves.length > 0) {
-          console.log(piece, moves);
           return true;
         }
       }
@@ -268,8 +262,6 @@ class Board {
     const moves: TCoordinates[] = [];
     const piece = this.getPiece(currentLocation);
 
-    console.log(this.activeColour);
-
     if (!piece || piece.colour !== this.activeColour) {
       return [];
     }
@@ -282,7 +274,7 @@ class Board {
           currentLocation,
           target,
         );
-
+        
         if (!this.contains(targetCoordinates)) {
           continue;
         }
@@ -297,7 +289,6 @@ class Board {
         }
 
         if (isValid) {
-          console.log(piece);
           moves.push(targetCoordinates);
         }
       }

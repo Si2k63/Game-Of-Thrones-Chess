@@ -50,6 +50,18 @@ class Vector {
     return this.findIndex(coordinates) >= 0;
   }
 
+  containsAny(coordinates: TCoordinates[]): boolean {
+    for (const vector of this.vector) {
+      for (const coordinate of coordinates) {
+        if (coordinate[0] == vector[0] && coordinate[1] == vector[1]) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
   /**
    * Gets the index of a set of coordinates inside the vector.
    *
