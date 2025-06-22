@@ -1,3 +1,4 @@
+import Board from "../Board";
 import { TCoordinates, TSquare } from "../Engine.types";
 import AbstractMovementRule from "./AbstractMovementRule";
 
@@ -9,7 +10,7 @@ class IsPinned extends AbstractMovementRule {
       return false;
     }
 
-    const targetCoordinates = this.getAbsoluteCoordinates(this.piece, movement);
+    const targetCoordinates = Board.getAbsoluteCoordinates(this.piece, movement);
 
     if (piece?.name == "King") {
       return true;

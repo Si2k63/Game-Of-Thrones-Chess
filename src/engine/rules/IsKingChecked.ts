@@ -1,3 +1,4 @@
+import Board from "../Board";
 import { TCoordinates, TPieceColour, TSquare } from "../Engine.types";
 import King from "../pieces/King";
 import AbstractMovementRule from "./AbstractMovementRule";
@@ -14,7 +15,7 @@ class IsKingChecked extends AbstractMovementRule {
       return true;
     }
 
-    const targetCoordinates: TCoordinates = this.getAbsoluteCoordinates(
+    const targetCoordinates: TCoordinates = Board.getAbsoluteCoordinates(
       this.piece,
       movement,
     );

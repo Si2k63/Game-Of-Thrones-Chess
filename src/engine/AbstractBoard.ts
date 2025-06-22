@@ -36,7 +36,7 @@ abstract class AbstractBoard {
     return this.board[coords[0]][coords[1]];
   }
 
-  static getVectorTarget(
+  static getAbsoluteCoordinates(
     current: TCoordinates,
     vector: TCoordinates,
   ): TCoordinates {

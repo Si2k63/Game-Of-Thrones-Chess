@@ -31,7 +31,7 @@ class Move implements MoveInterface {
     let start: TCoordinates = [0, 0];
 
     for (let i = 0; i < this.maximumRecurrences; i++) {
-      start = Board.getVectorTarget(start, this.movement);
+      start = Board.getAbsoluteCoordinates(start, this.movement);
       moves.push(start);
     }
 

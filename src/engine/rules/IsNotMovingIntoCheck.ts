@@ -1,3 +1,4 @@
+import Board from "../Board";
 import { TCoordinates, TSquare } from "../Engine.types";
 import Pawn from "../pieces/Pawn";
 import AbstractMovementRule from "./AbstractMovementRule";
@@ -10,7 +11,7 @@ class IsNotMovingIntoCheck extends AbstractMovementRule {
       return true;
     }
 
-    const targetCoordinates: TCoordinates = this.getAbsoluteCoordinates(
+    const targetCoordinates: TCoordinates = Board.getAbsoluteCoordinates(
       this.piece,
       movement,
     );

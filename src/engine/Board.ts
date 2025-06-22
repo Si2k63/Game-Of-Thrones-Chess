@@ -248,7 +248,7 @@ class Board extends AbstractBoard {
       for (const target of move.getPossibleMoves()) {
         let isValid = true;
 
-        const targetCoordinates: TCoordinates = Board.getVectorTarget(
+        const targetCoordinates: TCoordinates = Board.getAbsoluteCoordinates(
           currentLocation,
           target,
         );
