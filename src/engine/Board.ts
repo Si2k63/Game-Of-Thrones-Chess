@@ -10,6 +10,7 @@ import {
 } from "./Engine.types";
 
 import King from "./pieces/King";
+import IsAbleToCastle from "./rules/IsAbleToCastle";
 import IsEnemyRule from "./rules/IsEnemyRule";
 import IsKingChecked from "./rules/IsKingChecked";
 import IsNotMovingIntoCheck from "./rules/IsNotMovingIntoCheck";
@@ -35,6 +36,7 @@ class Board {
     new IsPawnAbleToDash(),
     new IsNullRule(),
     new IsEnemyRule(),
+    new IsAbleToCastle()
   ];
 
   constructor(board: TBoard) {

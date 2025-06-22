@@ -3,7 +3,7 @@ import King from "../pieces/King";
 import AbstractMovementRule from "./AbstractMovementRule";
 
 class IsAbleToCastle extends AbstractMovementRule {
-  isValid(_: TCoordinates) {
+  isValid(movement: TCoordinates) {
     const piece: TSquare = this.getSelectedPiece();
 
     if (!piece) {
@@ -14,7 +14,9 @@ class IsAbleToCastle extends AbstractMovementRule {
       return true;
     }
 
-    if (piece.hasMoved) {
+    const isAttemptingToCastle = ["[0,2]","[0,-2]"].includes(JSON.stringify(movement))
+
+    if (piece.hasMoved && isAttemptingToCastle) {
       return false;
     }
 
