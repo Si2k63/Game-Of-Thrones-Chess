@@ -11,7 +11,7 @@ const PromotionModal = () => {
   const [state, setState] = useApplicationContext();
   const {
     result,
-    result: { canPromote, current },
+    result: { canPromote, previous },
   } = state;
 
   const { onPromote } = useChessEngine();
@@ -36,10 +36,10 @@ const PromotionModal = () => {
   };
 
   const pieces: TPiece[] = [
-    new Rook(current, "Left"),
-    new Knight(current, "Left"),
-    new Bishop(current, "Left"),
-    new Queen(current),
+    new Rook(previous, "Left"),
+    new Knight(previous, "Left"),
+    new Bishop(previous, "Left"),
+    new Queen(previous),
   ];
 
   return (

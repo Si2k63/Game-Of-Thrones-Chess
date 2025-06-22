@@ -112,7 +112,7 @@ class Board {
           continue;
         }
 
-        if (piece.colour === this.activeColour && piece.name === "Pawn") {
+        if (piece.colour !== this.activeColour && piece.name === "Pawn") {
           return true;
         }
       }
