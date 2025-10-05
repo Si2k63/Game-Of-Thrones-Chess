@@ -1,4 +1,4 @@
-import { TAbstractBoard, TBoard, TCoordinates, TMovementRule, TSquare } from "./Engine.types";
+import { TAbstractBoard, TBoard, TBoardPiece, TCoordinates, TMovementRule, TPiece, TSquare } from "./Engine.types";
 
 abstract class AbstractBoard implements TAbstractBoard {
   board: TBoard = [];
@@ -28,6 +28,18 @@ abstract class AbstractBoard implements TAbstractBoard {
 
   getPiece(coords: TCoordinates): TSquare {
     return this.board[coords[0]][coords[1]];
+  }
+
+  *getPieces(): Generator<TBoardPiece> {
+    const indexes = [0, this.board.length - 1];
+    for (const rowIndex of indexes) {
+      for (const [columnIndex, piece] of this.board[rowIndex].entries()) {
+        if (!piece) {
+          continue;
+        }
+        yield { rowIndex, columnIndex, piece };
+      }
+    }
   }
 
   static getAbsoluteCoordinates(

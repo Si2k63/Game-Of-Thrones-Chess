@@ -44,17 +44,16 @@ class Board extends AbstractBoard {
     this.board = board;
     this.taken = [];
   }
-
   move(from: TCoordinates, to: TCoordinates): MoveResult {
     this.board = this.board.map((row, rowIndex) =>
       rowIndex === from[0] || rowIndex === to[0]
         ? row.map((cell, colIndex) => {
-            if (rowIndex === from[0] && colIndex === from[1]) return null;
-            if (rowIndex === to[0] && colIndex === to[1]) {
-              return this.board[from[0]][from[1]];
-            }
-            return cell;
-          })
+          if (rowIndex === from[0] && colIndex === from[1]) return null;
+          if (rowIndex === to[0] && colIndex === to[1]) {
+            return this.board[from[0]][from[1]];
+          }
+          return cell;
+        })
         : row,
     );
 
@@ -77,33 +76,18 @@ class Board extends AbstractBoard {
    * @TODO: There's too much repetition in this class - needs refactoring - board iterator?
    */
   promote(replacement: TSquare) {
-    const indexes = [0, this.board.length - 1];
-    for (const index of indexes) {
-      for (const [columnIndex, piece] of this.board[index].entries()) {
-        if (!piece) {
-          continue;
-        }
-
-        if (piece.colour !== this.activeColour && piece.name === "Pawn") {
-          // already switched after completion of move.
-          this.board[index][columnIndex] = replacement;
-        }
+    for (const { piece, rowIndex, columnIndex } of this.getPieces()) {
+      if (piece.colour !== this.activeColour && piece.name === "Pawn") {
+        // already switched after completion of move.
+        this.board[rowIndex][columnIndex] = replacement;
       }
     }
   }
 
   canPromote(): boolean {
-    const indexes = [0, this.board.length - 1];
-
-    for (const index of indexes) {
-      for (const piece of this.board[index]) {
-        if (!piece) {
-          continue;
-        }
-
-        if (piece.colour !== this.activeColour && piece.name === "Pawn") {
-          return true;
-        }
+    for (const { piece } of this.getPieces()) {
+      if (piece.colour !== this.activeColour && piece.name === "Pawn") {
+        return true;
       }
     }
 
@@ -125,24 +109,16 @@ class Board extends AbstractBoard {
   }
 
   findPiece(name: TPieceName, colour: TPieceColour): TCoordinates | undefined {
-    for (const [rowIndex, row] of this.board.entries()) {
-      for (const [columnIndex, _] of row.entries()) {
-        const piece = this.board[rowIndex][columnIndex];
-
-        if (!piece) {
-          continue;
-        }
-
-        if (piece.colour !== colour) {
-          continue;
-        }
-
-        if (piece.name !== name) {
-          continue;
-        }
-
-        return [rowIndex, columnIndex];
+    for (const { piece, rowIndex, columnIndex } of this.getPieces()) {
+      if (piece.colour !== colour) {
+        continue;
       }
+
+      if (piece.name !== name) {
+        continue;
+      }
+
+      return [rowIndex, columnIndex];
     }
   }
 
@@ -153,32 +129,26 @@ class Board extends AbstractBoard {
       return false;
     }
 
-    for (const [rowIndex, row] of this.board.entries()) {
-      for (const [columnIndex, _] of row.entries()) {
-        const enemy = this.board[rowIndex][columnIndex];
-        if (!enemy) {
-          continue;
-        }
+    for (const { rowIndex, columnIndex, piece } of this.getPieces()) {
 
-        if (enemy.colour !== this.activeColour) {
-          continue;
-        }
+      if (piece.colour !== this.activeColour) {
+        continue;
+      }
 
-        const intersectingVector = enemy.getIntersectingVector(
-          kingCoordinates,
-          [rowIndex, columnIndex],
-          this.board,
-        );
+      const intersectingVector = piece.getIntersectingVector(
+        kingCoordinates,
+        [rowIndex, columnIndex],
+        this.board,
+      );
 
-        if (typeof intersectingVector === "undefined") {
-          continue;
-        }
+      if (typeof intersectingVector === "undefined") {
+        continue;
+      }
 
-        const between = intersectingVector.before(kingCoordinates);
+      const between = intersectingVector.before(kingCoordinates);
 
-        if (between.isEmpty()) {
-          return true;
-        }
+      if (between.isEmpty()) {
+        return true;
       }
     }
 
@@ -186,21 +156,15 @@ class Board extends AbstractBoard {
   }
 
   hasMoves(): boolean {
-    for (const [rowIndex, row] of this.board.entries()) {
-      for (const [columnIndex, piece] of row.entries()) {
-        if (!piece) {
-          continue;
-        }
+    for (const { rowIndex, columnIndex, piece } of this.getPieces()) {
+      if (piece.colour !== this.activeColour) {
+        continue;
+      }
 
-        if (piece.colour !== this.activeColour) {
-          continue;
-        }
+      const moves = this.getAvailableSquares([rowIndex, columnIndex]);
 
-        const moves = this.getAvailableSquares([rowIndex, columnIndex]);
-
-        if (moves.length > 0) {
-          return true;
-        }
+      if (moves.length > 0) {
+        return true;
       }
     }
 

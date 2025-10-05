@@ -8,6 +8,7 @@ export type TPieceName =
   | "Rook"
   | "Queen"
   | "King";
+
 export type TPieceColour = "Black" | "White";
 
 export type TAbstractBoard = {
@@ -15,7 +16,6 @@ export type TAbstractBoard = {
   getBoard(): TBoard;
   addRule(rule: TMovementRule): TAbstractBoard
   getPiece(coords: TCoordinates): TSquare;
-
 }
 
 export type TCoordinates = [number, number];
@@ -59,3 +59,10 @@ export type MoveResult = {
   previous: TPieceColour;
   current: TPieceColour;
 };
+
+export type TBoardPiece = {
+  rowIndex: number;
+  columnIndex: number;
+  piece: TPiece;
+}
+
