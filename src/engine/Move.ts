@@ -9,7 +9,6 @@ interface MoveInterface {
 class Move implements MoveInterface {
   movement: TCoordinates = [0, 0];
   maximumRecurrences: number = 1;
-  isRecurring = false;
 
   /**
    * @param movement relative TCoordinates to travel to.
