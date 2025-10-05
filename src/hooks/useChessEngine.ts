@@ -1,6 +1,6 @@
 import Board from "@engine/Board";
 import { TBoardState, TCoordinates, TPiece } from "@engine/Engine.types";
-import { defaultBoard } from "@engine/helpers/board";
+import { defaultBoard } from "@engine/constants/board";
 import useSound from "@hooks/useSound";
 import { useState } from "react";
 
