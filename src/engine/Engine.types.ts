@@ -10,6 +10,14 @@ export type TPieceName =
   | "King";
 export type TPieceColour = "Black" | "White";
 
+export type TAbstractBoard = {
+  contains(targetCoordinates: TCoordinates): boolean;
+  getBoard(): TBoard;
+  addRule(rule: TMovementRule): TAbstractBoard
+  getPiece(coords: TCoordinates): TSquare;
+
+}
+
 export type TCoordinates = [number, number];
 export type TSquare = TPiece | null;
 export type TBoard = TSquare[][];

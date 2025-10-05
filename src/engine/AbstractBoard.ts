@@ -1,6 +1,6 @@
-import { TBoard, TCoordinates, TMovementRule } from "./Engine.types";
+import { TAbstractBoard, TBoard, TCoordinates, TMovementRule, TSquare } from "./Engine.types";
 
-abstract class AbstractBoard {
+abstract class AbstractBoard implements TAbstractBoard {
   board: TBoard = [];
   rules: TMovementRule[] = [];
 
@@ -8,7 +8,7 @@ abstract class AbstractBoard {
     this.board = board;
   }
 
-  contains(targetCoordinates: TCoordinates) {
+  contains(targetCoordinates: TCoordinates): boolean {
     return (
       targetCoordinates[0] >= 0 &&
       targetCoordinates[0] < this.board.length &&
@@ -17,16 +17,16 @@ abstract class AbstractBoard {
     );
   }
 
-  getBoard() {
+  getBoard(): TBoard {
     return this.board;
   }
 
-  addRule(rule: TMovementRule): AbstractBoard {
+  addRule(rule: TMovementRule): TAbstractBoard {
     this.rules.push(rule);
     return this;
   }
 
-  getPiece(coords: TCoordinates) {
+  getPiece(coords: TCoordinates): TSquare {
     return this.board[coords[0]][coords[1]];
   }
 
