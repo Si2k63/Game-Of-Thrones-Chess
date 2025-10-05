@@ -16,6 +16,7 @@ export type TAbstractBoard = {
   getBoard(): TBoard;
   addRule(rule: TMovementRule): TAbstractBoard
   getPiece(coords: TCoordinates): TSquare;
+  getAbsoluteCoordinates(coordinates: TCoordinates, vector: TCoordinates): TCoordinates;
 }
 
 export type TCoordinates = [number, number];
@@ -39,8 +40,14 @@ export type TPiece = {
   setHasMoved: () => void;
 };
 
+export type TMove = {
+  movement: TCoordinates;
+  maximumRecurrences: number;
+  getMovement(): TCoordinates;
+  getMaximumRecurrences(): number;
+}
+
 export type TMovementRule = {
-  setBoard: (board: TBoard) => void;
   setPiece: (piece: TCoordinates) => void;
   isValid: (movement: TCoordinates) => boolean;
 };

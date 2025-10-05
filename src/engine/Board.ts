@@ -27,7 +27,8 @@ class Board extends AbstractBoard {
 
   taken: TPiece[] = [];
   rules: TMovementRule[] = [
-    new IsValidSpaceRule(),
+    new IsValidSpaceRule(this),
+    /*
     new IsNullOrEnemyRule(),
     new IsPinned(),
     new IsObstructed(),
@@ -37,6 +38,7 @@ class Board extends AbstractBoard {
     new IsNullRule(),
     new IsEnemyRule(),
     new IsAbleToCastle(),
+    */
   ];
 
   reset(board: TBoard) {
@@ -199,7 +201,6 @@ class Board extends AbstractBoard {
   }
 
   getAvailableSquares(currentLocation: TCoordinates) {
-    const board: TBoard = this.board;
     const moves: TCoordinates[] = [];
     const piece = this.getPiece(currentLocation);
 
@@ -208,10 +209,10 @@ class Board extends AbstractBoard {
     }
 
     for (const move of piece.getMoves()) {
-      for (const target of move.getPossibleMoves()) {
+      for (const target of this.getPossibleMoves(move)) {
         let isValid = true;
 
-        const targetCoordinates: TCoordinates = Board.getAbsoluteCoordinates(
+        const targetCoordinates: TCoordinates = this.getAbsoluteCoordinates(
           currentLocation,
           target,
         );
@@ -221,7 +222,6 @@ class Board extends AbstractBoard {
         }
 
         for (const rule of this.rules) {
-          rule.setBoard(board);
           rule.setPiece(currentLocation);
 
           if (!rule.isValid(target)) {

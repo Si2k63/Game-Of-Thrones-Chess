@@ -1,4 +1,4 @@
-import { TAbstractBoard, TBoard, TBoardPiece, TCoordinates, TMovementRule, TPiece, TSquare } from "./Engine.types";
+import { TAbstractBoard, TBoard, TBoardPiece, TCoordinates, TMove, TMovementRule, TPiece, TSquare } from "./Engine.types";
 
 abstract class AbstractBoard implements TAbstractBoard {
   board: TBoard = [];
@@ -42,11 +42,29 @@ abstract class AbstractBoard implements TAbstractBoard {
     }
   }
 
-  static getAbsoluteCoordinates(
+  getAbsoluteCoordinates(
     current: TCoordinates,
     vector: TCoordinates,
   ): TCoordinates {
     return [current[0] + vector[0], current[1] + vector[1]];
+  }
+
+  getPossibleMoves(move: TMove) {
+    const maximumRecurrences = move.getMaximumRecurrences()
+    const target = move.getMovement();
+    if (maximumRecurrences === 1) {
+      return [target];
+    }
+    const moves: TCoordinates[] = [];
+
+    let start: TCoordinates = [0, 0];
+
+    for (let i = 0; i < maximumRecurrences; i++) {
+      start = this.getAbsoluteCoordinates(start, target);
+      moves.push(start);
+    }
+
+    return moves;
   }
 }
 

@@ -1,11 +1,11 @@
-import { TBoard, TCoordinates, TMovementRule, TSquare } from "../Engine.types";
+import { TAbstractBoard, TCoordinates, TMovementRule, TSquare } from "../Engine.types";
 
 abstract class AbstractMovementRule implements TMovementRule {
-  board: TBoard = [];
+  board: TAbstractBoard;
   piece: TCoordinates = [0, 0];
   path: TCoordinates[] = [];
 
-  setBoard(board: TBoard) {
+  constructor(board: TAbstractBoard) {
     this.board = board;
   }
 
@@ -14,11 +14,12 @@ abstract class AbstractMovementRule implements TMovementRule {
   }
 
   getSelectedPiece(): TSquare {
-    return this.board[this.piece[0]][this.piece[1]];
+    return this.board.getPiece(this.piece)
   }
 
   getTargetPiece(movement: TCoordinates): TSquare {
-    return this.board[movement[0] + this.piece[0]][movement[1] + this.piece[1]];
+    const coords = this.board.getAbsoluteCoordinates(this.piece, movement);
+    return this.board.getPiece(coords);
   }
 
   abstract isValid(movement: TCoordinates): boolean;
