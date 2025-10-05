@@ -1,4 +1,5 @@
 import {
+  TAbstractBoard,
   TBoard,
   TCoordinates,
   TPiece,
@@ -21,16 +22,16 @@ abstract class Piece implements TPiece {
     this.skin = skin;
   }
 
-  getVectors(origin: TCoordinates, board: TBoard): Vector[] {
+  getVectors(origin: TCoordinates, board: TAbstractBoard): Vector[] {
     const vectors: Vector[] = [];
 
     this.movements.forEach((move: Move) => {
-      const possibleMoves = move.getPossibleMoves();
+      const possibleMoves = board.getPossibleMoves(move);
       const currentVector: TCoordinates[] = [];
       possibleMoves.forEach((mv) => {
         currentVector.push(mv);
       });
-      vectors.push(new Vector(currentVector, origin, board));
+      vectors.push(new Vector(currentVector, origin, board.getBoard()));
     });
 
     return vectors;
@@ -43,7 +44,7 @@ abstract class Piece implements TPiece {
   getIntersectingVector(
     target: TCoordinates,
     origin: TCoordinates,
-    board: TBoard,
+    board: TAbstractBoard,
   ): Vector | undefined {
     return this.getVectors(origin, board)
       .map((vector: Vector) => {

@@ -17,6 +17,8 @@ export type TAbstractBoard = {
   addRule(rule: TMovementRule): TAbstractBoard
   getPiece(coords: TCoordinates): TSquare;
   getAbsoluteCoordinates(coordinates: TCoordinates, vector: TCoordinates): TCoordinates;
+  getPieces(): Generator<TBoardPiece>;
+  getPossibleMoves(move: TMove): TCoordinates[];
 }
 
 export type TCoordinates = [number, number];
@@ -31,11 +33,11 @@ export type TPiece = {
   movements: Move[];
   hasMoved: boolean;
   getMoves: () => Move[];
-  getVectors: (origin: TCoordinates, board: TBoard) => Vector[];
+  getVectors: (origin: TCoordinates, board: TAbstractBoard) => Vector[];
   getIntersectingVector(
     target: TCoordinates,
     origin: TCoordinates,
-    board: TBoard,
+    board: TAbstractBoard,
   ): Vector | undefined;
   setHasMoved: () => void;
 };

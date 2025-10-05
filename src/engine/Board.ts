@@ -28,9 +28,9 @@ class Board extends AbstractBoard {
   taken: TPiece[] = [];
   rules: TMovementRule[] = [
     new IsValidSpaceRule(this),
+    new IsPinned(this),
     /*
     new IsNullOrEnemyRule(),
-    new IsPinned(),
     new IsObstructed(),
     new IsNotMovingIntoCheck(),
     new IsKingChecked(),
@@ -140,7 +140,7 @@ class Board extends AbstractBoard {
       const intersectingVector = piece.getIntersectingVector(
         kingCoordinates,
         [rowIndex, columnIndex],
-        this.board,
+        this,
       );
 
       if (typeof intersectingVector === "undefined") {
