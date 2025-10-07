@@ -87,7 +87,11 @@ class Board extends AbstractBoard {
   }
 
   canPromote(): boolean {
-    for (const { piece } of this.getPieces()) {
+    for (const { rowIndex, piece } of this.getPieces()) {
+      if ([0, this.board.length - 1].includes(rowIndex) === false) {
+        continue;
+      }
+
       if (piece.colour !== this.activeColour && piece.name === "Pawn") {
         return true;
       }
