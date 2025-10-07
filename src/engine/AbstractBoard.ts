@@ -31,8 +31,8 @@ abstract class AbstractBoard implements TAbstractBoard {
   }
 
   *getPieces(): Generator<TBoardPiece> {
-    for (const [rowIndex] of this.board.entries()) {
-      for (const [columnIndex, piece] of this.board[rowIndex].entries()) {
+    for (const [rowIndex, row] of this.board.entries()) {
+      for (const [columnIndex, piece] of row.entries()) {
         if (!piece) {
           continue;
         }
