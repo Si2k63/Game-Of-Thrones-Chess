@@ -29,16 +29,14 @@ class Board extends AbstractBoard {
   rules: TMovementRule[] = [
     new IsValidSpaceRule(this),
     new IsPinned(this),
-    /*
-    new IsNullOrEnemyRule(),
-    new IsObstructed(),
-    new IsNotMovingIntoCheck(),
-    new IsKingChecked(),
-    new IsPawnAbleToDash(),
-    new IsNullRule(),
-    new IsEnemyRule(),
-    new IsAbleToCastle(),
-    */
+    new IsNullOrEnemyRule(this),
+    new IsObstructed(this),
+    new IsNotMovingIntoCheck(this),
+    new IsKingChecked(this),
+    new IsPawnAbleToDash(this),
+    new IsNullRule(this),
+    new IsEnemyRule(this),
+    new IsAbleToCastle(this),
   ];
 
   reset(board: TBoard) {

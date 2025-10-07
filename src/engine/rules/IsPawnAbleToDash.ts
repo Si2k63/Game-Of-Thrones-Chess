@@ -8,7 +8,7 @@ class IsPawnAbleToDash extends AbstractMovementRule {
   isValid(movement: TCoordinates) {
     const selectedPiece = this.getSelectedPiece();
 
-    if (selectedPiece instanceof Pawn !== true) {
+    if (!selectedPiece || selectedPiece instanceof Pawn !== true) {
       return true;
     }
 

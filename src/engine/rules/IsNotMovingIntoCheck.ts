@@ -5,53 +5,51 @@ import AbstractMovementRule from "./AbstractMovementRule";
 
 class IsNotMovingIntoCheck extends AbstractMovementRule {
   isValid(movement: TCoordinates) {
-    const piece: TSquare = this.getSelectedPiece();
+    const selectedPiece: TSquare = this.getSelectedPiece();
 
-    if (piece?.name !== "King") {
+    if (selectedPiece?.name !== "King") {
       return true;
     }
 
-    const targetCoordinates: TCoordinates = Board.getAbsoluteCoordinates(
+    const targetCoordinates: TCoordinates = this.board.getAbsoluteCoordinates(
       this.piece,
       movement,
     );
 
-    for (const [rowIndex, row] of this.board.entries()) {
-      for (const [columnIndex, enemy] of row.entries()) {
-        if (!enemy || piece?.colour === enemy.colour) {
-          continue;
-        }
+    for (const { rowIndex, columnIndex, piece } of this.board.getPieces()) {
+      if (selectedPiece?.colour === piece.colour) {
+        continue;
+      }
 
-        const intersectingVector = enemy.getIntersectingVector(
-          targetCoordinates,
-          [rowIndex, columnIndex],
-          this.board,
-        );
+      const intersectingVector = piece.getIntersectingVector(
+        targetCoordinates,
+        [rowIndex, columnIndex],
+        this.board,
+      );
 
-        if (!intersectingVector) {
-          continue;
-        }
+      if (!intersectingVector) {
+        continue;
+      }
 
-        const blockingPiece = intersectingVector
-          .before(targetCoordinates)
-          .firstPiece();
+      const blockingPiece = intersectingVector
+        .before(targetCoordinates)
+        .firstPiece();
 
-        // Pawns are awkward and have non-attacking moves.
-        if (
-          enemy instanceof Pawn === true &&
-          intersectingVector.relative().containsAny([
-            [-1, 0],
-            [-2, 0],
-            [1, 0],
-            [2, 0],
-          ])
-        ) {
-          continue;
-        }
+      // Pawns are awkward and have non-attacking moves.
+      if (
+        piece instanceof Pawn === true &&
+        intersectingVector.relative().containsAny([
+          [-1, 0],
+          [-2, 0],
+          [1, 0],
+          [2, 0],
+        ])
+      ) {
+        continue;
+      }
 
-        if (!blockingPiece || blockingPiece == piece) {
-          return false;
-        }
+      if (!blockingPiece || blockingPiece == piece) {
+        return false;
       }
     }
 

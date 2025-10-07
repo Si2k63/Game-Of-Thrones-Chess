@@ -1,6 +1,5 @@
 import {
   TAbstractBoard,
-  TBoard,
   TCoordinates,
   TPiece,
   TPieceColour,

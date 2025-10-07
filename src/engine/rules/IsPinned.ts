@@ -21,7 +21,7 @@ class IsPinned extends AbstractMovementRule {
     }
 
     for (const { rowIndex, columnIndex, piece } of this.board.getPieces()) {
-      if (!piece || selectedPiece?.colour === piece.colour) {
+      if (selectedPiece.colour === piece.colour) {
         continue;
       }
 
@@ -48,7 +48,7 @@ class IsPinned extends AbstractMovementRule {
       }
 
       const piecesAfter = intersectingVector.after(this.piece);
-      const containsKing = piecesAfter.containsPiece("King", piece?.colour);
+      const containsKing = piecesAfter.containsPiece("King", selectedPiece.colour);
 
       intersectingVector.push([rowIndex, columnIndex]); // add enemy position to determine if we can take it.
 
