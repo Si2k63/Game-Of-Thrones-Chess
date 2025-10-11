@@ -77,10 +77,20 @@ class Board extends AbstractBoard {
    */
   promote(replacement: TSquare) {
     for (const { piece, rowIndex, columnIndex } of this.getPieces()) {
-      if (piece.colour !== this.activeColour && piece.name === "Pawn") {
-        // already switched after completion of move.
-        this.board[rowIndex][columnIndex] = replacement;
+      if ([0, this.board.length - 1].includes(rowIndex) === false) {
+        continue;
       }
+
+      // already switched after completion of move.
+      if (piece.colour === this.activeColour) {
+        continue;
+      }
+
+      if (piece.name !== "Pawn") {
+        continue;
+      }
+
+      this.board[rowIndex][columnIndex] = replacement;
     }
   }
 
