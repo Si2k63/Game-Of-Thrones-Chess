@@ -48,7 +48,19 @@ class IsPinned extends AbstractMovementRule {
       }
 
       const piecesAfter = intersectingVector.after(this.piece);
-      const containsKing = piecesAfter.containsPiece("King", selectedPiece.colour);
+      const kingsIndex = piecesAfter.findPieceIndex("King", selectedPiece.colour);
+
+      const containsKing = kingsIndex >= 0;
+
+      if (!containsKing) {
+        continue;
+      }
+
+      const hasPiecesBeforeKing = !piecesAfter.slice(1, kingsIndex).isEmpty();
+
+      if (hasPiecesBeforeKing) {
+        continue;
+      }
 
       intersectingVector.push([rowIndex, columnIndex]); // add enemy position to determine if we can take it.
 

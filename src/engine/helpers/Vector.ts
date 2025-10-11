@@ -124,11 +124,13 @@ class Vector {
   }
 
   containsPiece(name: TPieceName, colour: TPieceColour): boolean {
-    return (
-      this.pieces().findIndex(
-        (square) => square?.name == name && square?.colour == colour,
-      ) >= 0
-    );
+    return this.findPieceIndex(name, colour) >= 0;
+  }
+
+  findPieceIndex(name: TPieceName, colour: TPieceColour) {
+    return this.pieces().findIndex(
+      (square) => square?.name == name && square?.colour == colour,
+    )
   }
 
   endsWith(coordinates: TCoordinates): boolean {
