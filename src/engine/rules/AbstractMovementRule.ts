@@ -1,4 +1,9 @@
-import { TAbstractBoard, TCoordinates, TMovementRule, TSquare } from "../Engine.types";
+import {
+  TAbstractBoard,
+  TCoordinates,
+  TMovementRule,
+  TSquare,
+} from "../Engine.types";
 
 abstract class AbstractMovementRule implements TMovementRule {
   board: TAbstractBoard;
@@ -14,7 +19,7 @@ abstract class AbstractMovementRule implements TMovementRule {
   }
 
   getSelectedPiece(): TSquare {
-    return this.board.getPiece(this.piece)
+    return this.board.getPiece(this.piece);
   }
 
   getTargetPiece(movement: TCoordinates): TSquare {

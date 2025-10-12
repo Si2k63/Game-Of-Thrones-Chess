@@ -48,7 +48,10 @@ class IsPinned extends AbstractMovementRule {
       }
 
       const piecesAfter = intersectingVector.after(this.piece);
-      const kingsIndex = piecesAfter.findPieceIndex("King", selectedPiece.colour);
+      const kingsIndex = piecesAfter.findPieceIndex(
+        "King",
+        selectedPiece.colour,
+      );
 
       const containsKing = kingsIndex >= 0;
 

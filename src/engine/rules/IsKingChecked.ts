@@ -4,10 +4,10 @@ import King from "../pieces/King";
 import AbstractMovementRule from "./AbstractMovementRule";
 
 class IsKingChecked extends AbstractMovementRule {
-  board: Board
+  board: Board;
 
   constructor(board: Board) {
-    super(board)
+    super(board);
     this.board = board;
   }
 
@@ -26,7 +26,7 @@ class IsKingChecked extends AbstractMovementRule {
       this.piece,
       movement,
     );
-    const kingCoordinates = this.board.findPiece("King", selectedPiece.colour)
+    const kingCoordinates = this.board.findPiece("King", selectedPiece.colour);
 
     if (!kingCoordinates) {
       return true;

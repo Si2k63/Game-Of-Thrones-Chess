@@ -130,7 +130,7 @@ class Vector {
   findPieceIndex(name: TPieceName, colour: TPieceColour) {
     return this.pieces().findIndex(
       (square) => square?.name === name && square?.colour === colour,
-    )
+    );
   }
 
   endsWith(coordinates: TCoordinates): boolean {

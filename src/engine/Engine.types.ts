@@ -14,12 +14,15 @@ export type TPieceColour = "Black" | "White";
 export type TAbstractBoard = {
   contains(targetCoordinates: TCoordinates): boolean;
   getBoard(): TBoard;
-  addRule(rule: TMovementRule): TAbstractBoard
+  addRule(rule: TMovementRule): TAbstractBoard;
   getPiece(coords: TCoordinates): TSquare;
-  getAbsoluteCoordinates(coordinates: TCoordinates, vector: TCoordinates): TCoordinates;
+  getAbsoluteCoordinates(
+    coordinates: TCoordinates,
+    vector: TCoordinates,
+  ): TCoordinates;
   getPieces(): Generator<TBoardPiece>;
   getPossibleMoves(move: TMove): TCoordinates[];
-}
+};
 
 export type TCoordinates = [number, number];
 export type TSquare = TPiece | null;
@@ -47,7 +50,7 @@ export type TMove = {
   maximumRecurrences: number;
   getMovement(): TCoordinates;
   getMaximumRecurrences(): number;
-}
+};
 
 export type TMovementRule = {
   setPiece: (piece: TCoordinates) => void;
@@ -73,5 +76,4 @@ export type TBoardPiece = {
   rowIndex: number;
   columnIndex: number;
   piece: TPiece;
-}
-
+};

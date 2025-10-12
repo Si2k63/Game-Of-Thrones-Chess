@@ -20,7 +20,6 @@ class Move implements TMove {
   getMaximumRecurrences(): number {
     return this.maximumRecurrences;
   }
-
 }
 
 export default Move;

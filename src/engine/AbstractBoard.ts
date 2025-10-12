@@ -1,4 +1,13 @@
-import { TAbstractBoard, TBoard, TBoardPiece, TCoordinates, TMove, TMovementRule, TPiece, TSquare } from "./Engine.types";
+import {
+  TAbstractBoard,
+  TBoard,
+  TBoardPiece,
+  TCoordinates,
+  TMove,
+  TMovementRule,
+  TPiece,
+  TSquare,
+} from "./Engine.types";
 
 abstract class AbstractBoard implements TAbstractBoard {
   board: TBoard = [];
@@ -49,7 +58,7 @@ abstract class AbstractBoard implements TAbstractBoard {
   }
 
   getPossibleMoves(move: TMove) {
-    const maximumRecurrences = move.getMaximumRecurrences()
+    const maximumRecurrences = move.getMaximumRecurrences();
     const target = move.getMovement();
     if (maximumRecurrences === 1) {
       return [target];
