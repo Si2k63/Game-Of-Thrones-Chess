@@ -69,7 +69,7 @@ class Board extends AbstractBoard {
   }
 
   changeActiveColour() {
-    this.activeColour = this.activeColour == "White" ? "Black" : "White";
+    this.activeColour = this.activeColour === "White" ? "Black" : "White";
   }
 
   /*
@@ -115,7 +115,7 @@ class Board extends AbstractBoard {
       stalemate: !this.isCheck() && !this.hasMoves(),
       canPromote: this.canPromote(),
       previous:
-        this.activeColour == "White" ? "Black" : ("White" as TPieceColour),
+        this.activeColour === "White" ? "Black" : ("White" as TPieceColour),
       current: this.activeColour,
     };
 

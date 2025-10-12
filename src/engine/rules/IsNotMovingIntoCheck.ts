@@ -48,7 +48,7 @@ class IsNotMovingIntoCheck extends AbstractMovementRule {
         continue;
       }
 
-      if (!blockingPiece || blockingPiece == piece) {
+      if (!blockingPiece || blockingPiece === piece) {
         return false;
       }
     }

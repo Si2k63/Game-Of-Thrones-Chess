@@ -22,7 +22,7 @@ class IsPawnAbleToDash extends AbstractMovementRule {
       return false;
     }
 
-    const row = selectedPiece.colour == "White" ? 6 : 1;
+    const row = selectedPiece.colour === "White" ? 6 : 1;
 
     return this.piece[0] === row;
   }

@@ -53,7 +53,7 @@ class Vector {
   containsAny(coordinates: TCoordinates[]): boolean {
     for (const vector of this.vector) {
       for (const coordinate of coordinates) {
-        if (coordinate[0] == vector[0] && coordinate[1] == vector[1]) {
+        if (coordinate[0] === vector[0] && coordinate[1] === vector[1]) {
           return true;
         }
       }
@@ -69,7 +69,7 @@ class Vector {
    */
   findIndex(coordinates: TCoordinates): number {
     return this.vector.findIndex(
-      (square) => square[0] == coordinates[0] && square[1] == coordinates[1],
+      (square) => square[0] === coordinates[0] && square[1] === coordinates[1],
     );
   }
 
@@ -120,7 +120,7 @@ class Vector {
   }
 
   isEmpty(): boolean {
-    return this.pieces().filter((x) => x !== null).length == 0;
+    return this.pieces().filter((x) => x !== null).length === 0;
   }
 
   containsPiece(name: TPieceName, colour: TPieceColour): boolean {
@@ -129,15 +129,15 @@ class Vector {
 
   findPieceIndex(name: TPieceName, colour: TPieceColour) {
     return this.pieces().findIndex(
-      (square) => square?.name == name && square?.colour == colour,
+      (square) => square?.name === name && square?.colour === colour,
     )
   }
 
   endsWith(coordinates: TCoordinates): boolean {
-    if (this.vector.length == 0) {
+    if (this.vector.length === 0) {
       return false;
     }
-    return this.findIndex(coordinates) == this.vector.length - 1;
+    return this.findIndex(coordinates) === this.vector.length - 1;
   }
 
   push(coordinates: TCoordinates) {

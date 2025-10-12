@@ -35,7 +35,7 @@ class IsKingChecked extends AbstractMovementRule {
     let intersectingVectorFound = false;
 
     for (const { rowIndex, columnIndex, piece } of this.board.getPieces()) {
-      if (!piece || piece?.colour == selectedPiece.colour) {
+      if (!piece || piece?.colour === selectedPiece.colour) {
         continue;
       }
 
