@@ -48,12 +48,12 @@ class Board extends AbstractBoard {
     this.board = this.board.map((row, rowIndex) =>
       rowIndex === from[0] || rowIndex === to[0]
         ? row.map((cell, colIndex) => {
-            if (rowIndex === from[0] && colIndex === from[1]) return null;
-            if (rowIndex === to[0] && colIndex === to[1]) {
-              return this.board[from[0]][from[1]];
-            }
-            return cell;
-          })
+          if (rowIndex === from[0] && colIndex === from[1]) return null;
+          if (rowIndex === to[0] && colIndex === to[1]) {
+            return this.board[from[0]][from[1]];
+          }
+          return cell;
+        })
         : row,
     );
 
@@ -175,6 +175,7 @@ class Board extends AbstractBoard {
       }
 
       const moves = this.getAvailableSquares([rowIndex, columnIndex]);
+      console.log(piece, moves)
 
       if (moves.length > 0) {
         return true;

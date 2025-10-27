@@ -51,14 +51,16 @@ class IsKingChecked extends AbstractMovementRule {
 
       const between = intersectingVector.before(kingCoordinates);
 
+
       if (!between.isEmpty()) {
         continue;
       }
 
-      intersectingVectorFound = true;
-      intersectingVector.push([rowIndex, columnIndex]);
 
-      if (intersectingVector.contains(targetCoordinates)) {
+      intersectingVectorFound = true;
+      between.push([rowIndex, columnIndex]);
+
+      if (between.contains(targetCoordinates)) {
         return true;
       }
     }
