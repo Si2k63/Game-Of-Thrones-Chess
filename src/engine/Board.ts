@@ -144,7 +144,7 @@ class Board extends AbstractBoard {
     }
 
     for (const { rowIndex, columnIndex, piece } of this.getPieces()) {
-      if (piece.colour !== this.activeColour) {
+      if (piece.colour === this.activeColour) {
         continue;
       }
 
