@@ -1,15 +1,9 @@
 import Board from "../Board";
-import { TCoordinates, TPieceColour, TSquare } from "../Engine.types";
+import { TCoordinates, TSquare } from "../Engine.types";
 import King from "../pieces/King";
 import AbstractMovementRule from "./AbstractMovementRule";
 
 class IsKingChecked extends AbstractMovementRule {
-  board: Board;
-
-  constructor(board: Board) {
-    super(board);
-    this.board = board;
-  }
 
   isValid(movement: TCoordinates) {
     const selectedPiece: TSquare = this.getSelectedPiece();
@@ -26,7 +20,7 @@ class IsKingChecked extends AbstractMovementRule {
       this.piece,
       movement,
     );
-    const kingCoordinates = this.board.findPiece("King", selectedPiece.colour);
+    const kingCoordinates = (<Board>this.board).findPiece("King", selectedPiece.colour);
 
     if (!kingCoordinates) {
       return true;

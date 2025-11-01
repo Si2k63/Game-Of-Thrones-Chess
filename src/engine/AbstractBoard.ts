@@ -5,7 +5,6 @@ import {
   TCoordinates,
   TMove,
   TMovementRule,
-  TPiece,
   TSquare,
 } from "./Engine.types";
 
