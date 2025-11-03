@@ -72,9 +72,6 @@ class Board extends AbstractBoard {
     this.activeColour = this.activeColour === "White" ? "Black" : "White";
   }
 
-  /*
-   * @TODO: There's too much repetition in this class - needs refactoring - board iterator?
-   */
   promote(replacement: TSquare) {
     for (const { piece, rowIndex, columnIndex } of this.getPieces()) {
       if ([0, this.board.length - 1].includes(rowIndex) === false) {
