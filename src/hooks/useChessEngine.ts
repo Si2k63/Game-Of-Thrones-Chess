@@ -19,17 +19,16 @@ export function useChessEngine() {
   const [state, setState] = useState<TBoardState>(defaultState);
   const { activePiece, availableSquares } = state;
 
-  const setBoardState = (newState: Partial<TBoardState>) => setState((prevState: TBoardState) => ({ ...prevState, ...newState }))
-
   const onPieceClick = (activePiece: TCoordinates) => {
     const availableSquares = board.getAvailableSquares(activePiece);
     playActivationSound(board.getPiece(activePiece));
-    setBoardState({ availableSquares, activePiece });
+    setState({ ...state, availableSquares, activePiece });
   };
 
   const onReset = () => {
     board.reset(defaultBoard);
-    setBoardState({
+    setState({
+      ...state,
       pieces: [...board.getBoard()],
       availableSquares: [],
       taken: [],
@@ -38,7 +37,8 @@ export function useChessEngine() {
 
   const onPieceMove = (coordinates: TCoordinates) => {
     const result = board.move(activePiece as TCoordinates, coordinates);
-    setBoardState({
+    setState({
+      ...state,
       pieces: [...board.getBoard()],
       availableSquares: [],
       taken: [...board.getTaken()],
@@ -49,7 +49,7 @@ export function useChessEngine() {
 
   const onPromote = (piece: TPiece) => {
     board.promote(piece);
-    setBoardState({ pieces: [...board.getBoard()] });
+    setState({ ...state, pieces: [...board.getBoard()] });
   };
 
   const isAvailableSquare = (coordinates: TCoordinates): boolean => {
