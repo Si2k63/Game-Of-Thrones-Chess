@@ -1,10 +1,10 @@
 import {
   ApplicationContext,
   defaultApplicationState,
-} from "@/hooks/useApplicationContext";
+} from "@hooks/useApplicationContext";
 import { useState } from "react";
-import { TApplicationState } from "../../App.types";
-import { TParentComponent } from "../component.types";
+import { TApplicationState } from "@/App.types";
+import { TParentComponent } from "@components/component.types";
 
 const ApplicationContextProvider: React.FC<TParentComponent> = (
   props: TParentComponent,

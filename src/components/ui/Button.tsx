@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { TButton } from "../component.types";
+import { TButton } from "@components/component.types";
 
 const Button: React.FC<TButton> = (props: TButton) => {
   const { children, icon, onClick } = props;

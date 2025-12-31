@@ -1,5 +1,5 @@
 import usePromotionModal from "@/hooks/usePromotionModal";
-import Piece from "./Piece";
+import Piece from "@components/Piece";
 
 const PromotionModal = () => {
 

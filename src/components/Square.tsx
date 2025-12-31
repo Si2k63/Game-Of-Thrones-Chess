@@ -1,4 +1,4 @@
-import { TSquareProps } from "../component.types";
+import { TSquareProps } from "@components/component.types";
 
 const Square: React.FC<TSquareProps> = (props: TSquareProps) => {
   const { colour, children, onClick, available } = props;

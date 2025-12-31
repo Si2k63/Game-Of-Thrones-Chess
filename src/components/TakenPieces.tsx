@@ -2,7 +2,7 @@ import Piece from "@components/Piece";
 import { TPiece } from "@engine/Engine.types";
 import { useChessEngine } from "@hooks/useChessEngine";
 
-const Taken = () => {
+const TakenPieces = () => {
   const { taken } = useChessEngine();
 
   return (
@@ -14,4 +14,4 @@ const Taken = () => {
   );
 };
 
-export default Taken;
+export default TakenPieces;

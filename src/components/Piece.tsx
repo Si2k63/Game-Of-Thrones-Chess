@@ -1,4 +1,4 @@
-import { TPieceProps } from "../component.types";
+import { TPieceProps } from "@components/component.types";
 
 const Piece: React.FC<TPieceProps> = (props: TPieceProps) => {
   const { name, colour, active, underAttack, onClick } = props;

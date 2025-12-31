@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import ApplicationContextProvider from "./components/Layout/ApplicationContextProvider";
+import App from "@/App";
+import ApplicationContextProvider from "@/ApplicationContextProvider";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

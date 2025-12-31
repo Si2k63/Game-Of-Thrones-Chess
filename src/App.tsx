@@ -1,11 +1,11 @@
 import "@/App.css";
-import Board from "./components/Board";
-import Menu from "./components/Layout/Menu";
-import SplashScreen from "./components/Layout/SplashScreen";
-import TakenPieces from "./components/TakenPieces";
-import useApplicationContext from "./hooks/useApplicationContext";
-import ResultModal from "./components/ResultModal";
-import PromotionModal from "./components/PromotionModal";
+import Board from "@components/Board";
+import Menu from "@components/ui/Menu";
+import SplashScreen from "@components/ui/SplashScreen";
+import TakenPieces from "@components/TakenPieces";
+import useApplicationContext from "@hooks/useApplicationContext";
+import ResultModal from "@components/ui/ResultModal";
+import PromotionModal from "@components/ui/PromotionModal";
 
 function App() {
   const [{ hasBegun }] = useApplicationContext();

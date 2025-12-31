@@ -1,4 +1,4 @@
-import { TAvailableSquareMarkerProps } from "./component.types";
+import { TAvailableSquareMarkerProps } from "@components/component.types";
 
 const AvailableSquareMarker: React.FC<TAvailableSquareMarkerProps> = (
   props: TAvailableSquareMarkerProps,

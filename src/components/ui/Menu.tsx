@@ -1,4 +1,4 @@
-import Button from "@/components/Layout/Button";
+import Button from "@components/ui/Button";
 import { faMusic, faVolumeLow } from "@fortawesome/free-solid-svg-icons";
 import useApplicationContext from "@hooks/useApplicationContext";
 import useSound from "@hooks/useSound";
