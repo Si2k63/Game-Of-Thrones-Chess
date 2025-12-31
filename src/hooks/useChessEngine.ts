@@ -22,13 +22,12 @@ export function useChessEngine() {
   const onPieceClick = (activePiece: TCoordinates) => {
     const availableSquares = board.getAvailableSquares(activePiece);
     playActivationSound(board.getPiece(activePiece));
-    setState({ ...state, availableSquares, activePiece });
+    setState({ availableSquares, activePiece });
   };
 
   const onReset = () => {
     board.reset(defaultBoard);
     setState({
-      ...state,
       pieces: [...board.getBoard()],
       availableSquares: [],
       taken: [],
@@ -38,7 +37,6 @@ export function useChessEngine() {
   const onPieceMove = (coordinates: TCoordinates) => {
     const result = board.move(activePiece as TCoordinates, coordinates);
     setState({
-      ...state,
       pieces: [...board.getBoard()],
       availableSquares: [],
       taken: [...board.getTaken()],
@@ -49,7 +47,7 @@ export function useChessEngine() {
 
   const onPromote = (piece: TPiece) => {
     board.promote(piece);
-    setState({ ...state, pieces: [...board.getBoard()] });
+    setState({ pieces: [...board.getBoard()] });
   };
 
   const isAvailableSquare = (coordinates: TCoordinates): boolean => {

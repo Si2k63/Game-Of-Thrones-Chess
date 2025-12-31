@@ -1,6 +1,6 @@
 import { TCoordinates, TPieceColour } from "@/engine/Engine.types";
 import { useChessEngine } from "@/hooks/useChessEngine";
-import AvailableSquareMarker from "@components/AvailableSquareMarker";
+import AvailableSquareMarker from "./AvailableSquareMarker";
 import Piece from "./Piece";
 import Square from "./Square";
 import { TPieceProps } from "@components/component.types";
@@ -20,7 +20,7 @@ const Board: React.FC = () => {
   const onClick = (coordinates: TCoordinates, available: boolean) => {
     if (available) {
       const result = onPieceMove(coordinates);
-      setState({ ...state, result });
+      setState({ result });
     } else {
       onPieceClick(coordinates);
     }

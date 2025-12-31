@@ -27,7 +27,6 @@ const usePromotionModal = () => {
   const onPieceSelect = (piece: TPiece) => {
     onPromote(piece);
     setState({
-      ...state,
       result: {
         ...result,
         canPromote: false,

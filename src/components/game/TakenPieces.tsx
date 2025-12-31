@@ -1,4 +1,4 @@
-import Piece from "@components/Piece";
+import Piece from "./Piece";
 import { TPiece } from "@engine/Engine.types";
 import { useChessEngine } from "@hooks/useChessEngine";
 

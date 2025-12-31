@@ -9,5 +9,5 @@ export type TApplicationState = {
 
 export type TApplicationContext = [
   TApplicationState,
-  React.Dispatch<React.SetStateAction<TApplicationState>>,
+  (state: Partial<TApplicationState>) => void
 ];

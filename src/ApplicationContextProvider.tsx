@@ -13,8 +13,11 @@ const ApplicationContextProvider: React.FC<TParentComponent> = (
   const [state, setState] = useState<TApplicationState>(
     defaultApplicationState,
   );
+
+  const setApplicationState = (newState: Partial<TApplicationState>): void => setState((prevState: TApplicationState) => ({ ...prevState, ...newState }));
+
   return (
-    <ApplicationContext.Provider value={[state, setState]}>
+    <ApplicationContext.Provider value={[state, setApplicationState]}>
       {children}
     </ApplicationContext.Provider>
   );

@@ -1,5 +1,5 @@
 import usePromotionModal from "@/hooks/usePromotionModal";
-import Piece from "@components/Piece";
+import Piece from "@components/game/Piece";
 
 const PromotionModal = () => {
 
