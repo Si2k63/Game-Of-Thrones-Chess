@@ -172,7 +172,6 @@ class Board extends AbstractBoard {
       }
 
       const moves = this.getAvailableSquares([rowIndex, columnIndex]);
-      console.log(piece, moves)
 
       if (moves.length > 0) {
         return true;

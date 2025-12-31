@@ -14,8 +14,6 @@ const ApplicationContextProvider: React.FC<TParentComponent> = (
     defaultApplicationState,
   );
 
-  console.log(state);
-
   const setApplicationState = (newState: Partial<TApplicationState>): void => setState((prevState: TApplicationState) => ({ ...prevState, ...newState }));
 
   return (
