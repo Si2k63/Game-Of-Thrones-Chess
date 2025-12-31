@@ -19,7 +19,7 @@ class IsAbleToCastle extends AbstractMovementRule {
     const isAttemptingToCastle = ["[0,2]", "[0,-2]"].includes(jsonMovement);
     const rookSkin = jsonMovement === "[0,2]" ? "Right" : "Left";
 
-    if (piece.hasMoved && isAttemptingToCastle) {
+    if (this.board.hasPieceMoved(piece) && isAttemptingToCastle) {
       return false;
     }
 

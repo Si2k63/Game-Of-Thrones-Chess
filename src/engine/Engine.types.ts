@@ -34,7 +34,6 @@ export type TPiece = {
   colour: TPieceColour;
   skin?: TSkin;
   movements: Move[];
-  hasMoved: boolean;
   getMoves: () => Move[];
   getVectors: (origin: TCoordinates, board: TAbstractBoard) => Vector[];
   getIntersectingVector(
@@ -42,7 +41,6 @@ export type TPiece = {
     origin: TCoordinates,
     board: TAbstractBoard,
   ): Vector | undefined;
-  setHasMoved: () => void;
 };
 
 export type TMove = {
