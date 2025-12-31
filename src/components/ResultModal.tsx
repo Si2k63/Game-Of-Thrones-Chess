@@ -1,34 +1,11 @@
-import useApplicationContext, {
-  defaultApplicationState,
-} from "@/hooks/useApplicationContext";
-import { useChessEngine } from "@/hooks/useChessEngine";
+import useResultModal from "@/hooks/useResultModal";
 
 const ResultModal = () => {
-  const [
-    {
-      result: { checkmate, stalemate, previous },
-    },
-    setState,
-  ] = useApplicationContext();
 
-  const { onReset } = useChessEngine();
-
-  const classes = [
-    "fixed inset-0 items-center justify-center bg-black bg-opacity-20 z-50",
-  ];
-  const visible = checkmate || stalemate;
-
-  if (!visible) {
-    classes.push("hidden");
-  }
-
-  const onClose = () => {
-    onReset();
-    setState(defaultApplicationState);
-  };
+  const { className, checkmate, previous, onClose } = useResultModal();
 
   return (
-    <div className={classes.join(" ")}>
+    <div className={className}>
       <div className="bg-gray-900 rounded-sm max-w-md w-full p-6 space-y-4 absolute transform translate-x-[-50%] translate-y-[-50%] top-1/2 left-1/2">
         <h3 className="text-xl text-white font-semibold">
           {checkmate ? `${previous} Wins - Checkmate!` : `Stalemate!`}
