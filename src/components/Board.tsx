@@ -1,9 +1,9 @@
 import { TCoordinates, TPieceColour } from "@/engine/Engine.types";
 import { useChessEngine } from "@/hooks/useChessEngine";
-import AvailableSquareMarker from "../AvailableSquareMarker";
-import Piece from "../Piece/Piece";
-import Square from "../Square";
-import { TPieceProps } from "../component.types";
+import AvailableSquareMarker from "./AvailableSquareMarker";
+import Piece from "./Piece";
+import Square from "./Square";
+import { TPieceProps } from "./component.types";
 import useApplicationContext from "@/hooks/useApplicationContext";
 
 const Board: React.FC = () => {
