@@ -22,6 +22,7 @@ export type TAbstractBoard = {
   ): TCoordinates;
   getPieces(): Generator<TBoardPiece>;
   getPossibleMoves(move: TMove): TCoordinates[];
+  hasPieceMoved(coords: TCoordinates): boolean;
 };
 
 export type TCoordinates = [number, number];

@@ -19,17 +19,17 @@ class IsAbleToCastle extends AbstractMovementRule {
     const isAttemptingToCastle = ["[0,2]", "[0,-2]"].includes(jsonMovement);
     const rookSkin = jsonMovement === "[0,2]" ? "Right" : "Left";
 
-    if (this.board.hasPieceMoved(piece) && isAttemptingToCastle) {
+    if (this.board.hasPieceMoved(this.piece) && isAttemptingToCastle) {
       return false;
     }
 
-    for (const { piece: rook } of this.board.getPieces()) {
+    for (const { piece: rook, rowIndex, columnIndex } of this.board.getPieces()) {
 
       if (rook.name !== "Rook" || rook.colour !== piece.colour || rook.skin !== rookSkin) {
         continue;
       }
 
-      return !rook.hasMoved;
+      return !this.board.hasPieceMoved([rowIndex, columnIndex]);
 
     }
 

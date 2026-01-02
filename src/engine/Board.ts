@@ -25,7 +25,6 @@ import IsValidSpaceRule from "./rules/IsValidSpaceRule";
 class Board extends AbstractBoard {
   activeColour: TPieceColour = "White";
   taken: TPiece[] = [];
-  moved: TPiece[] = [];
 
   rules: TMovementRule[] = [
     new IsValidSpaceRule(this),
@@ -46,34 +45,15 @@ class Board extends AbstractBoard {
     this.taken = [];
   }
 
+
   move(from: TCoordinates, to: TCoordinates): MoveResult {
-    const [fromRow, fromCol] = from;
-    const [toRow, toCol] = to;
-    const piece = this.getPiece(from);
-
-    const newBoard = [...this.board];
-
-    newBoard[fromRow] = [...newBoard[fromRow]];
-    newBoard[fromRow][fromCol] = null;
-    newBoard[toRow] = [...newBoard[toRow]];
-    newBoard[toRow][toCol] = piece;
-    this.board = newBoard;
-
-    const movedPiece = this.getPiece(to);
-
-    if (!this.moved.includes(movedPiece)) {
-      this.moved.push(movedPiece);
-    }
+    super.move(from, to);
 
     if (this.castleKing(from, to)) {
       this.changeActiveColour();
     }
 
     return this.checkResult();
-  }
-
-  hasPieceMoved(piece: TPiece): boolean {
-    return this.moved.includes(piece);
   }
 
   changeActiveColour() {
