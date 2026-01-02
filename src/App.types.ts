@@ -1,10 +1,10 @@
-import { MoveResult } from "@engine/Engine.types";
+import { TMoveResult } from "@engine/Engine.types";
 
 export type TApplicationState = {
   hasBegun: boolean;
   playTheme: boolean;
   playSounds: boolean;
-  result: MoveResult;
+  result: TMoveResult;
 };
 
 export type TApplicationContext = [

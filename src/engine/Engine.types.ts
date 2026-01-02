@@ -63,7 +63,7 @@ export type TBoardState = {
   taken: TPiece[];
 };
 
-export type MoveResult = {
+export type TMoveResult = {
   checkmate: boolean;
   stalemate: boolean;
   canPromote: boolean;

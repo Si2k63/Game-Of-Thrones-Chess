@@ -1,6 +1,6 @@
 import AbstractBoard from "./AbstractBoard";
 import {
-  MoveResult,
+  TMoveResult,
   TBoard,
   TCoordinates,
   TPiece,
@@ -46,7 +46,7 @@ class Board extends AbstractBoard {
   }
 
 
-  move(from: TCoordinates, to: TCoordinates): MoveResult {
+  move(from: TCoordinates, to: TCoordinates): TMoveResult {
     super.move(from, to);
 
     if (this.castleKing(from, to)) {
@@ -93,7 +93,7 @@ class Board extends AbstractBoard {
     return false;
   }
 
-  checkResult(): MoveResult {
+  checkResult(): TMoveResult {
     this.changeActiveColour();
     const result = {
       checkmate: this.isCheck() && !this.hasMoves(),
