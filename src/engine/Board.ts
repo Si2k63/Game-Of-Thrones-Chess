@@ -39,6 +39,11 @@ class Board extends AbstractBoard {
     new IsAbleToCastle(this),
   ];
 
+  /**
+   * Resets the board state to a new one.
+   *
+   * @param board - The new board to replace the current one.
+   */
   reset(board: TBoard) {
     this.activeColour = "White";
     this.board = board;
@@ -46,6 +51,13 @@ class Board extends AbstractBoard {
   }
 
 
+  /**
+  * Moves a piece on the board from one coordinate to another.
+  *
+  * @param from - The piece's current coordinates.
+  * @param to - The piece's target coordinates.
+  *
+  */
   move(from: TCoordinates, to: TCoordinates): TMoveResult {
     super.move(from, to);
 
@@ -56,11 +68,19 @@ class Board extends AbstractBoard {
     return this.checkResult();
   }
 
-  changeActiveColour() {
+  /**
+  * Toggles the active colour.
+  */
+  changeActiveColour(): void {
     this.activeColour = this.activeColour === "White" ? "Black" : "White";
   }
 
-  promote(replacement: TSquare) {
+  /**
+  * Promotes a qualifying pawn with the chosen replacement piece.
+  *
+  * @param replacement - The piece to transform the pawn into.
+  */
+  promote(replacement: TPiece): void {
     for (const { piece, rowIndex, columnIndex } of this.getPieces()) {
       if ([0, this.board.length - 1].includes(rowIndex) === false) {
         continue;
@@ -79,6 +99,11 @@ class Board extends AbstractBoard {
     }
   }
 
+  /**
+   * Checks whether the active player has any pawn which can promote.
+   *
+   * @returns True if the player has a promotable pawn.
+   */
   canPromote(): boolean {
     for (const { rowIndex, piece } of this.getPieces()) {
       if ([0, this.board.length - 1].includes(rowIndex) === false) {
@@ -93,6 +118,11 @@ class Board extends AbstractBoard {
     return false;
   }
 
+  /**
+  * Generates the result of a movement, checking for things like whether pieces can promote, or whether a move has resulted in checkmate.
+  *
+  * @returns The move result describing the state of the game.
+  */
   checkResult(): TMoveResult {
     this.changeActiveColour();
     const result = {
@@ -107,6 +137,12 @@ class Board extends AbstractBoard {
     return result;
   }
 
+  /**
+  * Locates a piece based on its name and colour.
+  *
+  * @param name - The piece name (e.g. King)
+  * @param colour - The colour of the piece (Black or White).
+  */
   findPiece(name: TPieceName, colour: TPieceColour): TCoordinates | undefined {
     for (const { piece, rowIndex, columnIndex } of this.getPieces()) {
       if (piece.colour !== colour) {
@@ -121,6 +157,11 @@ class Board extends AbstractBoard {
     }
   }
 
+  /**
+   * Determines if the active player's King is in check.
+   *
+   * @returns True if any opponent piece has the active player's King in check.
+   */
   isCheck(): boolean {
     const kingCoordinates = this.findPiece("King", this.activeColour);
 
@@ -153,6 +194,11 @@ class Board extends AbstractBoard {
     return false;
   }
 
+  /**
+   * Determines if the active player has any available moves.
+  *
+  * @returns True if the active player has at least one move.
+  */
   hasMoves(): boolean {
     for (const { rowIndex, columnIndex, piece } of this.getPieces()) {
       if (piece.colour !== this.activeColour) {
@@ -169,6 +215,12 @@ class Board extends AbstractBoard {
     return false;
   }
 
+  /**
+  * Moves the appropriate rook when the active player is castling.
+    *
+    * @param from - The coordinates of their King.
+    * @param to - The coordinates to which their King intends to move.
+    */
   castleKing(from: TCoordinates, to: TCoordinates) {
     const movedPiece = this.board[to[0]][to[1]];
 
@@ -192,11 +244,21 @@ class Board extends AbstractBoard {
     );
   }
 
-  getTaken() {
+  /**
+  * Returns an array of the pieces that have been taken so far.
+  *
+  * @returns the taken pieces.
+  */
+  getTaken(): TPiece[] {
     return this.taken;
   }
 
-  getAvailableSquares(currentLocation: TCoordinates) {
+  /**
+  * Calculates a list of possible moves for the selected piece.
+  *
+  * @returns An array of TCoordinates comtaining possible squares to move to.
+  */
+  getAvailableSquares(currentLocation: TCoordinates): TCoordinates[] {
     const moves: TCoordinates[] = [];
     const piece = this.getPiece(currentLocation);
 
