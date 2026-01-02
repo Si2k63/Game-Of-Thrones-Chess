@@ -50,7 +50,6 @@ class Board extends AbstractBoard {
     this.taken = [];
   }
 
-
   /**
   * Moves a piece on the board from one coordinate to another.
   *
