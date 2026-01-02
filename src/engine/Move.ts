@@ -1,4 +1,3 @@
-import Board from "./Board";
 import { TCoordinates, TMove } from "./Engine.types";
 
 class Move implements TMove {
@@ -6,7 +5,10 @@ class Move implements TMove {
   maximumRecurrences: number = 1;
 
   /**
-   * @param movement relative TCoordinates to travel to.
+   * Instantiates the Move class.
+   *
+   * @param movement - The relative TCoordinates to travel to.
+   * @param maximumRecurrences - The maximum number of times a move can recur.
    */
   constructor(movement: TCoordinates, maximumRecurrences: number = 1) {
     this.movement = movement;
