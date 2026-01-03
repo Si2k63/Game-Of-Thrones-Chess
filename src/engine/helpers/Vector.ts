@@ -119,20 +119,48 @@ class Vector {
     return this.slice(index);
   }
 
+  /**
+   * Determine if the curret vector has any pieces inside it.
+   *
+   * @returns True if the vector contains only nulls.
+   */
   isEmpty(): boolean {
     return this.pieces().filter((x) => x !== null).length === 0;
   }
 
+  /**
+   * Determine if the current vector contains a piece with the given colour and name.
+   *
+   * @param name - The piece's name (e.g. King).
+   * @param colour - The piece's colour (e.g. White or Black).
+   *
+   * @returns True if the currenct vector contains a matching piece.
+   */
   containsPiece(name: TPieceName, colour: TPieceColour): boolean {
     return this.findPieceIndex(name, colour) >= 0;
   }
 
-  findPieceIndex(name: TPieceName, colour: TPieceColour) {
+  /**
+   * Determines the index inside the vector of the matching piece.
+   *
+   * @param name - The piece's name (e.g. King).
+   * @param colour - The piece's colour (e.g. White or Black).
+   *
+   * @returns zero or greater if the currenct vector contains a matching piece.
+   */
+  findPieceIndex(name: TPieceName, colour: TPieceColour): number {
     return this.pieces().findIndex(
       (square) => square?.name === name && square?.colour === colour,
     );
   }
 
+  /**
+  * Checks if the supplied coordinates are the last element in the current vector.
+  *
+  * @param coordinates - The coordinates to test.
+  *
+  * @returns True if the coordinates are the coordinates of the last square in the vector.
+  */
   endsWith(coordinates: TCoordinates): boolean {
     if (this.vector.length === 0) {
       return false;
@@ -140,12 +168,24 @@ class Vector {
     return this.findIndex(coordinates) === this.vector.length - 1;
   }
 
+  /**
+  * Add the supplied coordinates to the end of the vector.
+  *
+  * @param coordinates - The coordinates to append.
+  *
+  * @returns an updated instance of this vector.
+  */
   push(coordinates: TCoordinates) {
     this.vector.push(coordinates);
     return this;
   }
 
-  insideBoard() {
+  /**
+  * Filters the current vector to ensure its contents are within the confines of the board.
+  *
+  * @returns An updated instance of the vector class.
+  */
+  insideBoard(): Vector {
     this.vector = this.vector.filter(
       (target) =>
         target[0] >= 0 &&
@@ -156,11 +196,17 @@ class Vector {
     return this;
   }
 
-  length() {
+  /**
+   * @returns The length of the current vector.
+   */
+  length(): number {
     return this.vector.length;
   }
 
-  firstPiece() {
+  /**
+  * @returns The first piece in the current vector.
+  */
+  firstPiece(): TSquare | undefined {
     return this.pieces().find((x) => x !== null);
   }
 }
