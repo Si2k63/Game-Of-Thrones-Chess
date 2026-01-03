@@ -6,6 +6,19 @@ import { useState } from "react";
 
 const board = new Board(defaultBoard);
 
+/**
+* Hook to manage the chess engine and its state in react.
+* 
+* @returns An object containing:
+*
+* The current TBoardState state spread into the object.
+* onPromote - A function to handle piece promotion.
+* onReset - Handles resetting the board to its original state.
+* isActivePiece - Confirms whether the given coordinates is the active piece.
+* isAvailableSquare - Determines if the given coordinates are an available square.
+* onPieceClick - Handles the onClick event of a chess piece for the active player.
+* onPieceMove - Handles the movement of a selected piece to its new target square.
+*/
 export function useChessEngine() {
   const { playActivationSound } = useSound();
 

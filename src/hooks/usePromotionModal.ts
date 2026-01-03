@@ -6,8 +6,16 @@ import Bishop from "@/engine/pieces/Bishop";
 import Queen from "@/engine/pieces/Queen";
 import { TPiece } from "@/engine/Engine.types";
 
-const usePromotionModal = () => {
-
+/**
+* Hook to manage the promotion modal and its associated funcionality.
+*
+* @returns An object containing:
+*
+* Pieces - The available promotion pieces.
+* onPieceSelect - Function for handling when the piece to promote is selected by a user.
+* className - The tailwind classes to set on the promotion modal's main div.
+*/
+export function usePromotionModal() {
   const [state, setState] = useApplicationContext();
   const {
     result,
@@ -47,5 +55,3 @@ const usePromotionModal = () => {
     className: classes.join(" ")
   }
 }
-
-export default usePromotionModal;

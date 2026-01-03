@@ -6,6 +6,15 @@ let sound: HTMLAudioElement = new Audio("audio/Black.Pawn.Default.mp3");
 const theme = new Audio("audio/theme.mp3");
 theme.volume = 0.2;
 
+/**
+* A hook to manage the game sound.
+*
+* @returns An object containing:
+*
+* toggleSounds - a function to toggle piece sounds on or off.
+* toggleMusic - a function to toggle the music on or off.
+* playActivationSound - A function that accepts a TSquare and plays the accompanying sound for that piece.
+*/
 export default function useSound() {
   const [applicationState, setApplicationState] = useApplicationContext();
   const { playSounds, playTheme } = applicationState;

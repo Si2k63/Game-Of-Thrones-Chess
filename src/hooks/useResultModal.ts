@@ -4,8 +4,17 @@ import useApplicationContext, {
 } from "@/hooks/useApplicationContext";
 import { useChessEngine } from "@/hooks/useChessEngine";
 
-const useResultModal = () => {
-
+/**
+ * Hook to manage the result modal at the end of the game and its associated functionality.
+ *
+* @returns An object containing:
+*
+* className - The classes to apply to the result modal's main div.
+* checkmate - A boolean determining whether the game ended in checkmate.
+* previous - The previous player's colour (White or Black).
+* onClose - A function to handle the onClose modal event.
+*/
+export default function useResultModal() {
   const [
     {
       result: { checkmate, stalemate, previous },
@@ -35,6 +44,4 @@ const useResultModal = () => {
     previous,
     onClose
   }
-}
-
-export default useResultModal;
+};

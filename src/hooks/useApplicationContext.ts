@@ -18,6 +18,12 @@ export const ApplicationContext = createContext<TApplicationContext | null>(
   null,
 );
 
+/**
+* A hook to handle the initialisation of the application context.
+*
+* @returns The application context
+*
+*/
 export default function useApplicationContext() {
   const context = useContext(ApplicationContext);
 
