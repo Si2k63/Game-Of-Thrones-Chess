@@ -1,6 +1,7 @@
 import Board from "../Board";
 import { TCoordinates, TSquare } from "../Engine.types";
 import King from "../pieces/King";
+import Pawn from "../pieces/Pawn";
 import AbstractMovementRule from "./AbstractMovementRule";
 
 class IsKingChecked extends AbstractMovementRule {
@@ -44,8 +45,12 @@ class IsKingChecked extends AbstractMovementRule {
 
       const between = intersectingVector.before(kingCoordinates);
 
-
       if (!between.isEmpty()) {
+        continue;
+      }
+
+      // The pawn is on the same file as the king, but the king is not in check.
+      if (piece instanceof Pawn == true && columnIndex == kingCoordinates[1]) {
         continue;
       }
 
@@ -58,6 +63,7 @@ class IsKingChecked extends AbstractMovementRule {
       }
     }
 
+    console.log(!intersectingVectorFound);
     return !intersectingVectorFound;
   }
 }
