@@ -1,6 +1,6 @@
 import Rook from "@/engine/pieces/Rook";
 import useApplicationContext from "@/hooks/useApplicationContext";
-import { useChessEngine } from "@/hooks/useChessEngine";
+import useChessEngine from "@/hooks/useChessEngine";
 import Knight from "@/engine/pieces/Knight";
 import Bishop from "@/engine/pieces/Bishop";
 import Queen from "@/engine/pieces/Queen";
@@ -15,7 +15,7 @@ import { TPiece } from "@/engine/Engine.types";
 * onPieceSelect - Function for handling when the piece to promote is selected by a user.
 * className - The tailwind classes to set on the promotion modal's main div.
 */
-export function usePromotionModal() {
+export default function usePromotionModal() {
   const [state, setState] = useApplicationContext();
   const {
     result,

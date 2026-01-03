@@ -1,6 +1,6 @@
 import Piece from "./Piece";
 import { TPiece } from "@engine/Engine.types";
-import { useChessEngine } from "@hooks/useChessEngine";
+import useChessEngine from "@hooks/useChessEngine";
 
 const TakenPieces = () => {
   const { taken } = useChessEngine();

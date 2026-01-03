@@ -1,5 +1,5 @@
 import { TCoordinates, TPieceColour } from "@/engine/Engine.types";
-import { useChessEngine } from "@/hooks/useChessEngine";
+import useChessEngine from "@/hooks/useChessEngine";
 import AvailableSquareMarker from "./AvailableSquareMarker";
 import Piece from "./Piece";
 import Square from "./Square";

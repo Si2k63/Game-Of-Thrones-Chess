@@ -19,7 +19,7 @@ const board = new Board(defaultBoard);
 * onPieceClick - Handles the onClick event of a chess piece for the active player.
 * onPieceMove - Handles the movement of a selected piece to its new target square.
 */
-export function useChessEngine() {
+export default function useChessEngine() {
   const { playActivationSound } = useSound();
 
   const defaultState = {
