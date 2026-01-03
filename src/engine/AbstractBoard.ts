@@ -168,6 +168,13 @@ abstract class AbstractBoard implements TAbstractBoard {
     return moves;
   }
 
+  /**
+  * Retrieve a list of vectors for the piece at the given coordinates.
+  *
+  * @param coordinates - The coordinates of the target piece.
+  *
+  * @returns an array of vectors containing the pieces possible movements..
+  */
   getVectors(coordinates: TCoordinates): Vector[] {
     const vectors: Vector[] = [];
     const piece = this.getPiece(coordinates);
@@ -188,6 +195,14 @@ abstract class AbstractBoard implements TAbstractBoard {
     return vectors;
   }
 
+  /**
+  * Retrieve the first vector of the target that intersects with the origin.
+  *
+  * @param target - The coordinates of the piece whose vectors we want to check.
+  * @param origin - The coordinates that we want to see if any of the target's vectors intersect with.
+  *
+  * @returns An instance of the target's intersecting vector or undefined.
+  */
   getIntersectingVector(
     target: TCoordinates,
     origin: TCoordinates,
