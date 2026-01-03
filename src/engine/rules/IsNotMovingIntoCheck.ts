@@ -21,10 +21,9 @@ class IsNotMovingIntoCheck extends AbstractMovementRule {
         continue;
       }
 
-      const intersectingVector = piece.getIntersectingVector(
+      const intersectingVector = this.board.getIntersectingVector(
         targetCoordinates,
-        [rowIndex, columnIndex],
-        this.board,
+        [rowIndex, columnIndex]
       );
 
       if (!intersectingVector) {

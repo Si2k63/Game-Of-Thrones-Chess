@@ -1,4 +1,5 @@
 import { TCoordinates, TSquare } from "../Engine.types";
+import Vector from "../helpers/Vector";
 import AbstractMovementRule from "./AbstractMovementRule";
 
 class IsObstructed extends AbstractMovementRule {
@@ -9,9 +10,9 @@ class IsObstructed extends AbstractMovementRule {
       return false;
     }
 
-    const vectors = piece.getVectors(this.piece, this.board);
+    const vectors = this.board.getVectors(this.piece);
     const intersectingVector = vectors
-      .filter((vector) => vector.contains(movement))
+      .filter((vector: Vector) => vector.contains(movement))
       .pop();
 
     if (!intersectingVector) {

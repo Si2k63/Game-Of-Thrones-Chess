@@ -25,10 +25,9 @@ class IsPinned extends AbstractMovementRule {
         continue;
       }
 
-      const intersectingVector = piece.getIntersectingVector(
+      const intersectingVector = this.board.getIntersectingVector(
         this.piece,
-        [rowIndex, columnIndex],
-        this.board,
+        [rowIndex, columnIndex]
       );
 
       if (!intersectingVector) {

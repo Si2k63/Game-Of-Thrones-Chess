@@ -8,6 +8,8 @@ import {
   TPiece,
   TSquare,
 } from "./Engine.types";
+import Vector from "./helpers/Vector";
+import Move from "./Move";
 
 abstract class AbstractBoard implements TAbstractBoard {
   board: TBoard = [];
@@ -164,6 +166,38 @@ abstract class AbstractBoard implements TAbstractBoard {
     }
 
     return moves;
+  }
+
+  getVectors(coordinates: TCoordinates): Vector[] {
+    const vectors: Vector[] = [];
+    const piece = this.getPiece(coordinates);
+
+    if (!piece) {
+      return vectors;
+    }
+
+    piece.getMoves().forEach((move: Move) => {
+      const possibleMoves = this.getPossibleMoves(move);
+      const currentVector: TCoordinates[] = [];
+      possibleMoves.forEach((mv) => {
+        currentVector.push(mv);
+      });
+      vectors.push(new Vector(currentVector, coordinates, this.getBoard()));
+    });
+
+    return vectors;
+  }
+
+  getIntersectingVector(
+    target: TCoordinates,
+    origin: TCoordinates,
+  ): Vector | undefined {
+    return this.getVectors(origin)
+      .map((vector: Vector) => {
+        return vector.absolute().insideBoard();
+      })
+      .filter((vector) => vector.contains(target))
+      .pop();
   }
 }
 

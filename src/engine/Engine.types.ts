@@ -23,6 +23,13 @@ export type TAbstractBoard = {
   getPieces(): Generator<TBoardPiece>;
   getPossibleMoves(move: TMove): TCoordinates[];
   hasPieceMoved(coords: TCoordinates): boolean;
+  getVectors(
+    target: TCoordinates,
+  ): Vector[];
+  getIntersectingVector(
+    target: TCoordinates,
+    origin: TCoordinates,
+  ): Vector | undefined;
 };
 
 export type TCoordinates = [number, number];
@@ -36,12 +43,6 @@ export type TPiece = {
   skin?: TSkin;
   movements: Move[];
   getMoves: () => Move[];
-  getVectors: (origin: TCoordinates, board: TAbstractBoard) => Vector[];
-  getIntersectingVector(
-    target: TCoordinates,
-    origin: TCoordinates,
-    board: TAbstractBoard,
-  ): Vector | undefined;
 };
 
 export type TMove = {

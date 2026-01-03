@@ -33,10 +33,9 @@ class IsKingChecked extends AbstractMovementRule {
         continue;
       }
 
-      const intersectingVector = piece.getIntersectingVector(
+      const intersectingVector = this.board.getIntersectingVector(
         kingCoordinates,
-        [rowIndex, columnIndex],
-        this.board,
+        [rowIndex, columnIndex]
       );
 
       if (!intersectingVector) {

@@ -1,12 +1,9 @@
 import {
-  TAbstractBoard,
-  TCoordinates,
   TPiece,
   TPieceColour,
   TPieceName,
   TSkin,
 } from "../Engine.types";
-import Vector from "../helpers/Vector";
 import Move from "../Move";
 
 abstract class Piece implements TPiece {
@@ -18,34 +15,6 @@ abstract class Piece implements TPiece {
   constructor(colour: TPieceColour, skin: TSkin = "Default") {
     this.colour = colour;
     this.skin = skin;
-  }
-
-  getVectors(origin: TCoordinates, board: TAbstractBoard): Vector[] {
-    const vectors: Vector[] = [];
-
-    this.movements.forEach((move: Move) => {
-      const possibleMoves = board.getPossibleMoves(move);
-      const currentVector: TCoordinates[] = [];
-      possibleMoves.forEach((mv) => {
-        currentVector.push(mv);
-      });
-      vectors.push(new Vector(currentVector, origin, board.getBoard()));
-    });
-
-    return vectors;
-  }
-
-  getIntersectingVector(
-    target: TCoordinates,
-    origin: TCoordinates,
-    board: TAbstractBoard,
-  ): Vector | undefined {
-    return this.getVectors(origin, board)
-      .map((vector: Vector) => {
-        return vector.absolute().insideBoard();
-      })
-      .filter((vector) => vector.contains(target))
-      .pop();
   }
 
   getMoves(): Move[] {

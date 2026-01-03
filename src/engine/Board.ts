@@ -9,6 +9,8 @@ import {
   TSquare,
   TMovementRule,
 } from "./Engine.types";
+import Vector from "./helpers/Vector";
+import Move from "./Move";
 
 import King from "./pieces/King";
 import IsAbleToCastle from "./rules/IsAbleToCastle";
@@ -173,10 +175,9 @@ class Board extends AbstractBoard {
         continue;
       }
 
-      const intersectingVector = piece.getIntersectingVector(
+      const intersectingVector = this.getIntersectingVector(
         kingCoordinates,
-        [rowIndex, columnIndex],
-        this,
+        [rowIndex, columnIndex]
       );
 
       if (typeof intersectingVector === "undefined") {

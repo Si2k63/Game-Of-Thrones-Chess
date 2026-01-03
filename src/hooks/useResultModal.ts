@@ -2,7 +2,7 @@
 import useApplicationContext, {
   defaultApplicationState,
 } from "@/hooks/useApplicationContext";
-import { useChessEngine } from "@/hooks/useChessEngine";
+import useChessEngine from "@/hooks/useChessEngine";
 
 /**
  * Hook to manage the result modal at the end of the game and its associated functionality.
