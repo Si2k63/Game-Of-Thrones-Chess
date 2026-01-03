@@ -63,7 +63,6 @@ class IsKingChecked extends AbstractMovementRule {
       }
     }
 
-    console.log(!intersectingVectorFound);
     return !intersectingVectorFound;
   }
 }
